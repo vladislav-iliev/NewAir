@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--LEGEND-->
+    <View
+        android:id="@+id/legendBackground"
+        android:layout_width="120dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="60dp"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/legendBlue"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toTopOf="@id/legendBackground" />
+
+    <TextView
+        android:id="@+id/legendTextBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="0 - 5"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendBlue" />
+
+    <View
+        android:id="@+id/legendGreenLight"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toBottomOf="@id/legendBlue" />
+
+    <TextView
+        android:id="@+id/legendTextGreenLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="6 - 16"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendGreenLight" />
+
+    <View
+        android:id="@+id/legendGreen"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toBottomOf="@id/legendGreenLight" />
+
+    <TextView
+        android:id="@+id/legendTextGreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="17 - 33"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendGreen" />
+
+    <View
+        android:id="@+id/legendGreenDark"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toBottomOf="@id/legendGreen" />
+
+    <TextView
+        android:id="@+id/legendTextGreenDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="34 - 50"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendGreenDark" />
+
+    <View
+        android:id="@+id/legendOrangeLight"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toBottomOf="@id/legendGreenDark" />
+
+    <TextView
+        android:id="@+id/legendTextOrangeLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="51 - 58"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendOrangeLight" />
+
+    <View
+        android:id="@+id/legendOrange"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toBottomOf="@id/legendOrangeLight" />
+
+    <TextView
+        android:id="@+id/legendTextOrange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="59 - 66"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendOrange" />
+
+    <View
+        android:id="@+id/legendOrangeDark"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toBottomOf="@id/legendOrange" />
+
+    <TextView
+        android:id="@+id/legendTextOrangeDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="67 - 75"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendOrangeDark" />
+
+    <View
+        android:id="@+id/legendRedLight"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toBottomOf="@id/legendOrangeDark" />
+
+    <TextView
+        android:id="@+id/legendTextRedLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="76 - 83"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendRedLight" />
+
+    <View
+        android:id="@+id/legendRed"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toBottomOf="@id/legendRedLight" />
+
+    <TextView
+        android:id="@+id/legendTextRed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="84 - 91"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendRed" />
+
+    <View
+        android:id="@+id/legendRedDark"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toBottomOf="@id/legendRed" />
+
+    <TextView
+        android:id="@+id/legendTextRedDark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="92 - 100"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendRedDark" />
+
+    <View
+        android:id="@+id/legendPurple"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/legendButton"
+        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toBottomOf="@id/legendRedDark" />
+
+    <TextView
+        android:id="@+id/legendTextPurple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:text="100 -"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/refreshButton"
+        app:layout_constraintTop_toTopOf="@id/legendPurple" />
+
+    <!--SETTINGS ITEMS-->
+    <ImageButton
+        android:id="@+id/legendButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/brown_transparent"
+        android:padding="15dp"
+        android:src="@drawable/ic_info_outline_white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/refreshButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/round_corners"
+        android:padding="15dp"
+        android:src="@drawable/ic_refresh"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/legendButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--ADD LOCATION ITEMS-->
+    <TextView
+        android:id="@+id/addLocationText"
+        style="@style/TextShadow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select new location"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addLocationBtn"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_add"
+        android:visibility="gone"
+        app:backgroundTint="@color/white"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

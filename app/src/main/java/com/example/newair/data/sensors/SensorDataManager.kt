@@ -89,6 +89,7 @@ class SensorDataManager {
         res.add(random())
         res.add(random())
         res.add(random())
+        res.add(random())
         lastHistoryData = res
         loading = false
         return Collections.unmodifiableList(lastHistoryData)

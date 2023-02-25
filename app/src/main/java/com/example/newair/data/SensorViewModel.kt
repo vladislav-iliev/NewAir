@@ -21,23 +21,19 @@ class SensorViewModel : ViewModel() {
 
     fun addUserLocation(newLocation: UserLocation) {
         userLocationsManager.addUserLocation(newLocation)
-        downloadData()
     }
 
     fun addUserLocations(newLocations: List<UserLocation>) {
         userLocationsManager.addUserLocations(newLocations)
-        downloadData()
     }
 
     fun removeUserLocation(name: String) {
         val loc = userLocationsManager.getUserLocations().first { it.name.equals(name) }
         userLocationsManager.removeUserLocation(loc)
-        downloadData()
     }
 
     fun removeAllUserLocations() {
         userLocationsManager.removeAllUserLocations()
-        downloadData()
     }
 
     fun userLocationExists(name: String) = userLocationsManager.locationAlreadyAdded(name)

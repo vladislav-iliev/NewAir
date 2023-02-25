@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity(),
     NavigationBarView.OnItemSelectedListener,
     NavController.OnDestinationChangedListener {
 
+    private lateinit var navController: NavController
+    private lateinit var navBar: NavigationBarView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,17 +34,15 @@ class MainActivity : AppCompatActivity(),
     private fun setNavController() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-        val navController = navHostFragment.navController
-        val navBar = findViewById<View>(R.id.nav_view) as NavigationBarView
+        navController = navHostFragment.navController
+        navBar = findViewById<View>(R.id.nav_view) as NavigationBarView
         navBar.setupWithNavController(navController)
         navBar.setOnItemSelectedListener(this)
         navController.addOnDestinationChangedListener(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-        navHostFragment.navController.navigate(
+        navController.navigate(
             if (item.itemId == R.id.navigation_map) HomeFragmentDirections.actionNavigationHomeToNavigationMap(true)
             else HomeFragmentDirections.actionNavigationHomeToNavigationGraph()
         )
@@ -49,8 +50,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
-        (findViewById<View>(R.id.nav_view) as NavigationBarView).visibility =
-            if (destination.id == R.id.navigation_home) View.VISIBLE else View.GONE
+        navBar.visibility = if (destination.id == R.id.navigation_home) View.VISIBLE else View.GONE
     }
 
     override fun onPause() {

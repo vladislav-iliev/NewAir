@@ -6,7 +6,7 @@
     <PreferenceCategory android:title="@string/preference_category_appearance">
         <SwitchPreference
             android:defaultValue="false"
-            android:icon="@drawable/ic_remove_red_eye"
+            android:icon="@drawable/ic_palette"
             android:key="@string/color_blind_switch_key"
             android:summary="@string/color_mode_switch_summary"
             android:title="@string/color_mode_switch_title" />
@@ -25,7 +25,7 @@
 
     <PreferenceCategory android:title="@string/preference_category_miscellaneous">
         <Preference
-            android:icon="@drawable/ic_info_outline"
+            android:icon="@drawable/ic_info"
             android:key="@string/about_dialog_key"
             android:title="@string/about_dialog_title" />
     </PreferenceCategory>

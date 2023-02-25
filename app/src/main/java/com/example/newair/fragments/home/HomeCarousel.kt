@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
@@ -17,8 +16,8 @@ import kotlin.math.roundToInt
 internal class HomeCarousel(private val fragment: HomeFragment) {
 
     private val carousel: CarouselPicker
-    private val carouselArrowLeft: ImageButton
-    private val carouselArrowRight: ImageButton
+    private val carouselArrowLeft: View
+    private val carouselArrowRight: View
     private val locations: MutableList<String> = ArrayList()
     private val carouselItems: MutableList<CarouselPicker.PickerItem> = ArrayList<CarouselPicker.PickerItem>()
     var currentPos = 0

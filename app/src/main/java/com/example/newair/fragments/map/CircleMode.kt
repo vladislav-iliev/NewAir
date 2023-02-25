@@ -42,6 +42,7 @@ internal class CircleMode(private val fragment: MapFragment, private val googleM
         val viewModel: SensorViewModel by (fragment.activityViewModels())
         val circleOptions = CircleOptions().radius(100.toDouble()).strokeWidth(0.toFloat())
 
+        viewModel.downloadData()
         viewModel.uiState.value.liveData.filter { it.type == Sensor.SensorType.PM10 }.forEach {
             circleOptions.center(it.latLng)
             circleOptions.fillColor(getCircleColor(it.measure))

@@ -88,55 +88,38 @@
         app:layout_constraintGuide_percent="0.60" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.45" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.22" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.78" />
-
     <!--SETTINGS ICONS-->
-    <ImageButton
+    <Button
         android:id="@+id/settingsButton"
+        style="@style/HomeBtn"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@null"
-        android:padding="15dp"
-        android:src="@drawable/ic_settings"
+        app:icon="@drawable/ic_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <Button
         android:id="@+id/refreshButton"
+        style="@style/HomeBtn"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@null"
-        android:padding="15dp"
-        android:src="@drawable/ic_refresh"
+        app:icon="@drawable/ic_refresh"
         app:layout_constraintBottom_toBottomOf="@id/settingsButton"
         app:layout_constraintEnd_toStartOf="@id/settingsButton"
         app:layout_constraintTop_toTopOf="@id/settingsButton" />
 
-    <ImageButton
+    <Button
         android:id="@+id/addButton"
+        style="@style/HomeBtn"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@null"
-        android:padding="15dp"
-        android:src="@drawable/ic_add_location"
+        app:icon="@drawable/ic_add_location"
         app:layout_constraintBottom_toBottomOf="@id/refreshButton"
         app:layout_constraintEnd_toStartOf="@id/refreshButton"
         app:layout_constraintTop_toTopOf="@id/refreshButton" />
@@ -146,66 +129,67 @@
         android:id="@+id/carousel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="15dp"
         android:background="@null"
         app:items_visible="three"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/addButton" />
 
-    <View
+    <ImageView
         android:id="@+id/circle"
         android:layout_width="200sp"
         android:layout_height="200sp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/circle"
-        app:layout_constraintBottom_toBottomOf="@id/pollutionText"
+        android:layout_marginTop="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/pollutionText" />
+        app:layout_constraintTop_toBottomOf="@id/carousel"
+        app:srcCompat="@drawable/circle" />
 
     <TextView
         android:id="@+id/pollutionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="7sp"
         android:text="00.0"
         android:textSize="80sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/carousel" />
+        app:layout_constraintBottom_toTopOf="@id/pollutionDescription"
+        app:layout_constraintEnd_toEndOf="@id/circle"
+        app:layout_constraintStart_toStartOf="@id/circle"
+        app:layout_constraintTop_toTopOf="@id/circle"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/pollutionDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PM10 μg/m3"
-        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintBottom_toBottomOf="@id/circle"
+        app:layout_constraintEnd_toEndOf="@id/pollutionText"
+        app:layout_constraintStart_toStartOf="@id/pollutionText"
         app:layout_constraintTop_toBottomOf="@id/pollutionText" />
 
-    <ImageButton
+    <Button
         android:id="@+id/carouselArrowLeft"
+        style="@style/HomeBtn"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@null"
-        android:padding="15dp"
-        android:src="@drawable/ic_keyboard_arrow_left"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/pollutionText"
-        app:layout_constraintEnd_toStartOf="@id/guideline4"
-        app:layout_constraintTop_toTopOf="@id/pollutionText" />
+        app:icon="@drawable/ic_navigate_before"
+        app:layout_constraintBottom_toBottomOf="@id/circle"
+        app:layout_constraintEnd_toStartOf="@id/circle"
+        app:layout_constraintTop_toTopOf="@id/circle" />
 
-    <ImageButton
+    <Button
         android:id="@+id/carouselArrowRight"
+        style="@style/HomeBtn"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@null"
-        android:padding="15dp"
-        android:src="@drawable/ic_keyboard_arrow_right"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/pollutionText"
-        app:layout_constraintStart_toEndOf="@id/guideline5"
-        app:layout_constraintTop_toTopOf="@id/pollutionText" />
+        app:icon="@drawable/ic_navigate_next"
+        app:layout_constraintBottom_toBottomOf="@id/circle"
+        app:layout_constraintStart_toEndOf="@id/circle"
+        app:layout_constraintTop_toTopOf="@id/circle" />
 
     <!--HEALTH MESSAGE-->
     <TextView
@@ -223,19 +207,18 @@
     <!--INDICATORS-->
     <ImageView
         android:id="@+id/temperatureIcon"
-        android:layout_width="25dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/healthMessage"
-        app:srcCompat="@drawable/ic_temperature" />
+        app:srcCompat="@drawable/ic_thermometer"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/temperatureText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
         android:text="D"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/temperatureIcon"
@@ -258,14 +241,14 @@
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="@id/temperatureIcon"
         app:layout_constraintStart_toStartOf="@id/guideline2"
-        app:srcCompat="@drawable/ic_humidity" />
+        app:layout_constraintTop_toTopOf="@+id/temperatureIcon"
+        app:srcCompat="@drawable/ic_humidity"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/humidityText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
         android:text="H"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/humidityIcon"

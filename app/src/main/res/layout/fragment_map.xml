@@ -310,11 +310,14 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addLocationBtn"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_margin="15dp"
         android:visibility="gone"
+        app:backgroundTint="#ff1744"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>

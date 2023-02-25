@@ -64,13 +64,13 @@ class GraphFragment : Fragment() {
 
     private fun initializeDataSet(entryList: List<Entry>): LineDataSet {
         val dataSet = LineDataSet(entryList, resources.getString(R.string.line_data_set_label))
-        dataSet.color = ContextCompat.getColor(requireContext(), R.color.navbarTextLight)
-        dataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.white))
-        dataSet.circleHoleColor = ContextCompat.getColor(requireContext(), R.color.black)
+        dataSet.color = ContextCompat.getColor(requireContext(), R.color.semi_dark_grey)
+        dataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.dark_grey))
+        dataSet.circleHoleColor = ContextCompat.getColor(requireContext(), R.color.light_grey)
         dataSet.circleRadius = 6.toFloat()
         dataSet.circleHoleRadius = 5.toFloat()
         dataSet.lineWidth = 3.toFloat()
-        dataSet.highLightColor = ContextCompat.getColor(requireContext(), R.color.brown_transparent)
+        dataSet.highLightColor = ContextCompat.getColor(requireContext(), R.color.text_on_grey)
         return dataSet
     }
 
@@ -83,7 +83,7 @@ class GraphFragment : Fragment() {
     private fun initializeLineData(dataSetList: List<ILineDataSet>): LineData {
         val lineData = LineData(dataSetList)
         lineData.setValueTextSize(15.toFloat())
-        lineData.setValueTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+        lineData.setValueTextColor(ContextCompat.getColor(requireContext(), R.color.dark_grey))
         return lineData
     }
 
@@ -103,8 +103,8 @@ class GraphFragment : Fragment() {
     private fun initializeDescription(lineChart: LineChart?) {
         val description = Description()
         description.textSize = 12.toFloat()
-        description.textColor = ContextCompat.getColor(requireContext(), R.color.black)
-        description.text = resources.getString(R.string.graph_description)
+        description.textColor = ContextCompat.getColor(requireContext(), R.color.dark_grey)
+        description.text = "PM10"
         lineChart!!.description = description
     }
 
@@ -134,7 +134,7 @@ class GraphFragment : Fragment() {
     private fun updateGraph() {
         val viewModel: SensorViewModel by activityViewModels()
         val lineDataSet = lineChart.lineData.getDataSetByIndex(0)
-        val pm10 = viewModel.uiState.value.historyData
+        val pm10 = viewModel.uiState.value!!.historyData
         (0 until lineDataSet.entryCount).forEach {
             lineDataSet.getEntryForIndex(it).y = pm10[it].toFloat()
         }

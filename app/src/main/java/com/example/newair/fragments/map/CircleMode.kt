@@ -26,24 +26,23 @@ internal class CircleMode(private val fragment: MapFragment, private val googleM
     init {
         initializeLegend()
         setMapLegendColors(isColorBlind)
-        fragment.requireView().findViewById<View>(R.id.refreshButton).apply {
-            visibility = View.VISIBLE
-            setOnClickListener { onRefreshPressed() }
-        }
         fragment.requireView().findViewById<View>(R.id.legendButton).apply {
             visibility = View.VISIBLE
             setOnClickListener { toggleMapLegend() }
         }
-        onRefreshPressed()
+
+        val viewModel: SensorViewModel by (fragment.activityViewModels())
+        viewModel.uiState.observe(fragment) { onNewData(it.liveData) }
+        fragment.requireView().findViewById<View>(R.id.refreshButton).apply {
+            visibility = View.VISIBLE
+            setOnClickListener { viewModel.downloadData() }
+        }
     }
 
-    private fun onRefreshPressed() {
+    private fun onNewData(sensors: List<Sensor>) {
         googleMap.clear()
-        val viewModel: SensorViewModel by (fragment.activityViewModels())
         val circleOptions = CircleOptions().radius(100.toDouble()).strokeWidth(0.toFloat())
-
-        viewModel.downloadData()
-        viewModel.uiState.value.liveData.filter { it.type == Sensor.SensorType.PM10 }.forEach {
+        sensors.filter { it.type == Sensor.SensorType.PM10 }.forEach {
             circleOptions.center(it.latLng)
             circleOptions.fillColor(getCircleColor(it.measure))
             googleMap.addCircle(circleOptions)

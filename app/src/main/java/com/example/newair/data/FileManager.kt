@@ -6,10 +6,11 @@ import com.example.newair.R
 import com.example.newair.data.user_locations.UserLocation
 import com.google.android.gms.maps.model.LatLng
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
-import java.nio.file.Files
 
 class FileManager(private val context: Context) {
 
@@ -38,7 +39,7 @@ class FileManager(private val context: Context) {
      */
     fun readUserLocationsFile(): List<UserLocation> {
         try {
-            ObjectInputStream(Files.newInputStream(locationsFile.toPath())).use { inStr ->
+            ObjectInputStream(FileInputStream(locationsFile)).use { inStr ->
                 val res: MutableList<UserLocation> = ArrayList()
                 val incStr = inStr.readObject() as String
                 if (incStr.isEmpty()) return listOf()
@@ -55,10 +56,7 @@ class FileManager(private val context: Context) {
                 return res
             }
         } catch (e: IOException) {
-            Log.e(
-                context.getString(R.string.user_locations_file_tag),
-                context.getString(R.string.user_locations_file_empty)
-            )
+            Log.e(context.getString(R.string.user_locations_file_tag), e.toString())
         } catch (e: ClassNotFoundException) {
             e.printStackTrace()
         }
@@ -71,7 +69,7 @@ class FileManager(private val context: Context) {
     fun saveUserLocations(userLocations: List<UserLocation>) {
         if (userLocations.isEmpty()) return
         try {
-            ObjectOutputStream(Files.newOutputStream(locationsFile.toPath())).use { os ->
+            ObjectOutputStream(FileOutputStream(locationsFile)).use { os ->
                 val toSave = StringBuilder()
                 for (i in userLocations.indices) {
                     toSave.append(userLocations[i].name)
@@ -84,7 +82,7 @@ class FileManager(private val context: Context) {
                 os.writeObject(toSave.toString())
             }
         } catch (e: IOException) {
-            e.printStackTrace()
+            Log.e(context.getString(R.string.user_locations_file_tag), e.toString())
         }
     }
 
@@ -109,7 +107,7 @@ class FileManager(private val context: Context) {
      */
     private fun readHistoryDataFile(): List<Double> {
         try {
-            ObjectInputStream(Files.newInputStream(historyDataFile.toPath())).use { inStr ->
+            ObjectInputStream(FileInputStream(historyDataFile)).use { inStr ->
                 val savedHistoryDataArray = inStr.readObject() as? Array<*>
                 val res: MutableList<Double> = ArrayList()
                 for (i in 0..6) res.add(savedHistoryDataArray?.get(i) as Double)
@@ -132,7 +130,7 @@ class FileManager(private val context: Context) {
     private fun saveHistoryData(historyData: List<Double>) {
         if (!historyDataSafeToSave(historyData)) return
         try {
-            ObjectOutputStream(Files.newOutputStream(historyDataFile.toPath())).use { os ->
+            ObjectOutputStream(FileOutputStream(historyDataFile)).use { os ->
                 val toSave = arrayOfNulls<String>(6)
                 for (i in 0..5) toSave[i] = historyData[i].toString()
                 os.writeObject(toSave)

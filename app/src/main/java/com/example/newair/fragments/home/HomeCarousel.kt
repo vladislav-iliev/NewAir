@@ -105,7 +105,7 @@ internal class HomeCarousel(private val fragment: HomeFragment) {
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             val view = LayoutInflater.from(context).inflate(drawable, null)
             val tv = view.findViewById<TextView>(`in`.goodiebag.carouselpicker.R.id.tv)
-            tv.setTextColor(ContextCompat.getColor(context, R.color.homeTextColor))
+            tv.setTextColor(ContextCompat.getColor(context, R.color.white))
             val pickerItem: CarouselPicker.PickerItem = items[position]
             tv.visibility = View.VISIBLE
             tv.text = pickerItem.text

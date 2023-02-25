@@ -27,13 +27,12 @@ class MainActivity : AppCompatActivity(),
         setContentView(R.layout.activity_main)
         setNavController()
         val viewModel: SensorViewModel by viewModels()
-        (viewModel).addUserLocations(FileManager(this).readUserLocationsFile())
+        viewModel.addUserLocations(FileManager(this).readUserLocationsFile())
         viewModel.downloadData()
     }
 
     private fun setNavController() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         navBar = findViewById<View>(R.id.nav_view) as NavigationBarView
         navBar.setupWithNavController(navController)
@@ -42,10 +41,12 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        navController.navigate(
-            if (item.itemId == R.id.navigation_map) HomeFragmentDirections.actionNavigationHomeToNavigationMap(true)
-            else HomeFragmentDirections.actionNavigationHomeToNavigationGraph()
-        )
+        val dir = when (item.itemId) {
+            R.id.navigation_map -> HomeFragmentDirections.actionNavigationHomeToNavigationMap(true)
+            R.id.navigation_graph -> HomeFragmentDirections.actionNavigationHomeToNavigationGraph()
+            else -> null
+        }
+        if (dir != null) navController.navigate(dir)
         return true
     }
 
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onPause() {
         val viewModel: SensorViewModel by viewModels()
-        FileManager(this).saveUserLocations(viewModel.uiState.value.userLocations)
+        FileManager(this).saveUserLocations(viewModel.uiState.value!!.userLocations)
         super.onPause()
     }
 }

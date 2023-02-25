@@ -1,5 +1,6 @@
 package com.example.newair.fragments.home
 
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,6 @@ import com.example.newair.data.SensorViewModel
 import com.example.newair.data.sensors.Sensor
 import com.example.newair.data.user_locations.UserLocation
 import com.google.android.gms.maps.model.LatLng
-import org.apache.lucene.util.SloppyMath
 
 class HomeFragment : Fragment(), OnClickListener {
 
@@ -36,20 +36,21 @@ class HomeFragment : Fragment(), OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        carousel = HomeCarousel(this).apply { addLocations(viewModel.uiState.value.userLocations) }
+        carousel = HomeCarousel(this).apply { addLocations(viewModel.uiState.value!!.userLocations) }
         rootView = requireView()
-        backgroundView = rootView.requireViewById<View>(R.id.container)
-        healthView = rootView.requireViewById<TextView>(R.id.healthMessage)
-        pollutionView = rootView.requireViewById<TextView>(R.id.pollutionText)
-        temperatureView = rootView.requireViewById<TextView>(R.id.temperatureText)
-        humidityView = rootView.requireViewById<TextView>(R.id.humidityText)
+        backgroundView = rootView.findViewById(R.id.container)
+        healthView = rootView.findViewById(R.id.healthMessage)
+        pollutionView = rootView.findViewById(R.id.pollutionText)
+        temperatureView = rootView.findViewById(R.id.temperatureText)
+        humidityView = rootView.findViewById(R.id.humidityText)
         isColorBlind = PreferenceManager.getDefaultSharedPreferences(requireContext())
             .getBoolean(getString(R.string.color_blind_switch_key), false)
 
         view.findViewById<View>(R.id.addButton).setOnClickListener(this)
         view.findViewById<View>(R.id.refreshButton).setOnClickListener(this)
         view.findViewById<View>(R.id.settingsButton).setOnClickListener(this)
-        updateScreen()
+
+        viewModel.uiState.observe(viewLifecycleOwner) { updateScreen() }
     }
 
     override fun onClick(v: View) {
@@ -58,7 +59,6 @@ class HomeFragment : Fragment(), OnClickListener {
                 .navigate(HomeFragmentDirections.actionNavigationHomeToNavigationMap(false))
             R.id.refreshButton -> {
                 viewModel.downloadData()
-                updateScreen()
             }
             R.id.settingsButton -> NavHostFragment.findNavController(this)
                 .navigate(HomeFragmentDirections.actionNavigationHomeToNavigationSettings())
@@ -66,10 +66,12 @@ class HomeFragment : Fragment(), OnClickListener {
     }
 
     fun updateScreen() {
-        val pos = carousel.currentPos
-        val currentLocation: UserLocation? = if (pos == 0) null else viewModel.uiState.value.userLocations[pos - 1]
-        val sensors = viewModel.uiState.value.liveData
+        val uiState = viewModel.uiState.value!!
 
+        val pos = carousel.currentPos
+        val currentLocation: UserLocation? = if (pos == 0) null else uiState.userLocations[pos - 1]
+
+        val sensors = uiState.liveData
         val newPollution =
             if (currentLocation == null) getAverage(sensors, Sensor.SensorType.PM10)
             else findClosestUserLocationSensor(sensors, currentLocation, Sensor.SensorType.PM10).measure
@@ -108,15 +110,20 @@ class HomeFragment : Fragment(), OnClickListener {
         (sensors.filter { it.type == type }.sumOf { it.measure } / sensors.size).toInt().toDouble()
 
     private fun findClosestUserLocationSensor(
-        sensors: List<Sensor>, userLocation: UserLocation,
+        sensors: List<Sensor>,
+        userLocation: UserLocation,
         type: Sensor.SensorType
     ): Sensor {
         val userLoc = userLocation.latLng
-        return sensors.filter { it.type == type }.minWith { a, b ->
-            (distanceBetween(userLoc, a.latLng) - distanceBetween(userLoc, b.latLng)).toInt()
-        }
+        return sensors.filter { it.type == type }
+            .minWith { a, b -> (distanceBetween(userLoc, a.latLng) - distanceBetween(userLoc, b.latLng)).toInt() }
     }
 
-    private fun distanceBetween(a: LatLng, b: LatLng) =
-        SloppyMath.haversinMeters(a.latitude, a.longitude, b.latitude, b.longitude)
+    private fun distanceBetween(a: LatLng, b: LatLng) = Location("a").apply {
+        latitude = a.latitude
+        longitude = a.longitude
+    }.distanceTo(Location("b").apply {
+        latitude = b.latitude
+        longitude = b.longitude
+    })
 }

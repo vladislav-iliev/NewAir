@@ -51,8 +51,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/legendButton"
-        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintEnd_toEndOf="@id/legendBlue"
+        app:layout_constraintStart_toStartOf="@id/legendBlue"
         app:layout_constraintTop_toBottomOf="@id/legendBlue" />
 
     <TextView
@@ -73,8 +73,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/legendButton"
-        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintEnd_toEndOf="@id/legendGreenLight"
+        app:layout_constraintStart_toStartOf="@id/legendGreenLight"
         app:layout_constraintTop_toBottomOf="@id/legendGreenLight" />
 
     <TextView
@@ -95,8 +95,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/legendButton"
-        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintEnd_toEndOf="@id/legendGreen"
+        app:layout_constraintStart_toStartOf="@id/legendGreen"
         app:layout_constraintTop_toBottomOf="@id/legendGreen" />
 
     <TextView
@@ -117,8 +117,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/legendButton"
-        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintEnd_toEndOf="@id/legendGreenDark"
+        app:layout_constraintStart_toStartOf="@id/legendGreenDark"
         app:layout_constraintTop_toBottomOf="@id/legendGreenDark" />
 
     <TextView
@@ -139,8 +139,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/legendButton"
-        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintEnd_toEndOf="@id/legendOrangeLight"
+        app:layout_constraintStart_toStartOf="@id/legendOrangeLight"
         app:layout_constraintTop_toBottomOf="@id/legendOrangeLight" />
 
     <TextView
@@ -161,8 +161,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/legendButton"
-        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintEnd_toEndOf="@id/legendOrange"
+        app:layout_constraintStart_toStartOf="@id/legendOrange"
         app:layout_constraintTop_toBottomOf="@id/legendOrange" />
 
     <TextView
@@ -183,8 +183,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/legendButton"
-        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintEnd_toEndOf="@id/legendOrangeDark"
+        app:layout_constraintStart_toStartOf="@id/legendOrangeDark"
         app:layout_constraintTop_toBottomOf="@id/legendOrangeDark" />
 
     <TextView
@@ -205,8 +205,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/legendButton"
-        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintEnd_toEndOf="@id/legendRedLight"
+        app:layout_constraintStart_toStartOf="@id/legendRedLight"
         app:layout_constraintTop_toBottomOf="@id/legendRedLight" />
 
     <TextView
@@ -227,8 +227,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/legendButton"
-        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintEnd_toEndOf="@id/legendRed"
+        app:layout_constraintStart_toStartOf="@id/legendRed"
         app:layout_constraintTop_toBottomOf="@id/legendRed" />
 
     <TextView
@@ -249,8 +249,8 @@
         android:layout_marginTop="10dp"
         android:background="@color/black"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/legendButton"
-        app:layout_constraintStart_toStartOf="@id/legendButton"
+        app:layout_constraintEnd_toEndOf="@id/legendRedDark"
+        app:layout_constraintStart_toStartOf="@id/legendRedDark"
         app:layout_constraintTop_toBottomOf="@id/legendRedDark" />
 
     <TextView
@@ -271,6 +271,7 @@
         android:layout_marginTop="10dp"
         android:paddingBottom="10dp"
         android:text="PM10 μg/m3"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendPurple"

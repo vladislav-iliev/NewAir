@@ -26,7 +26,7 @@ _**Full size screenshots available at /media/screenshots/**_
 
 ![Screenshot of Home](/media/screenshots/mini/home_default.png) 
 ![Screenshot of Map](/media/screenshots/mini/map_default.png) 
-![Screenshot of Graph](/media/screenshots/mini/graph_default.png)
+![Screenshot of Graph](/media/screenshots/mini/graph.png)
 
 Users could enable a colourblind pallette from Settings.
 
@@ -45,7 +45,7 @@ now only visible in Home, deemed unnecessary elsewhere
 Downloading data from Newcastle Urban Observatory too slow to use worldwide
 
 ## Authors
-### Initial (2018)
+### Initial
 First developed in 2018 in Newcastle University
 
 * Lead programmer: Vladislav Iliev

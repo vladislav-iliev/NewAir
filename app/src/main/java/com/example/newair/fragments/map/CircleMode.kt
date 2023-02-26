@@ -84,6 +84,7 @@ internal class CircleMode(private val fragment: MapFragment, private val googleM
         legendTexts.add(root.findViewById(R.id.legendTextRed))
         legendTexts.add(root.findViewById(R.id.legendTextRedDark))
         legendTexts.add(root.findViewById(R.id.legendTextPurple))
+        legendTexts.add(root.findViewById(R.id.measurement))
     }
 
     private fun setMapLegendColors(isColorBlind: Boolean) {

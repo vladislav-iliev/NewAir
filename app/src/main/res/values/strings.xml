@@ -18,7 +18,7 @@
     <string name="title_graph">History</string>
     <string name="title_settings">Settings</string>
     <!--Home-->
-    <string name="data_not_avaiable">Data unavailable</string>
+    <string name="data_not_available">Data unavailable</string>
 
     <!--Graph-->
     <string name="line_data_set_label">Dates</string>
@@ -46,19 +46,7 @@
     <!--About-->
     <string name="about_dialog_key">about_dialog</string>
     <string name="about_dialog_title">About</string>
-    <string name="about_dialog_contents">
-        Lead programmer: Vladislav Iliev\n
-        Design and Logo: V.M.T. Godsell\n
-        Technical assistance:\n
-        I. Gylaris, L.P. Stannard\n
-        QA:\n
-        I.J. Watt, B.D. Wilsher\n
-        Team organisation:\n
-        R.J. Cooper, A.L.J. Heilling\n
-        External resources by:\n
-        Freepik\n
-        com.github.GoodieBag:CarouselPicker:v1.2\n
-        com.github.PhilJay:MPAndroidChart:v3.1.0\n
+    <string name="about_dialog_contents">Lead programmer:\nVladislav Iliev\nArt direction:\nV.M.T. Godsell\nTechnical assistance:\nI. Gylaris, L.P. Stannard\nExternal resources:\nFreepik\ncom.github.GoodieBag:CarouselPicker:v1.2\ncom.github.PhilJay:MPAndroidChart:v3.1.0\n
     </string>
 
     <!--Add new location dialog-->

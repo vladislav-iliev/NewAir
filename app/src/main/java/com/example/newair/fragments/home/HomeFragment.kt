@@ -91,7 +91,7 @@ class HomeFragment : Fragment(), OnClickListener {
     private fun setColorAndHealthMessage(newPollution: Double) {
         if (newPollution < 0) {
             backgroundView.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey))
-            healthView.text = getString(R.string.data_not_avaiable)
+            healthView.text = getString(R.string.data_not_available)
             return
         }
 

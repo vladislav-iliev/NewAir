@@ -39,9 +39,8 @@ class GraphFragment : Fragment() {
     private fun createDates(): Array<Date> {
         val calendar = Calendar.getInstance()
         calendar.time = Date()
-        var i = 0
         return Array(7) {
-            calendar.add(Calendar.DAY_OF_YEAR, -(i++))
+            calendar.add(Calendar.DAY_OF_YEAR, -1)
             dateNullifyTime(calendar.time)
         }
     }

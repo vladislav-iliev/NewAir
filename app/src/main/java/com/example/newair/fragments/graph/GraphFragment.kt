@@ -94,7 +94,7 @@ class GraphFragment : Fragment() {
         lineChart.data = lineData
         lineChart.legend.isEnabled = false
         lineChart.axisRight.setDrawLabels(false)
-        lineChart.setVisibleYRange(0f, 120.toFloat(), lineDataSet.axisDependency)
+        lineChart.setVisibleYRange(0f, 140.toFloat(), lineDataSet.axisDependency)
         initializeDescription(lineChart)
         initializeXAxis(lineChart)
     }
@@ -113,13 +113,13 @@ class GraphFragment : Fragment() {
         xAxis.setDrawGridLines(false)
         xAxis.valueFormatter = object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
-                return formatDateDate(dates[dates.size - value.toInt() - 1])
+                return formatDate(dates[dates.size - value.toInt() - 1])
             }
         }
         xAxis.labelRotationAngle = (-45).toFloat()
     }
 
-    fun formatDateDate(date: Date): String {
+    private fun formatDate(date: Date): String {
         val calendar = Calendar.getInstance()
         calendar.time = date
         return String.format(

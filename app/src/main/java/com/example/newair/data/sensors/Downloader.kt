@@ -4,7 +4,8 @@ import com.example.newair.data.sensors.Sensor.SensorType
 import com.google.android.gms.maps.model.LatLng
 
 internal class Downloader {
-    private fun random() = (0..99).random().toDouble()
+    private fun random() = (0..110).random().toDouble()
+    private fun randomLow() = (0..30).random().toDouble()
 
     fun newLiveSensors() = listOf(
         Sensor(SensorType.PM10, LatLng(54.973918, -1.624631), random()),
@@ -22,18 +23,18 @@ internal class Downloader {
         Sensor(SensorType.PM10, LatLng(54.970717, -1.622784), random()),
         Sensor(SensorType.PM10, LatLng(54.979261, -1.613316), random()),
 
-        Sensor(SensorType.HUMID, LatLng(54.973918, -1.624631), random()),
-        Sensor(SensorType.HUMID, LatLng(54.979667, -1.626219), random()),
-        Sensor(SensorType.HUMID, LatLng(54.982082, -1.616685), random()),
-        Sensor(SensorType.HUMID, LatLng(54.973908, -1.618864), random()),
-        Sensor(SensorType.HUMID, LatLng(54.974662, -1.635057), random()),
-        Sensor(SensorType.HUMID, LatLng(54.971311, -1.611821), random()),
+        Sensor(SensorType.HUMID, LatLng(54.973918, -1.624631), randomLow()),
+        Sensor(SensorType.HUMID, LatLng(54.979667, -1.626219), randomLow()),
+        Sensor(SensorType.HUMID, LatLng(54.982082, -1.616685), randomLow()),
+        Sensor(SensorType.HUMID, LatLng(54.973908, -1.618864), randomLow()),
+        Sensor(SensorType.HUMID, LatLng(54.974662, -1.635057), randomLow()),
+        Sensor(SensorType.HUMID, LatLng(54.971311, -1.611821), randomLow()),
 
-        Sensor(SensorType.TEMP, LatLng(54.973918, -1.624631), random()),
-        Sensor(SensorType.TEMP, LatLng(54.979667, -1.626219), random()),
-        Sensor(SensorType.TEMP, LatLng(54.982082, -1.616685), random()),
-        Sensor(SensorType.TEMP, LatLng(54.973908, -1.618864), random()),
-        Sensor(SensorType.TEMP, LatLng(54.974662, -1.635057), random()),
+        Sensor(SensorType.TEMP, LatLng(54.973918, -1.624631), randomLow()),
+        Sensor(SensorType.TEMP, LatLng(54.979667, -1.626219), randomLow()),
+        Sensor(SensorType.TEMP, LatLng(54.982082, -1.616685), randomLow()),
+        Sensor(SensorType.TEMP, LatLng(54.973908, -1.618864), randomLow()),
+        Sensor(SensorType.TEMP, LatLng(54.974662, -1.635057), randomLow()),
     )
 
     fun newHistorySensors() = listOf(random(), random(), random(), random(), random(), random(), random())

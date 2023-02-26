@@ -50,11 +50,9 @@ internal class CircleMode(private val fragment: MapFragment, private val googleM
     }
 
     private fun getCircleColor(pollution: Double): Int {
-        var i = 1
-        while (i < colorStartValues.size) {
-            if (pollution < colorStartValues[i]) break
-            i++
-        }
+        var i = colorStartValues.indexOfFirst { pollution <= it }
+        if (i < 0) i = colorStartValues.lastIndex
+
         val newColor = if (isColorBlind) colorsColorblind[i] else colors[i]
         return Color.argb(150, Color.red(newColor), Color.green(newColor), Color.blue(newColor))
     }

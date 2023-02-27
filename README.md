@@ -22,16 +22,16 @@ locations and their readings are displayed via coloured markers.
 Additionally, history data is available for the averages of the last 7 days.
 Displayed on a line graph.
 
-_**Full size screenshots available at /media/screenshots/**_
+_**All media available at /media/**_
 
-![Screenshot of Home](/media/screenshots/mini/home_default.png) 
-![Screenshot of Map](/media/screenshots/mini/map_default.png) 
-![Screenshot of Graph](/media/screenshots/mini/graph.png)
+![Demo of Home](/media/demos/home.mp4) 
+![Demo of Map](/media/demos/map.mp4) 
+![Screenshot of Graph](/media/screenshots/graph.png)
 
 Users could enable a colourblind pallette from Settings.
 
-![Screenshot of colourblind Home](/media/screenshots/mini/home_colourblind.png) 
-![Screenshot of colourblind Map](/media/screenshots/mini/map_colourblind.png)
+![Screenshot of colourblind Home](/media/screenshots/home_colourblind.png) 
+![Screenshot of colourblind Map](/media/screenshots/map_colourblind.png)
 
 ## 2023 Update
 * Migrated to Kotlin

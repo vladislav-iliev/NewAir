@@ -24,9 +24,13 @@ Displayed on a line graph.
 
 _**All media available at /media/**_
 
-![Demo of Home](/media/demos/home.mp4) 
-![Demo of Map](/media/demos/map.mp4) 
-![Screenshot of Graph](/media/screenshots/graph.png)
+![Screenshot of Home](/media/screenshots/home_default.png) 
+![Screenshot of Map](/media/screenshots/map_default.png) 
+![Screenshot of Graph](/media/screenshots/graph.png) 
+
+![Video of Home available at /media/demos/](/media/demos/home.mp4)
+
+![Video of Map available at /media/demos/](/media/demos/map.mp4)
 
 Users could enable a colourblind pallette from Settings.
 

@@ -22,20 +22,18 @@ locations and their readings are displayed via coloured markers.
 Additionally, history data is available for the averages of the last 7 days.
 Displayed on a line graph.
 
-_**All media available at /media/**_
+_**Higher res screenshots, video media available at /media/**_
 
-![Screenshot of Home](/media/screenshots/home_default.png) 
-![Screenshot of Map](/media/screenshots/map_default.png) 
-![Screenshot of Graph](/media/screenshots/graph.png) 
+![Screenshot of Home, Light Pollution](/media/screenshots/mini/green.png) 
+![Screenshot of Home, Heavy Pollution](/media/screenshots/mini/purp.png) 
+![Screenshot of Map](/media/screenshots/mini/map.png) 
+![Screenshot of Graph](/media/screenshots/mini/graph.png) 
 
-![Video of Home available at /media/demos/](/media/demos/home.mp4)
+![Video of Home available at /media/recordings/](/media/recordings/home.mp4)
 
-![Video of Map available at /media/demos/](/media/demos/map.mp4)
+![Video of adding custom location available at /media/recordings/](/media/recordings/add_location.mp4)
 
 Users could enable a colourblind pallette from Settings.
-
-![Screenshot of colourblind Home](/media/screenshots/home_colourblind.png) 
-![Screenshot of colourblind Map](/media/screenshots/map_colourblind.png)
 
 ## 2023 Update
 * Migrated to Kotlin

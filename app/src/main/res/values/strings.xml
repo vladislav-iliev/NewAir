@@ -1,0 +1,62 @@
+<resources>
+    <!--Initial load-->
+    <string name="user_locations_file">locations.ser</string>
+    <string name="user_locations_file_tag">USER LOCATIONS FILE</string>
+    <string name="user_locations_file_already_exists_message">USER LOCATIONS FILE ALREADY EXISTS</string>
+    <string name="user_locations_file_empty">USER LOCATIONS FILE EMPTY</string>
+
+    <string name="history_data_file">history_data.ser</string>
+    <string name="history_data_file_tag">HISTORY DATA FILE</string>
+    <string name="history_data_file_already_exists_message">HISTORY DATA FILE ALREADY EXISTS</string>
+    <string name="history_data_file_empty">HISTORY DATA FILE EMPTY</string>
+
+    <!--Fragments-->
+    <string name="app_name">NewAir</string>
+    <string name="title_loading">Loading</string>
+    <string name="title_map">Map</string>
+    <string name="title_home">Home</string>
+    <string name="title_graph">History</string>
+    <string name="title_settings">Settings</string>
+    <!--Home-->
+    <string name="data_not_available">Data unavailable</string>
+
+    <!--Graph-->
+    <string name="line_data_set_label">Dates</string>
+    <string name="calendar_format">dd/MM/yyyy</string>
+    <string name="date_format">%d %s</string>
+
+    <!--Settings-->
+    <string name="preference_category_appearance">Appearance</string>
+    <string name="preference_category_data">Data</string>
+    <string name="preference_category_locations">Locations</string>
+    <string name="preference_category_miscellaneous">Miscellaneous</string>
+
+    <!--Colorblind-->
+    <string name="color_blind_switch_key">color_blind_checkbox_key</string>
+    <string name="color_mode_switch_title">Colour blind</string>
+    <string name="color_mode_switch_summary">Enable a colour blind palette</string>
+
+    <!--Locations-->
+    <string name="delete_user_locations_button_key">delete_user_locations_preference</string>
+    <string name="delete_all_locations_button_title">Delete all locations</string>
+    <string name="delete_user_location_button_key">delete_user_location_preference</string>
+    <string name="delete_user_location_button_title">Delete location</string>
+    <string name="delete_user_location_dialog_title">Select location to delete</string>
+
+    <!--About-->
+    <string name="about_dialog_key">about_dialog</string>
+    <string name="about_dialog_title">About</string>
+    <string name="about_dialog_contents">Lead programmer:\nVladislav Iliev\nArt direction:\nV.M.T. Godsell\nTechnical assistance:\nI. Gylaris, L.P. Stannard\nQA:\nB. Wilsher, I. Watt\nExternal resources:\nFreepik\ncom.github.GoodieBag:CarouselPicker:v1.2\ncom.github.PhilJay:MPAndroidChart:v3.1.0\n
+    </string>
+
+    <!--Add new location dialog-->
+    <string name="add_custom_location_dialog_title">Enter name</string>
+    <string name="location_empty">Enter a valid name</string>
+    <string name="location_outside_newcastle">Location outside sensor coverage</string>
+    <string name="location_already_exists_format">%s %s</string>
+    <string name="location_already_exists_toast">Location already exists:</string>
+
+    <!--Dates-->
+    <string name="date_condensed_format">yyyyMMdd</string>
+    <string name="date_hyphenated_format">yyyy-MM-dd HH:mm:ss</string>
+</resources>

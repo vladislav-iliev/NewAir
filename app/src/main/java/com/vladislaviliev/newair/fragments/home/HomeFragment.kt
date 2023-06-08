@@ -52,9 +52,9 @@ class HomeFragment : Fragment() {
 
     internal fun updateScreen() {
         val loc: UserLocation? = if (carousel.position == 0) null else vm.userLocations[carousel.position - 1]
-        val pollution = if (loc == null) getAverage(SensorType.PM10) else closestSensor(loc, SensorType.PM10).measure
-        val temp = if (loc == null) getAverage(SensorType.TEMP) else closestSensor(loc, SensorType.TEMP).measure
-        val humid = if (loc == null) getAverage(SensorType.HUMID) else closestSensor(loc, SensorType.HUMID).measure
+        val pollution = if (loc == null) getAverage(SensorType.PM10) else closestSensor(loc.latLng, SensorType.PM10).measure
+        val temp = if (loc == null) getAverage(SensorType.TEMP) else closestSensor(loc.latLng, SensorType.TEMP).measure
+        val humid = if (loc == null) getAverage(SensorType.HUMID) else closestSensor(loc.latLng, SensorType.HUMID).measure
         carousel.checkArrowsVisibility(carousel.position)
         pollutionView.text = pollution.toString()
         temperatureView.text = temp.toString()
@@ -68,16 +68,13 @@ class HomeFragment : Fragment() {
         return (sensors.filter { it.type == type }.sumOf { it.measure } / sensors.size).toInt().toDouble()
     }
 
-    private fun closestSensor(userLoc: UserLocation, type: SensorType): Sensor {
-        val latLng = userLoc.latLng
+    private fun closestSensor(latLng: LatLng, type: SensorType): Sensor {
+        fun distanceBetween(a: LatLng, b: LatLng) = Location("a").apply { latitude = a.latitude; longitude = a.longitude }
+            .distanceTo(Location("b").apply { latitude = b.latitude; longitude = b.longitude })
         return vm.liveSensors.value!!
             .filter { it.type == type }
             .minWith { a, b -> (distanceBetween(latLng, a.latLng) - distanceBetween(latLng, b.latLng)).toInt() }
     }
-
-    private fun distanceBetween(a: LatLng, b: LatLng) =
-        Location("a").apply { latitude = a.latitude; longitude = a.longitude }
-            .distanceTo(Location("b").apply { latitude = b.latitude; longitude = b.longitude })
 
     private fun getThresholdIndex(pollution: Double): Int {
         val thresholds = resources.getIntArray(R.array.color_dividers_int)

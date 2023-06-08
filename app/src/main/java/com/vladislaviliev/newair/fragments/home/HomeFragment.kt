@@ -87,9 +87,8 @@ class HomeFragment : Fragment() {
 
     @ColorInt
     private fun getColor(pollution: Double): Int {
-        val colorBlind =
+        val isColorBlind =
             PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(getString(R.string.color_blind_switch_key), false)
-        val colors = resources.getIntArray(if (colorBlind) R.array.colors_colorblind else R.array.colors)
-        return colors[getThresholdIndex(pollution)]
+        return resources.getIntArray(if (isColorBlind) R.array.colors_colorblind else R.array.colors)[getThresholdIndex(pollution)]
     }
 }

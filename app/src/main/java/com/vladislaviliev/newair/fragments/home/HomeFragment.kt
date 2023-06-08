@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
         pollutionView.text = pollution.toString()
         temperatureView.text = temp.toString()
         humidityView.text = humid.toString()
-        healthView.text = resources.getStringArray(R.array.health_messages)[getThresholdIndex(pollution)]
+        healthView.text = getHealthMessage(pollution)
         backgroundView.setBackgroundColor(getColor(pollution))
     }
 
@@ -82,6 +82,8 @@ class HomeFragment : Fragment() {
         if (idx < 0) idx = thresholds.lastIndex
         return idx
     }
+
+    private fun getHealthMessage(pollution: Double) = resources.getStringArray(R.array.health_messages)[getThresholdIndex(pollution)]
 
     @ColorInt
     private fun getColor(pollution: Double): Int {

@@ -1,7 +1,6 @@
 package com.vladislaviliev.newair.data
 
 import com.google.android.gms.maps.model.LatLng
-import com.vladislaviliev.newair.data.Sensor.SensorType
 
 internal class Downloader {
     private fun random() = (0..110).random().toDouble()

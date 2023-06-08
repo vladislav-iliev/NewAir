@@ -5,11 +5,12 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.fragment.app.activityViewModels
 import androidx.preference.PreferenceManager
-import com.vladislaviliev.newair.Vm
-import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.data.Sensor
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.CircleOptions
+import com.vladislaviliev.newair.R
+import com.vladislaviliev.newair.Vm
+import com.vladislaviliev.newair.data.Sensor
+import com.vladislaviliev.newair.data.SensorType
 
 internal class CircleMode(fragment: MapFragment, private val googleMap: GoogleMap) {
 
@@ -43,7 +44,7 @@ internal class CircleMode(fragment: MapFragment, private val googleMap: GoogleMa
     private fun onNewData(sensors: Iterable<Sensor>) {
         googleMap.clear()
         val circleOptions = CircleOptions().radius(100.toDouble()).strokeWidth(0.toFloat())
-        sensors.filter { it.type == Sensor.SensorType.PM10 }.forEach {
+        sensors.filter { it.type == SensorType.PM10 }.forEach {
             circleOptions.center(it.latLng)
             circleOptions.fillColor(createColor(it.measure))
             googleMap.addCircle(circleOptions)

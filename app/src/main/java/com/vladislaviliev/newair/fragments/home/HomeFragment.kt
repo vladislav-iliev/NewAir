@@ -16,11 +16,10 @@ import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.Vm
 import com.vladislaviliev.newair.data.Sensor
 import com.vladislaviliev.newair.data.SensorType
-import com.vladislaviliev.newair.data.UserLocation
 
 class HomeFragment : Fragment() {
 
-    internal val vm: Vm by activityViewModels()
+    private val vm: Vm by activityViewModels()
 
     private lateinit var carousel: HomeCarousel
     private lateinit var backgroundView: View
@@ -34,7 +33,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        carousel = HomeCarousel(this)
+        carousel = HomeCarousel(this, vm.userLocations)
         backgroundView = view.findViewById(R.id.container)
         healthView = view.findViewById(R.id.healthMessage)
         pollutionView = view.findViewById(R.id.pollutionText)
@@ -51,10 +50,10 @@ class HomeFragment : Fragment() {
     }
 
     internal fun updateScreen() {
-        val loc: UserLocation? = if (carousel.position == 0) null else vm.userLocations[carousel.position - 1]
-        val pollution = if (loc == null) getAverage(SensorType.PM10) else closestSensor(loc.latLng, SensorType.PM10).measure
-        val temp = if (loc == null) getAverage(SensorType.TEMP) else closestSensor(loc.latLng, SensorType.TEMP).measure
-        val humid = if (loc == null) getAverage(SensorType.HUMID) else closestSensor(loc.latLng, SensorType.HUMID).measure
+        val latLng = carousel.getCurrentLatLng()
+        val pollution = getReading(latLng, SensorType.PM10)
+        val temp = getReading(latLng, SensorType.TEMP)
+        val humid = getReading(latLng, SensorType.HUMID)
         carousel.checkArrowsVisibility(carousel.position)
         pollutionView.text = pollution.toString()
         temperatureView.text = temp.toString()
@@ -62,6 +61,9 @@ class HomeFragment : Fragment() {
         healthView.text = getHealthMessage(pollution)
         backgroundView.setBackgroundColor(getColor(pollution))
     }
+
+    private fun getReading(latLng: LatLng?, type: SensorType) =
+        if (latLng == null) getAverage(type) else closestSensor(latLng, type).measure
 
     private fun getAverage(type: SensorType): Double {
         val sensors = vm.liveSensors.value!!

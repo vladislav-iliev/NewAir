@@ -4,9 +4,10 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.vladislaviliev.newair.R
+import com.vladislaviliev.newair.data.UserLocation
 import `in`.goodiebag.carouselpicker.CarouselPicker
 
-internal class HomeCarousel(fragment: HomeFragment) {
+internal class HomeCarousel(fragment: HomeFragment, private val userLocations: List<UserLocation>) {
 
     private val locations = ArrayList(fragment.resources.getStringArray(R.array.initial_locations).toList())
     private val arrowLeft = fragment.requireView().findViewById<View>(R.id.carouselArrowLeft)
@@ -14,7 +15,7 @@ internal class HomeCarousel(fragment: HomeFragment) {
     internal var position = 0
 
     init {
-        locations.addAll(fragment.vm.userLocations.map { it.name })
+        locations.addAll(userLocations.map { it.name })
 
         val carouselItems = locations.map { CarouselPicker.TextItem(it, 10) }
         val adapter = CarouselPicker.CarouselViewAdapter(fragment.requireContext(), carouselItems, 0)
@@ -34,6 +35,8 @@ internal class HomeCarousel(fragment: HomeFragment) {
         arrowLeft.setOnClickListener { carousel.setCurrentItem(carousel.currentItem - 1, true) }
         arrowRight.setOnClickListener { carousel.setCurrentItem(carousel.currentItem + 1, true) }
     }
+
+    fun getCurrentLatLng() = if (position == 0) null else userLocations[position - 1].latLng
 
     fun checkArrowsVisibility(position: Int) {
         arrowLeft.visibility = if (position == 0) View.INVISIBLE else View.VISIBLE

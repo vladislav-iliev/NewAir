@@ -2,6 +2,6 @@ package com.vladislaviliev.newair.data
 
 import com.google.android.gms.maps.model.LatLng
 
-class Sensor(val type: SensorType, val latLng: LatLng, val measure: Double) : Comparable<Sensor> {
+data class Sensor(val type: SensorType, val latLng: LatLng, val measure: Double) : Comparable<Sensor> {
     override fun compareTo(other: Sensor) = measure.compareTo(other.measure)
 }

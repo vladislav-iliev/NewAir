@@ -64,15 +64,14 @@ class HomeFragment : Fragment() {
         backgroundView.setBackgroundColor(getColor(isColorBlind, pollution))
     }
 
-    private fun getReading(latLng: LatLng?, type: SensorType) =
-        if (latLng == null) getAverage(type) else closestSensor(latLng, type).measure
+    private fun getReading(latLng: LatLng?, type: SensorType) = if (latLng == null) getAverage(type) else closestReading(latLng, type)
 
     private fun getAverage(type: SensorType): Double {
         val sensors = vm.liveSensors.value!!
         return (sensors.filter { it.type == type }.sumOf { it.measure } / sensors.size).toInt().toDouble()
     }
 
-    private fun closestSensor(latLng: LatLng, type: SensorType) = vm.liveSensors.value!!
-        .filter { it.type == type }
-        .minWith { a, b -> (distanceBetween(latLng, a.latLng) - distanceBetween(latLng, b.latLng)).toInt() }
+    private fun closestReading(latLng: LatLng, type: SensorType) = vm.liveSensors.value!!
+        .filter { it.type == type }.minWith { a, b -> (distanceBetween(latLng, a.latLng) - distanceBetween(latLng, b.latLng)).toInt() }
+        .measure
 }

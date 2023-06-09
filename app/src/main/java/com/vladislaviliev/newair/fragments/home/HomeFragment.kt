@@ -46,15 +46,14 @@ class HomeFragment : Fragment() {
             NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionNavigationHomeToNavigationSettings())
         }
         view.findViewById<View>(R.id.refreshButton).setOnClickListener { vm.downloadData() }
-        vm.liveSensors.observe(viewLifecycleOwner) { updateScreen() }
+        vm.liveSensors.observe(viewLifecycleOwner) { redrawReadings() }
     }
 
-    internal fun updateScreen() {
+    internal fun redrawReadings() {
         val latLng = carousel.getCurrentLatLng()
         val pollution = getReading(latLng, SensorType.PM10)
         val temp = getReading(latLng, SensorType.TEMP)
         val humid = getReading(latLng, SensorType.HUMID)
-        carousel.checkArrowsVisibility(carousel.position)
         pollutionView.text = pollution.toString()
         temperatureView.text = temp.toString()
         humidityView.text = humid.toString()

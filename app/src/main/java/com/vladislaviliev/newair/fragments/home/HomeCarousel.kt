@@ -12,7 +12,7 @@ internal class HomeCarousel(fragment: HomeFragment, private val userLocations: L
     private val locations = ArrayList(fragment.resources.getStringArray(R.array.initial_locations).toList())
     private val arrowLeft = fragment.requireView().findViewById<View>(R.id.carouselArrowLeft)
     private val arrowRight = fragment.requireView().findViewById<View>(R.id.carouselArrowRight)
-    internal var position = 0
+    private var position = 0
 
     init {
         locations.addAll(userLocations.map { it.name })
@@ -28,17 +28,19 @@ internal class HomeCarousel(fragment: HomeFragment, private val userLocations: L
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageSelected(page: Int) {
                 position = page
-                fragment.updateScreen()
+                checkArrowsVisibility()
+                fragment.redrawReadings()
             }
         })
         carousel.adapter = adapter
         arrowLeft.setOnClickListener { carousel.setCurrentItem(carousel.currentItem - 1, true) }
         arrowRight.setOnClickListener { carousel.setCurrentItem(carousel.currentItem + 1, true) }
+        checkArrowsVisibility()
     }
 
     fun getCurrentLatLng() = if (position == 0) null else userLocations[position - 1].latLng
 
-    fun checkArrowsVisibility(position: Int) {
+    private fun checkArrowsVisibility() {
         arrowLeft.visibility = if (position == 0) View.INVISIBLE else View.VISIBLE
         arrowRight.visibility = if (position == locations.size - 1) View.INVISIBLE else View.VISIBLE
     }

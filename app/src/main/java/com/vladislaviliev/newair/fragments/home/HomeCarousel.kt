@@ -1,11 +1,10 @@
 package com.vladislaviliev.newair.fragments.home
 
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.data.UserLocation
-import `in`.goodiebag.carouselpicker.CarouselPicker
 
 internal class HomeCarousel(fragment: HomeFragment, private val userLocations: List<UserLocation>) {
 
@@ -16,23 +15,15 @@ internal class HomeCarousel(fragment: HomeFragment, private val userLocations: L
 
     init {
         locations.addAll(userLocations.map { it.name })
-
-        val carouselItems = locations.map { CarouselPicker.TextItem(it, 10) }
-        val adapter = CarouselPicker.CarouselViewAdapter(fragment.requireContext(), carouselItems, 0)
-        adapter.textColor = ContextCompat.getColor(fragment.requireContext(), R.color.white)
-
-        val carousel = fragment.requireView().findViewById<CarouselPicker>(R.id.carousel)
-        carousel.clearOnPageChangeListeners()
-        carousel.addOnPageChangeListener(object : OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun onPageScrollStateChanged(state: Int) {}
+        val carousel = fragment.requireView().findViewById<ViewPager2>(R.id.carousel)
+        carousel.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageSelected(page: Int) {
                 position = page
                 checkArrowsVisibility()
                 fragment.redrawReadings()
             }
         })
-        carousel.adapter = adapter
+        carousel.adapter = CarouselAdapter(locations)
         arrowLeft.setOnClickListener { carousel.setCurrentItem(carousel.currentItem - 1, true) }
         arrowRight.setOnClickListener { carousel.setCurrentItem(carousel.currentItem + 1, true) }
         checkArrowsVisibility()

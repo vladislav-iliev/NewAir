@@ -46,7 +46,7 @@
     <!--About-->
     <string name="about_dialog_key">about_dialog</string>
     <string name="about_dialog_title">About</string>
-    <string name="about_dialog_contents">Lead programmer:\nVladislav Iliev\nArt direction:\nV.M.T. Godsell\nTechnical assistance:\nI. Gylaris, L.P. Stannard\nQA:\nB. Wilsher, I. Watt\nExternal resources:\nFreepik\ncom.github.GoodieBag:CarouselPicker:v1.2\ncom.github.PhilJay:MPAndroidChart:v3.1.0\n
+    <string name="about_dialog_contents">Lead programmer:\nVladislav Iliev\nArt direction:\nV.M.T. Godsell\nTechnical assistance:\nI. Gylaris, L.P. Stannard\nQA:\nB. Wilsher, I. Watt\nExternal resources:\nFreepik\ncom.github.PhilJay:MPAndroidChart:v3.1.0\n
     </string>
 
     <!--Add new location dialog-->

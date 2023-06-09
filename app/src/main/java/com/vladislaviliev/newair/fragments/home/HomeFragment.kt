@@ -21,13 +21,13 @@ class HomeFragment : Fragment() {
 
     private val vm: Vm by activityViewModels()
 
-    private lateinit var carousel: HomeCarousel
+    private var isColorBlind = false
+    private lateinit var carousel: Carousel
     private lateinit var backgroundView: View
     private lateinit var pollutionView: TextView
     private lateinit var healthView: TextView
     private lateinit var temperatureView: TextView
     private lateinit var humidityView: TextView
-    private var isColorBlind = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.fragment_home, container, false)
@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         isColorBlind =
             PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(getString(R.string.color_blind_switch_key), false)
-        carousel = HomeCarousel(this, vm.userLocations)
+        carousel = Carousel(this, vm.userLocations)
         backgroundView = view.findViewById(R.id.container)
         healthView = view.findViewById(R.id.healthMessage)
         pollutionView = view.findViewById(R.id.pollutionText)

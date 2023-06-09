@@ -15,7 +15,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/measurement"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/refreshButton"
@@ -27,7 +26,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="15dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/legendButton"
         app:layout_constraintTop_toTopOf="@id/legendBackground" />
@@ -39,7 +37,6 @@
         android:layout_marginStart="15dp"
         android:text="0 - 5"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendBlue"
         app:layout_constraintStart_toStartOf="@id/legendBackground"
         app:layout_constraintTop_toTopOf="@id/legendBlue" />
@@ -50,7 +47,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendBlue"
         app:layout_constraintStart_toStartOf="@id/legendBlue"
         app:layout_constraintTop_toBottomOf="@id/legendBlue" />
@@ -61,7 +57,6 @@
         android:layout_height="wrap_content"
         android:text="6 - 16"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendGreenLight"
         app:layout_constraintStart_toStartOf="@id/legendTextBlue"
         app:layout_constraintTop_toTopOf="@id/legendGreenLight" />
@@ -72,7 +67,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendGreenLight"
         app:layout_constraintStart_toStartOf="@id/legendGreenLight"
         app:layout_constraintTop_toBottomOf="@id/legendGreenLight" />
@@ -83,7 +77,6 @@
         android:layout_height="wrap_content"
         android:text="17 - 33"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendGreen"
         app:layout_constraintStart_toStartOf="@id/legendTextGreenLight"
         app:layout_constraintTop_toTopOf="@id/legendGreen" />
@@ -94,7 +87,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendGreen"
         app:layout_constraintStart_toStartOf="@id/legendGreen"
         app:layout_constraintTop_toBottomOf="@id/legendGreen" />
@@ -105,7 +97,6 @@
         android:layout_height="wrap_content"
         android:text="34 - 50"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendGreenDark"
         app:layout_constraintStart_toStartOf="@id/legendTextGreen"
         app:layout_constraintTop_toTopOf="@id/legendGreenDark" />
@@ -116,7 +107,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendGreenDark"
         app:layout_constraintStart_toStartOf="@id/legendGreenDark"
         app:layout_constraintTop_toBottomOf="@id/legendGreenDark" />
@@ -127,7 +117,6 @@
         android:layout_height="wrap_content"
         android:text="51 - 58"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendOrangeLight"
         app:layout_constraintStart_toStartOf="@id/legendTextGreenDark"
         app:layout_constraintTop_toTopOf="@id/legendOrangeLight" />
@@ -138,7 +127,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendOrangeLight"
         app:layout_constraintStart_toStartOf="@id/legendOrangeLight"
         app:layout_constraintTop_toBottomOf="@id/legendOrangeLight" />
@@ -149,7 +137,6 @@
         android:layout_height="wrap_content"
         android:text="59 - 66"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendOrange"
         app:layout_constraintStart_toStartOf="@id/legendTextOrangeLight"
         app:layout_constraintTop_toTopOf="@id/legendOrange" />
@@ -160,7 +147,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendOrange"
         app:layout_constraintStart_toStartOf="@id/legendOrange"
         app:layout_constraintTop_toBottomOf="@id/legendOrange" />
@@ -171,7 +157,6 @@
         android:layout_height="wrap_content"
         android:text="67 - 75"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendOrangeDark"
         app:layout_constraintStart_toStartOf="@id/legendTextOrange"
         app:layout_constraintTop_toTopOf="@id/legendOrangeDark" />
@@ -182,7 +167,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendOrangeDark"
         app:layout_constraintStart_toStartOf="@id/legendOrangeDark"
         app:layout_constraintTop_toBottomOf="@id/legendOrangeDark" />
@@ -193,7 +177,6 @@
         android:layout_height="wrap_content"
         android:text="76 - 83"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendRedLight"
         app:layout_constraintStart_toStartOf="@id/legendTextOrangeDark"
         app:layout_constraintTop_toTopOf="@id/legendRedLight" />
@@ -204,7 +187,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendRedLight"
         app:layout_constraintStart_toStartOf="@id/legendRedLight"
         app:layout_constraintTop_toBottomOf="@id/legendRedLight" />
@@ -215,7 +197,6 @@
         android:layout_height="wrap_content"
         android:text="84 - 91"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendRed"
         app:layout_constraintStart_toStartOf="@id/legendTextRedLight"
         app:layout_constraintTop_toTopOf="@id/legendRed" />
@@ -226,7 +207,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendRed"
         app:layout_constraintStart_toStartOf="@id/legendRed"
         app:layout_constraintTop_toBottomOf="@id/legendRed" />
@@ -237,7 +217,6 @@
         android:layout_height="wrap_content"
         android:text="92 - 100"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendRedDark"
         app:layout_constraintStart_toStartOf="@id/legendTextRed"
         app:layout_constraintTop_toTopOf="@id/legendRedDark" />
@@ -248,7 +227,6 @@
         android:layout_height="15dp"
         android:layout_marginTop="10dp"
         android:background="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendRedDark"
         app:layout_constraintStart_toStartOf="@id/legendRedDark"
         app:layout_constraintTop_toBottomOf="@id/legendRedDark" />
@@ -259,7 +237,6 @@
         android:layout_height="wrap_content"
         android:text="100 -"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/legendPurple"
         app:layout_constraintStart_toStartOf="@id/legendTextRedDark"
         app:layout_constraintTop_toTopOf="@id/legendPurple" />
@@ -273,7 +250,6 @@
         android:text="PM10 μg/m3"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/legendPurple"
         app:layout_constraintStart_toStartOf="@id/legendTextPurple"
         app:layout_constraintTop_toBottomOf="@id/legendPurple" />
@@ -298,6 +274,13 @@
         app:icon="@drawable/ic_refresh"
         app:layout_constraintEnd_toStartOf="@id/legendButton"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/legend_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="legendBackground, legendBlue, legendTextBlue, legendGreenLight, legendTextGreenLight, legendGreen, legendTextGreen, legendGreenDark, legendTextGreenDark, legendOrangeLight, legendTextOrangeLight, legendOrange, legendTextOrange, legendOrangeDark, legendTextOrangeDark, legendRedLight, legendTextRedLight, legendRed, legendTextRed, legendRedDark, legendTextRedDark, legendPurple, legendTextPurple, measurement" />
 
     <!--ADD LOCATION ITEMS-->
     <TextView

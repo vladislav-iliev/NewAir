@@ -1,8 +1,6 @@
 package com.vladislaviliev.newair.fragments.map
 
-import android.graphics.Color
 import android.view.View
-import androidx.annotation.ColorInt
 import androidx.fragment.app.activityViewModels
 import androidx.preference.PreferenceManager
 import com.google.android.gms.maps.GoogleMap
@@ -11,15 +9,10 @@ import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.Vm
 import com.vladislaviliev.newair.data.Sensor
 import com.vladislaviliev.newair.data.SensorType
+import com.vladislaviliev.newair.data.getColor
 
 internal class CircleMode(fragment: MapFragment, private val googleMap: GoogleMap) {
 
-    @ColorInt
-    private val colors = fragment.resources.getIntArray(R.array.colors)
-
-    @ColorInt
-    private val colorsColorblind = fragment.resources.getIntArray(R.array.colors_colorblind)
-    private val colorStartValues = fragment.resources.getIntArray(R.array.color_dividers_int)
     private val legendBackground = fragment.requireView().findViewById<View>(R.id.legendBackground)
     private val legendBoxes = mutableListOf<View>()
     private val legendTexts = mutableListOf<View>()
@@ -46,17 +39,9 @@ internal class CircleMode(fragment: MapFragment, private val googleMap: GoogleMa
         val circleOptions = CircleOptions().radius(100.toDouble()).strokeWidth(0.toFloat())
         sensors.filter { it.type == SensorType.PM10 }.forEach {
             circleOptions.center(it.latLng)
-            circleOptions.fillColor(createColor(it.measure))
+            circleOptions.fillColor(getColor(isColorBlind, it.measure, 150))
             googleMap.addCircle(circleOptions)
         }
-    }
-
-    @ColorInt
-    private fun createColor(pollution: Double): Int {
-        var colorIdx = colorStartValues.indexOfFirst { pollution <= it }
-        if (colorIdx < 0) colorIdx = colorStartValues.lastIndex
-        val newColor = if (isColorBlind) colorsColorblind[colorIdx] else colors[colorIdx]
-        return Color.argb(150, Color.red(newColor), Color.green(newColor), Color.blue(newColor))
     }
 
     private fun initializeLegend(root: View) {
@@ -83,7 +68,7 @@ internal class CircleMode(fragment: MapFragment, private val googleMap: GoogleMa
         legendTexts.add(root.findViewById(R.id.legendTextRedDark))
         legendTexts.add(root.findViewById(R.id.legendTextPurple))
         legendTexts.add(root.findViewById(R.id.measurement))
-        legendBoxes.indices.forEach { legendBoxes[it].setBackgroundColor(if (isColorBlind) colorsColorblind[it] else colors[it]) }
+        legendBoxes.indices.forEach { legendBoxes[it].setBackgroundColor(getColor(isColorBlind, it)) }
     }
 
     private fun toggleMapLegend() {

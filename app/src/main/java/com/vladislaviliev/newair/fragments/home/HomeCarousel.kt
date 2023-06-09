@@ -9,7 +9,7 @@ import `in`.goodiebag.carouselpicker.CarouselPicker
 
 internal class HomeCarousel(fragment: HomeFragment, private val userLocations: List<UserLocation>) {
 
-    private val locations = ArrayList(fragment.resources.getStringArray(R.array.initial_locations).toList())
+    private val locations = mutableListOf("City")
     private val arrowLeft = fragment.requireView().findViewById<View>(R.id.carouselArrowLeft)
     private val arrowRight = fragment.requireView().findViewById<View>(R.id.carouselArrowRight)
     private var position = 0

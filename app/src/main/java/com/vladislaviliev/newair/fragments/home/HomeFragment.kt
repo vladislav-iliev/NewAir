@@ -1,12 +1,10 @@
 package com.vladislaviliev.newair.fragments.home
 
-import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.ColorInt
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -14,8 +12,10 @@ import androidx.preference.PreferenceManager
 import com.google.android.gms.maps.model.LatLng
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.Vm
-import com.vladislaviliev.newair.data.Sensor
 import com.vladislaviliev.newair.data.SensorType
+import com.vladislaviliev.newair.data.distanceBetween
+import com.vladislaviliev.newair.data.getColor
+import com.vladislaviliev.newair.data.getHealthMessage
 
 class HomeFragment : Fragment() {
 
@@ -27,12 +27,15 @@ class HomeFragment : Fragment() {
     private lateinit var healthView: TextView
     private lateinit var temperatureView: TextView
     private lateinit var humidityView: TextView
+    private var isColorBlind = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.fragment_home, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        isColorBlind =
+            PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(getString(R.string.color_blind_switch_key), false)
         carousel = HomeCarousel(this, vm.userLocations)
         backgroundView = view.findViewById(R.id.container)
         healthView = view.findViewById(R.id.healthMessage)
@@ -58,7 +61,7 @@ class HomeFragment : Fragment() {
         temperatureView.text = temp.toString()
         humidityView.text = humid.toString()
         healthView.text = getHealthMessage(pollution)
-        backgroundView.setBackgroundColor(getColor(pollution))
+        backgroundView.setBackgroundColor(getColor(isColorBlind, pollution))
     }
 
     private fun getReading(latLng: LatLng?, type: SensorType) =
@@ -69,27 +72,7 @@ class HomeFragment : Fragment() {
         return (sensors.filter { it.type == type }.sumOf { it.measure } / sensors.size).toInt().toDouble()
     }
 
-    private fun closestSensor(latLng: LatLng, type: SensorType): Sensor {
-        fun distanceBetween(a: LatLng, b: LatLng) = Location("a").apply { latitude = a.latitude; longitude = a.longitude }
-            .distanceTo(Location("b").apply { latitude = b.latitude; longitude = b.longitude })
-        return vm.liveSensors.value!!
-            .filter { it.type == type }
-            .minWith { a, b -> (distanceBetween(latLng, a.latLng) - distanceBetween(latLng, b.latLng)).toInt() }
-    }
-
-    private fun getThresholdIndex(pollution: Double): Int {
-        val thresholds = resources.getIntArray(R.array.color_dividers_int)
-        var idx = thresholds.indexOfFirst { pollution <= it }
-        if (idx < 0) idx = thresholds.lastIndex
-        return idx
-    }
-
-    private fun getHealthMessage(pollution: Double) = resources.getStringArray(R.array.health_messages)[getThresholdIndex(pollution)]
-
-    @ColorInt
-    private fun getColor(pollution: Double): Int {
-        val isColorBlind =
-            PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(getString(R.string.color_blind_switch_key), false)
-        return resources.getIntArray(if (isColorBlind) R.array.colors_colorblind else R.array.colors)[getThresholdIndex(pollution)]
-    }
+    private fun closestSensor(latLng: LatLng, type: SensorType) = vm.liveSensors.value!!
+        .filter { it.type == type }
+        .minWith { a, b -> (distanceBetween(latLng, a.latLng) - distanceBetween(latLng, b.latLng)).toInt() }
 }

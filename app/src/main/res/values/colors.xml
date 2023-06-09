@@ -10,29 +10,4 @@
     <color name="mid_grey">#BDBDBD</color>
     <color name="semi_dark_grey">#757575</color>
     <color name="dark_grey">#424242</color>
-
-    <!--Colors-->
-    <color name="backgroundBlue">#47BBF0</color>
-    <color name="backgroundGreenLight">#5BC78E</color>
-    <color name="backgroundGreen">#57BB67</color>
-    <color name="backgroundGreenDark">#44986A</color>
-    <color name="backgroundOrangeLight">#F39457</color>
-    <color name="backgroundOrange">#F17C32</color>
-    <color name="backgroundOrangeDark">#EA642F</color>
-    <color name="backgroundRedLight">#ED4639</color>
-    <color name="backgroundRed">#D63F3E</color>
-    <color name="backgroundRedDark">#CA3B3A</color>
-    <color name="backgroundPurple">#8E3276</color>
-
-    <color name="backgroundBlueColorblind">#45A7AF</color>
-    <color name="backgroundGreenLightColorblind">#C04CBF</color>
-    <color name="backgroundGreenColorblind">#33A2F7</color>
-    <color name="backgroundGreenDarkColorblind">#0E5DC5</color>
-    <color name="backgroundOrangeLightColorblind">#BF913D</color>
-    <color name="backgroundOrangeColorblind">#5FBF42</color>
-    <color name="backgroundOrangeDarkColorblind">#918F19</color>
-    <color name="backgroundRedLightColorblind">#BA3523</color>
-    <color name="backgroundRedColorblind">#96311A</color>
-    <color name="backgroundRedDarkColorblind">#77212C</color>
-    <color name="backgroundPurpleColorblind">#33723D</color>
 </resources>

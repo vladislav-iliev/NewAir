@@ -13,9 +13,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.Vm
 import com.vladislaviliev.newair.data.SensorType
-import com.vladislaviliev.newair.data.distanceBetween
-import com.vladislaviliev.newair.data.getColor
-import com.vladislaviliev.newair.data.getHealthMessage
+import com.vladislaviliev.newair.data.Utils
 
 class HomeFragment : Fragment() {
 
@@ -60,8 +58,8 @@ class HomeFragment : Fragment() {
         pollutionView.text = pollution.toString()
         temperatureView.text = temp.toString()
         humidityView.text = humid.toString()
-        healthView.text = getHealthMessage(pollution)
-        backgroundView.setBackgroundColor(getColor(isColorBlind, pollution))
+        healthView.text = Utils.getHealthMessage(pollution)
+        backgroundView.setBackgroundColor(Utils.getColor(isColorBlind, pollution))
     }
 
     private fun getReading(latLng: LatLng?, type: SensorType) = if (latLng == null) getAverage(type) else closestReading(latLng, type)
@@ -72,6 +70,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun closestReading(latLng: LatLng, type: SensorType) = vm.liveSensors.value!!
-        .filter { it.type == type }.minWith { a, b -> (distanceBetween(latLng, a.latLng) - distanceBetween(latLng, b.latLng)).toInt() }
+        .filter { it.type == type }
+        .minWith { a, b -> (Utils.distanceBetween(latLng, a.latLng) - Utils.distanceBetween(latLng, b.latLng)).toInt() }
         .measure
 }

@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vladislaviliev.newair.R
 
-internal class CarouselAdapter(private val items: List<String>) : RecyclerView.Adapter<CarouselAdapter.ViewHolder>() {
+internal class CarouselAdapter(private val items: List<CharSequence>) : RecyclerView.Adapter<CarouselAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.carousel_viewholder, parent, false))
 

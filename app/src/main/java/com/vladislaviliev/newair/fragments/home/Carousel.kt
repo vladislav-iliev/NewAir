@@ -8,13 +8,12 @@ import com.vladislaviliev.newair.data.UserLocation
 
 internal class Carousel(fragment: HomeFragment, private val userLocations: List<UserLocation>) {
 
-    private val locations = mutableListOf("City")
+    private val locations: List<CharSequence> = mutableListOf("City").apply { addAll(userLocations.map { it.name }) }
     private val arrowLeft = fragment.requireView().findViewById<View>(R.id.carouselArrowLeft)
     private val arrowRight = fragment.requireView().findViewById<View>(R.id.carouselArrowRight)
     private var position = 0
 
     init {
-        locations.addAll(userLocations.map { it.name })
         val carousel = fragment.requireView().findViewById<ViewPager2>(R.id.carousel)
         carousel.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageSelected(page: Int) {

@@ -2,36 +2,28 @@ package com.vladislaviliev.newair.home
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.UserLocation
 
-internal class Carousel(fragment: Fragment, private val userLocations: List<UserLocation>) {
+internal class Carousel(root: View, private val data: Data) {
 
-    private val locations: List<CharSequence> = mutableListOf("City").apply { addAll(userLocations.map { it.name }) }
-    private val arrowLeft = fragment.requireView().findViewById<View>(R.id.carouselArrowLeft)
-    private val arrowRight = fragment.requireView().findViewById<View>(R.id.carouselArrowRight)
-    private var position = 0
+    private val carouselView = root.findViewById<ViewPager2>(R.id.carousel)
+    private val arrowLeft = root.findViewById<View>(R.id.carouselArrowLeft)
+    private val arrowRight = root.findViewById<View>(R.id.carouselArrowRight)
 
     init {
-        val carousel = fragment.requireView().findViewById<ViewPager2>(R.id.carousel)
-        carousel.registerOnPageChangeCallback(object : OnPageChangeCallback() {
-            override fun onPageSelected(page: Int) {
-                position = page
-                checkArrowsVisibility()
-                fragment.redrawReadings()
-            }
-        })
-        carousel.adapter = CarouselAdapter(locations)
-        arrowLeft.setOnClickListener { carousel.setCurrentItem(carousel.currentItem - 1, true) }
-        arrowRight.setOnClickListener { carousel.setCurrentItem(carousel.currentItem + 1, true) }
-        checkArrowsVisibility()
+        carouselView.adapter = CarouselAdapter(data.locations)
+        carouselView.isUserInputEnabled = false
+        arrowLeft.setOnClickListener { data.setPosition(data.positionInt - 1) }
+        arrowRight.setOnClickListener { data.setPosition(data.positionInt + 1) }
     }
 
-    fun getCurrentLatLng() = if (position == 0) null else userLocations[position - 1].latLng
+    fun redrawPosition() {
+        checkArrowsVisibility(data.positionInt, data.locations.size)
+        carouselView.currentItem = data.positionInt
+    }
 
-    private fun checkArrowsVisibility() {
-        arrowLeft.visibility = if (position == 0) View.INVISIBLE else View.VISIBLE
-        arrowRight.visibility = if (position == locations.size - 1) View.INVISIBLE else View.VISIBLE
+    private fun checkArrowsVisibility(pos: Int, maxPos: Int) {
+        arrowLeft.visibility = if (pos == 0) View.INVISIBLE else View.VISIBLE
+        arrowRight.visibility = if (pos == maxPos - 1) View.INVISIBLE else View.VISIBLE
     }
 }

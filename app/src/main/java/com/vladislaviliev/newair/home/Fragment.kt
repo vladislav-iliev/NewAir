@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
-import com.google.android.gms.maps.model.LatLng
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.RuntimeData
 import com.vladislaviliev.newair.sensor.SensorType
@@ -17,7 +17,9 @@ import com.vladislaviliev.newair.sensor.Utils
 
 class Fragment : Fragment() {
 
-    private val data: RuntimeData by activityViewModels()
+    private val appData: RuntimeData by activityViewModels()
+    private val homeData: Data by viewModels()
+
     private var isColorBlind = false
     private lateinit var carousel: Carousel
     private lateinit var backgroundView: View
@@ -31,9 +33,11 @@ class Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        homeData.setLocations(appData.userLocations)
+        homeData.setPosition(0)
         isColorBlind =
             PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(getString(R.string.color_blind_switch_key), false)
-        carousel = Carousel(this, data.userLocations)
+        carousel = Carousel(requireView(), homeData)
         backgroundView = view.findViewById(R.id.container)
         healthView = view.findViewById(R.id.healthMessage)
         pollutionView = view.findViewById(R.id.pollutionText)
@@ -45,31 +49,21 @@ class Fragment : Fragment() {
         view.findViewById<View>(R.id.settingsButton).setOnClickListener {
             NavHostFragment.findNavController(this).navigate(FragmentDirections.actionNavigationHomeToNavigationSettings())
         }
-        view.findViewById<View>(R.id.refreshButton).setOnClickListener { data.download() }
-        data.liveSensors.observe(viewLifecycleOwner) { redrawReadings() }
+        view.findViewById<View>(R.id.refreshButton).setOnClickListener { appData.download() }
+        appData.liveSensors.observe(viewLifecycleOwner) { redrawReadings() }
+        homeData.position.observe(viewLifecycleOwner) { carousel.redrawPosition(); redrawReadings() }
     }
 
-    internal fun redrawReadings() {
-        val latLng = carousel.getCurrentLatLng()
-        val pollution = getReading(latLng, SensorType.PM10)
-        val temp = getReading(latLng, SensorType.TEMP)
-        val humid = getReading(latLng, SensorType.HUMID)
+    private fun redrawReadings() {
+        val sensors = appData.liveSensors.value!!
+        val latLng = homeData.getCurrentLatLng(appData.userLocations)
+        val pollution = Utils.getReading(latLng, sensors, SensorType.PM10)
+        val temp = Utils.getReading(latLng, sensors, SensorType.TEMP)
+        val humid = Utils.getReading(latLng, sensors, SensorType.HUMID)
         pollutionView.text = pollution.toString()
         temperatureView.text = temp.toString()
         humidityView.text = humid.toString()
         healthView.text = Utils.getHealthMessage(pollution)
         backgroundView.setBackgroundColor(Utils.getColor(isColorBlind, pollution))
     }
-
-    private fun getReading(latLng: LatLng?, type: SensorType) = if (latLng == null) getAverage(type) else closestReading(latLng, type)
-
-    private fun getAverage(type: SensorType): Double {
-        val sensors = data.liveSensors.value!!
-        return (sensors.filter { it.type == type }.sumOf { it.measure } / sensors.size).toInt().toDouble()
-    }
-
-    private fun closestReading(latLng: LatLng, type: SensorType) = data.liveSensors.value!!
-        .filter { it.type == type }
-        .minWith { a, b -> (Utils.distanceBetween(latLng, a.latLng) - Utils.distanceBetween(latLng, b.latLng)).toInt() }
-        .measure
 }

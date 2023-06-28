@@ -12,8 +12,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.RuntimeData
+import com.vladislaviliev.newair.sensor.Health
+import com.vladislaviliev.newair.sensor.Maths
 import com.vladislaviliev.newair.sensor.SensorType
-import com.vladislaviliev.newair.sensor.Utils
 
 class Fragment : Fragment() {
 
@@ -57,13 +58,13 @@ class Fragment : Fragment() {
     private fun redrawReadings() {
         val sensors = appData.liveSensors.value!!
         val latLng = homeData.getCurrentLatLng(appData.userLocations)
-        val pollution = Utils.getReading(latLng, sensors, SensorType.PM10)
-        val temp = Utils.getReading(latLng, sensors, SensorType.TEMP)
-        val humid = Utils.getReading(latLng, sensors, SensorType.HUMID)
+        val pollution = Maths.getReading(latLng, sensors, SensorType.PM10)
+        val temp = Maths.getReading(latLng, sensors, SensorType.TEMP)
+        val humid = Maths.getReading(latLng, sensors, SensorType.HUMID)
         pollutionView.text = pollution.toString()
         temperatureView.text = temp.toString()
         humidityView.text = humid.toString()
-        healthView.text = Utils.getHealthMessage(pollution)
-        backgroundView.setBackgroundColor(Utils.getColor(isColorBlind, pollution))
+        healthView.text = Health.getHealthMessage(pollution)
+        backgroundView.setBackgroundColor(Health.getColor(isColorBlind, pollution))
     }
 }

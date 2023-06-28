@@ -1,11 +1,9 @@
 package com.vladislaviliev.newair.sensor
 
 import android.graphics.Color
-import android.location.Location
 import androidx.annotation.ColorInt
-import com.google.android.gms.maps.model.LatLng
 
-object Utils {
+object Health {
     private val thresholds = arrayOf(0, 6, 17, 34, 51, 59, 67, 76, 84, 92, 101)
     private val healthMessages = arrayOf(
         "Enjoy your usual\noutdoor activities",
@@ -73,18 +71,4 @@ object Utils {
     }
 
     fun getHealthMessage(pollution: Double) = healthMessages[getThresholdIndex(pollution)]
-
-    private fun distanceBetween(a: LatLng, b: LatLng) = Location("a").apply { latitude = a.latitude; longitude = a.longitude }
-        .distanceTo(Location("b").apply { latitude = b.latitude; longitude = b.longitude })
-
-    private fun getAverage(sensors: List<Sensor>, type: SensorType) =
-        (sensors.filter { it.type == type }.sumOf { it.measure } / sensors.size).toInt().toDouble()
-
-    private fun closestReading(latLng: LatLng, sensors: List<Sensor>, type: SensorType) = sensors
-        .filter { it.type == type }
-        .minWith { a, b -> (distanceBetween(latLng, a.latLng) - distanceBetween(latLng, b.latLng)).toInt() }
-        .measure
-
-    fun getReading(latLng: LatLng?, sensors: List<Sensor>, type: SensorType) =
-        if (latLng == null) getAverage(sensors, type) else closestReading(latLng, sensors, type)
 }

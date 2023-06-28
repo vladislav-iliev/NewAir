@@ -1,9 +1,7 @@
-package com.vladislaviliev.newair.userlocation
+package com.vladislaviliev.newair
 
-import android.content.Context
 import android.util.Log
 import com.google.android.gms.maps.model.LatLng
-import com.vladislaviliev.newair.R
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -11,24 +9,20 @@ import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
-class Storage(private val context: Context) {
+class PersistentData(root: File) {
 
-    private val file: File = File(context.filesDir, context.getString(R.string.user_locations_file))
+    private val file: File = File(root, "storage.ser")
+    private val tag = "PERSISTENT_STORAGE"
     private val delimiter = '|'
     private val detailsDelimiter = '~'
 
     init {
-        checkUserLocationsFile()
+        checkFile()
     }
 
-    private fun checkUserLocationsFile() {
+    private fun checkFile() {
         try {
-            if (file.createNewFile()) {
-                Log.e(
-                    context.getString(R.string.user_locations_file_tag),
-                    context.getString(R.string.user_locations_file_already_exists_message)
-                )
-            }
+            if (file.createNewFile()) Log.e(tag, "FILE ALREADY EXISTS")
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -49,7 +43,7 @@ class Storage(private val context: Context) {
                 }
             }
         } catch (e: IOException) {
-            Log.e(context.getString(R.string.user_locations_file_tag), e.toString())
+            Log.e(tag, e.toString())
         } catch (e: ClassNotFoundException) {
             e.printStackTrace()
         }
@@ -67,7 +61,7 @@ class Storage(private val context: Context) {
         try {
             ObjectOutputStream(FileOutputStream(file)).use { it.writeObject(toSave.toString()) }
         } catch (e: IOException) {
-            Log.e(context.getString(R.string.user_locations_file_tag), e.toString())
+            Log.e(tag, e.toString())
         }
     }
 }

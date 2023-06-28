@@ -6,11 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vladislaviliev.newair.sensor.Downloader
 import com.vladislaviliev.newair.sensor.Sensor
-import com.vladislaviliev.newair.userlocation.UserLocation
 import kotlinx.coroutines.launch
 import java.util.Collections
 
-class Vm : ViewModel() {
+class RuntimeData : ViewModel() {
     private val _userLocations = mutableListOf<UserLocation>()
     val userLocations: List<UserLocation> get() = Collections.unmodifiableList(_userLocations)
 
@@ -30,7 +29,7 @@ class Vm : ViewModel() {
 
     fun userLocationExists(name: String) = _userLocations.any { it.name == name }
 
-    fun downloadData() {
+    fun download() {
         viewModelScope.launch {
             val downloader = Downloader()
             _liveSensors.value = downloader.newLiveSensors()

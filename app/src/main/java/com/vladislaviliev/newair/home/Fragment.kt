@@ -11,15 +11,14 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import com.google.android.gms.maps.model.LatLng
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.Vm
+import com.vladislaviliev.newair.RuntimeData
 import com.vladislaviliev.newair.sensor.SensorType
 import com.vladislaviliev.newair.sensor.Utils
 import com.vladislaviliev.newair.home.FragmentDirections as HomeDirections
 
 class Fragment : Fragment() {
 
-    private val vm: Vm by activityViewModels()
-
+    private val data: RuntimeData by activityViewModels()
     private var isColorBlind = false
     private lateinit var carousel: Carousel
     private lateinit var backgroundView: View
@@ -35,7 +34,7 @@ class Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         isColorBlind =
             PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(getString(R.string.color_blind_switch_key), false)
-        carousel = Carousel(this, vm.userLocations)
+        carousel = Carousel(this, data.userLocations)
         backgroundView = view.findViewById(R.id.container)
         healthView = view.findViewById(R.id.healthMessage)
         pollutionView = view.findViewById(R.id.pollutionText)
@@ -47,8 +46,8 @@ class Fragment : Fragment() {
         view.findViewById<View>(R.id.settingsButton).setOnClickListener {
             NavHostFragment.findNavController(this).navigate(HomeDirections.actionNavigationHomeToNavigationSettings())
         }
-        view.findViewById<View>(R.id.refreshButton).setOnClickListener { vm.downloadData() }
-        vm.liveSensors.observe(viewLifecycleOwner) { redrawReadings() }
+        view.findViewById<View>(R.id.refreshButton).setOnClickListener { data.download() }
+        data.liveSensors.observe(viewLifecycleOwner) { redrawReadings() }
     }
 
     internal fun redrawReadings() {
@@ -66,11 +65,11 @@ class Fragment : Fragment() {
     private fun getReading(latLng: LatLng?, type: SensorType) = if (latLng == null) getAverage(type) else closestReading(latLng, type)
 
     private fun getAverage(type: SensorType): Double {
-        val sensors = vm.liveSensors.value!!
+        val sensors = data.liveSensors.value!!
         return (sensors.filter { it.type == type }.sumOf { it.measure } / sensors.size).toInt().toDouble()
     }
 
-    private fun closestReading(latLng: LatLng, type: SensorType) = vm.liveSensors.value!!
+    private fun closestReading(latLng: LatLng, type: SensorType) = data.liveSensors.value!!
         .filter { it.type == type }
         .minWith { a, b -> (Utils.distanceBetween(latLng, a.latLng) - Utils.distanceBetween(latLng, b.latLng)).toInt() }
         .measure

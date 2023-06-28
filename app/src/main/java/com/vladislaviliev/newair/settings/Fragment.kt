@@ -6,7 +6,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.Vm
+import com.vladislaviliev.newair.RuntimeData
 import com.vladislaviliev.newair.settings.FragmentDirections as SettingsDirections
 
 class Fragment : PreferenceFragmentCompat() {
@@ -17,8 +17,8 @@ class Fragment : PreferenceFragmentCompat() {
             true
         }
         findPreference<Preference>(getString(R.string.delete_user_locations_button_key))!!.setOnPreferenceClickListener {
-            val viewModel: Vm by activityViewModels()
-            viewModel.removeAllUserLocations()
+            val data: RuntimeData by activityViewModels()
+            data.removeAllUserLocations()
             true
         }
         findPreference<Preference>(getString(R.string.about_dialog_key))!!.setOnPreferenceClickListener {

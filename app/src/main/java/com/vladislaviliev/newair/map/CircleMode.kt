@@ -7,14 +7,14 @@ import androidx.preference.PreferenceManager
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.CircleOptions
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.Vm
+import com.vladislaviliev.newair.RuntimeData
 import com.vladislaviliev.newair.sensor.SensorType
 import com.vladislaviliev.newair.sensor.Utils
 
 internal class CircleMode(fragment: Fragment, googleMap: GoogleMap) {
 
     init {
-        val viewModel: Vm by (fragment.activityViewModels())
+        val data: RuntimeData by (fragment.activityViewModels())
         val root = fragment.requireView()
         val legendContainer = root.findViewById<View>(R.id.legend_container)
         val isColorBlind = PreferenceManager.getDefaultSharedPreferences(fragment.requireContext())
@@ -33,7 +33,7 @@ internal class CircleMode(fragment: Fragment, googleMap: GoogleMap) {
 
         root.findViewById<View>(R.id.refreshButton).apply {
             visibility = View.VISIBLE
-            setOnClickListener { viewModel.downloadData() }
+            setOnClickListener { data.download() }
         }
         root.findViewById<View>(R.id.legendButton).apply {
             visibility = View.VISIBLE
@@ -41,7 +41,7 @@ internal class CircleMode(fragment: Fragment, googleMap: GoogleMap) {
         }
 
         val circleBuilder = CircleOptions().radius(100.toDouble()).strokeWidth(0.toFloat())
-        viewModel.liveSensors.observe(fragment) { sensors ->
+        data.liveSensors.observe(fragment) { sensors ->
             googleMap.clear()
             sensors.filter { it.type == SensorType.PM10 }.forEach {
                 circleBuilder.center(it.latLng)

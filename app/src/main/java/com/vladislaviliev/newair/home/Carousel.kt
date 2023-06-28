@@ -4,7 +4,7 @@ import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.userlocation.UserLocation
+import com.vladislaviliev.newair.UserLocation
 
 internal class Carousel(fragment: Fragment, private val userLocations: List<UserLocation>) {
 

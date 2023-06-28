@@ -8,8 +8,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.Vm
-import com.vladislaviliev.newair.userlocation.UserLocation
+import com.vladislaviliev.newair.RuntimeData
+import com.vladislaviliev.newair.UserLocation
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -31,8 +31,8 @@ internal class NewLocDialog : DialogFragment() {
             return
         }
 
-        val viewModel: Vm by activityViewModels()
-        if (viewModel.userLocationExists(input)) {
+        val data: RuntimeData by activityViewModels()
+        if (data.userLocationExists(input)) {
             val msg = getString(R.string.location_already_exists_format, getString(R.string.location_already_exists_toast), input)
             Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
             return
@@ -40,7 +40,7 @@ internal class NewLocDialog : DialogFragment() {
         val args: NewLocDialogArgs by navArgs()
         val lat = args.lat.toDouble()
         val lon = args.lon.toDouble()
-        viewModel.addUserLocation(UserLocation(input, LatLng(lat, lon)))
+        data.addUserLocation(UserLocation(input, LatLng(lat, lon)))
         d.dismiss()
         findNavController().navigate(NewLocDialogDirections.actionNewLocDialogToNavigationHome())
     }

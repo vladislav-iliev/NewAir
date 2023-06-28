@@ -16,7 +16,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.Vm
+import com.vladislaviliev.newair.RuntimeData
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -130,9 +130,9 @@ class Fragment : Fragment() {
     }
 
     private fun updateGraph() {
-        val viewModel: Vm by activityViewModels()
+        val data: RuntimeData by activityViewModels()
         val lineDataSet = lineChart.lineData.getDataSetByIndex(0)
-        val pm10 = viewModel.historySensors
+        val pm10 = data.historySensors
         (0 until lineDataSet.entryCount).forEach {
             lineDataSet.getEntryForIndex(it).y = pm10[it].toFloat()
         }

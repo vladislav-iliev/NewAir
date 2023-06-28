@@ -11,11 +11,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
 import com.vladislaviliev.newair.home.FragmentDirections as HomeDirections
-import com.vladislaviliev.newair.userlocation.Storage as UserLocationsStorage
 
 class Act : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, NavController.OnDestinationChangedListener {
 
-    private val vm: Vm by viewModels()
+    private val runtimeData: RuntimeData by viewModels()
     private lateinit var navController: NavController
     private lateinit var navBar: NavigationBarView
 
@@ -27,12 +26,12 @@ class Act : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, NavCo
         navBar.setupWithNavController(navController)
         navBar.setOnItemSelectedListener(this)
         navController.addOnDestinationChangedListener(this)
-        vm.addUserLocations(UserLocationsStorage(this).read())
-        vm.downloadData()
+        runtimeData.addUserLocations(PersistentData(filesDir).read())
+        runtimeData.download()
     }
 
     override fun onPause() {
-        UserLocationsStorage(this).save(vm.userLocations)
+        PersistentData(filesDir).save(runtimeData.userLocations)
         super.onPause()
     }
 

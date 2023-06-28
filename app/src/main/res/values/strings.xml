@@ -1,24 +1,11 @@
 <resources>
-    <!--Initial load-->
-    <string name="user_locations_file">locations.ser</string>
-    <string name="user_locations_file_tag">USER LOCATIONS FILE</string>
-    <string name="user_locations_file_already_exists_message">USER LOCATIONS FILE ALREADY EXISTS</string>
-    <string name="user_locations_file_empty">USER LOCATIONS FILE EMPTY</string>
-
-    <string name="history_data_file">history_data.ser</string>
-    <string name="history_data_file_tag">HISTORY DATA FILE</string>
-    <string name="history_data_file_already_exists_message">HISTORY DATA FILE ALREADY EXISTS</string>
-    <string name="history_data_file_empty">HISTORY DATA FILE EMPTY</string>
-
-    <!--Fragments-->
     <string name="app_name">NewAir</string>
+    <!--Fragments-->
     <string name="title_loading">Loading</string>
     <string name="title_map">Map</string>
     <string name="title_home">Home</string>
     <string name="title_graph">History</string>
     <string name="title_settings">Settings</string>
-    <!--Home-->
-    <string name="data_not_available">Data unavailable</string>
 
     <!--Graph-->
     <string name="line_data_set_label">Dates</string>

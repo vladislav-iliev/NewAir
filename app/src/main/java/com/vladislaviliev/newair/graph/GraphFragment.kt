@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.fragments.graph
+package com.vladislaviliev.newair.graph
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.fragments.home
+package com.vladislaviliev.newair.home
 
 import android.view.LayoutInflater
 import android.view.View

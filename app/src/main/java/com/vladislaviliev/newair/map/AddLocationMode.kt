@@ -1,16 +1,16 @@
-package com.vladislaviliev.newair.fragments.map
+package com.vladislaviliev.newair.map
 
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import com.vladislaviliev.newair.R
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.vladislaviliev.newair.R
 
 internal class AddLocationMode(private val fragment: Fragment, googleMap: GoogleMap) : OnClickListener {
     private val markerOptions = MarkerOptions().apply {

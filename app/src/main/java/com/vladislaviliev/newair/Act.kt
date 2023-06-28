@@ -9,9 +9,9 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.vladislaviliev.newair.data.FileManager
 import com.google.android.material.navigation.NavigationBarView
-import com.vladislaviliev.newair.fragments.home.HomeFragmentDirections
+import com.vladislaviliev.newair.data.FileManager
+import com.vladislaviliev.newair.home.HomeFragmentDirections
 
 class Act : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, NavController.OnDestinationChangedListener {
 

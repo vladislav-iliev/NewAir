@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.fragments.settings
+package com.vladislaviliev.newair.settings
 
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog

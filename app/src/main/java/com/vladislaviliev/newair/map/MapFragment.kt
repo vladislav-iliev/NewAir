@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.fragments.map
+package com.vladislaviliev.newair.map
 
 import android.os.Bundle
 import android.view.LayoutInflater

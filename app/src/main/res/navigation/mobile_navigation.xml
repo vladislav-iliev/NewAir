@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.vladislaviliev.newair.fragments.home.HomeFragment"
+        android:name="com.vladislaviliev.newair.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/navigation_map"
-        android:name="com.vladislaviliev.newair.fragments.map.MapFragment"
+        android:name="com.vladislaviliev.newair.map.MapFragment"
         android:label="@string/title_map"
         tools:layout="@layout/fragment_map">
         <argument
@@ -41,13 +41,13 @@
 
     <fragment
         android:id="@+id/navigation_graph"
-        android:name="com.vladislaviliev.newair.fragments.graph.GraphFragment"
+        android:name="com.vladislaviliev.newair.graph.GraphFragment"
         android:label="@string/title_graph"
         tools:layout="@layout/fragment_graph" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.vladislaviliev.newair.fragments.settings.SettingsFragment"
+        android:name="com.vladislaviliev.newair.settings.SettingsFragment"
         android:label="@string/title_settings">
         <action
             android:id="@+id/action_navigation_settings_to_aboutDialog"
@@ -59,15 +59,15 @@
 
     <dialog
         android:id="@+id/aboutDialog"
-        android:name="com.vladislaviliev.newair.fragments.settings.AboutDialog"
+        android:name="com.vladislaviliev.newair.settings.AboutDialog"
         android:label="AboutDialog" />
     <dialog
         android:id="@+id/removeLocationDialog"
-        android:name="com.vladislaviliev.newair.fragments.settings.RemoveLocationDialog"
+        android:name="com.vladislaviliev.newair.settings.RemoveLocationDialog"
         android:label="RemoveLocationDialog" />
     <dialog
         android:id="@+id/newLocDialog"
-        android:name="com.vladislaviliev.newair.fragments.map.NewLocDialog"
+        android:name="com.vladislaviliev.newair.map.NewLocDialog"
         android:label="NewLocDialog">
         <argument
             android:name="lat"

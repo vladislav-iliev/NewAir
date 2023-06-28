@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.fragments.home
+package com.vladislaviliev.newair.home
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2

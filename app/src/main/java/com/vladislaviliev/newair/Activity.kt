@@ -12,7 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
 import com.vladislaviliev.newair.home.FragmentDirections as HomeDirections
 
-class Act : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, NavController.OnDestinationChangedListener {
+class Activity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, NavController.OnDestinationChangedListener {
 
     private val runtimeData: RuntimeData by viewModels()
     private lateinit var navController: NavController

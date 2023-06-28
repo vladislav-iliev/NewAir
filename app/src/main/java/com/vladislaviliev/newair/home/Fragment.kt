@@ -14,7 +14,6 @@ import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.RuntimeData
 import com.vladislaviliev.newair.sensor.SensorType
 import com.vladislaviliev.newair.sensor.Utils
-import com.vladislaviliev.newair.home.FragmentDirections as HomeDirections
 
 class Fragment : Fragment() {
 
@@ -41,10 +40,10 @@ class Fragment : Fragment() {
         temperatureView = view.findViewById(R.id.temperatureText)
         humidityView = view.findViewById(R.id.humidityText)
         view.findViewById<View>(R.id.addButton).setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(HomeDirections.actionNavigationHomeToNavigationMap(false))
+            NavHostFragment.findNavController(this).navigate(FragmentDirections.actionNavigationHomeToNavigationMap(false))
         }
         view.findViewById<View>(R.id.settingsButton).setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(HomeDirections.actionNavigationHomeToNavigationSettings())
+            NavHostFragment.findNavController(this).navigate(FragmentDirections.actionNavigationHomeToNavigationSettings())
         }
         view.findViewById<View>(R.id.refreshButton).setOnClickListener { data.download() }
         data.liveSensors.observe(viewLifecycleOwner) { redrawReadings() }

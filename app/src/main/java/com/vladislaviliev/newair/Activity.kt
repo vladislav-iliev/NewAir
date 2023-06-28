@@ -10,7 +10,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
-import com.vladislaviliev.newair.home.FragmentDirections as HomeDirections
+import com.vladislaviliev.newair.home.FragmentDirections
 
 class Activity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, NavController.OnDestinationChangedListener {
 
@@ -37,8 +37,8 @@ class Activity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         navController.navigate(
-            if (item.itemId == R.id.navigation_map) HomeDirections.actionNavigationHomeToNavigationMap(true)
-            else HomeDirections.actionNavigationHomeToNavigationGraph()
+            if (item.itemId == R.id.navigation_map) FragmentDirections.actionNavigationHomeToNavigationMap(true)
+            else FragmentDirections.actionNavigationHomeToNavigationGraph()
         )
         return true
     }

@@ -10,7 +10,7 @@ import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+class Fragment : Fragment(), OnMapReadyCallback {
     private lateinit var mapView: MapView
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -4,9 +4,9 @@ import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.data.UserLocation
+import com.vladislaviliev.newair.userlocation.UserLocation
 
-internal class Carousel(fragment: HomeFragment, private val userLocations: List<UserLocation>) {
+internal class Carousel(fragment: Fragment, private val userLocations: List<UserLocation>) {
 
     private val locations: List<CharSequence> = mutableListOf("City").apply { addAll(userLocations.map { it.name }) }
     private val arrowLeft = fragment.requireView().findViewById<View>(R.id.carouselArrowLeft)

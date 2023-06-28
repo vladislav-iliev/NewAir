@@ -10,8 +10,8 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
-import com.vladislaviliev.newair.data.FileManager
-import com.vladislaviliev.newair.home.HomeFragmentDirections
+import com.vladislaviliev.newair.home.FragmentDirections as HomeDirections
+import com.vladislaviliev.newair.userlocation.Storage as UserLocationsStorage
 
 class Act : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, NavController.OnDestinationChangedListener {
 
@@ -27,19 +27,19 @@ class Act : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, NavCo
         navBar.setupWithNavController(navController)
         navBar.setOnItemSelectedListener(this)
         navController.addOnDestinationChangedListener(this)
-        vm.addUserLocations(FileManager(this).readUserLocationsFile())
+        vm.addUserLocations(UserLocationsStorage(this).read())
         vm.downloadData()
     }
 
     override fun onPause() {
-        FileManager(this).saveUserLocations(vm.userLocations)
+        UserLocationsStorage(this).save(vm.userLocations)
         super.onPause()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         navController.navigate(
-            if (item.itemId == R.id.navigation_map) HomeFragmentDirections.actionNavigationHomeToNavigationMap(true)
-            else HomeFragmentDirections.actionNavigationHomeToNavigationGraph()
+            if (item.itemId == R.id.navigation_map) HomeDirections.actionNavigationHomeToNavigationMap(true)
+            else HomeDirections.actionNavigationHomeToNavigationGraph()
         )
         return true
     }

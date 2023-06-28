@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.data
+package com.vladislaviliev.newair.sensor
 
 import com.google.android.gms.maps.model.LatLng
 

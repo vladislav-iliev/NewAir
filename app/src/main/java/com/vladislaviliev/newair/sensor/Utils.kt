@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.data
+package com.vladislaviliev.newair.sensor
 
 import android.graphics.Color
 import android.location.Location

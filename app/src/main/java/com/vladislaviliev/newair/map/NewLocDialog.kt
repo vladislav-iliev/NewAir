@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.Vm
-import com.vladislaviliev.newair.data.UserLocation
+import com.vladislaviliev.newair.userlocation.UserLocation
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText

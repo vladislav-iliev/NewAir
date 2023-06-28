@@ -8,10 +8,10 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.CircleOptions
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.Vm
-import com.vladislaviliev.newair.data.SensorType
-import com.vladislaviliev.newair.data.Utils
+import com.vladislaviliev.newair.sensor.SensorType
+import com.vladislaviliev.newair.sensor.Utils
 
-internal class CircleMode(fragment: MapFragment, googleMap: GoogleMap) {
+internal class CircleMode(fragment: Fragment, googleMap: GoogleMap) {
 
     init {
         val viewModel: Vm by (fragment.activityViewModels())

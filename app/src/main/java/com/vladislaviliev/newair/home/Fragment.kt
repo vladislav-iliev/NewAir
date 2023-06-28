@@ -12,10 +12,11 @@ import androidx.preference.PreferenceManager
 import com.google.android.gms.maps.model.LatLng
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.Vm
-import com.vladislaviliev.newair.data.SensorType
-import com.vladislaviliev.newair.data.Utils
+import com.vladislaviliev.newair.sensor.SensorType
+import com.vladislaviliev.newair.sensor.Utils
+import com.vladislaviliev.newair.home.FragmentDirections as HomeDirections
 
-class HomeFragment : Fragment() {
+class Fragment : Fragment() {
 
     private val vm: Vm by activityViewModels()
 
@@ -41,10 +42,10 @@ class HomeFragment : Fragment() {
         temperatureView = view.findViewById(R.id.temperatureText)
         humidityView = view.findViewById(R.id.humidityText)
         view.findViewById<View>(R.id.addButton).setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionNavigationHomeToNavigationMap(false))
+            NavHostFragment.findNavController(this).navigate(HomeDirections.actionNavigationHomeToNavigationMap(false))
         }
         view.findViewById<View>(R.id.settingsButton).setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionNavigationHomeToNavigationSettings())
+            NavHostFragment.findNavController(this).navigate(HomeDirections.actionNavigationHomeToNavigationSettings())
         }
         view.findViewById<View>(R.id.refreshButton).setOnClickListener { vm.downloadData() }
         vm.liveSensors.observe(viewLifecycleOwner) { redrawReadings() }

@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.data
+package com.vladislaviliev.newair.userlocation
 
 import com.google.android.gms.maps.model.LatLng
 

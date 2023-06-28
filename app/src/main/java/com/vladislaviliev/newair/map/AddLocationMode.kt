@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.vladislaviliev.newair.R
+import com.vladislaviliev.newair.map.FragmentDirections as MapDirections
 
 internal class AddLocationMode(private val fragment: Fragment, googleMap: GoogleMap) : OnClickListener {
     private val markerOptions = MarkerOptions().apply {
@@ -39,7 +40,7 @@ internal class AddLocationMode(private val fragment: Fragment, googleMap: Google
         }
         val lat = marker!!.position.latitude.toFloat()
         val lon = marker!!.position.longitude.toFloat()
-        NavHostFragment.findNavController(fragment).navigate(MapFragmentDirections.actionNavigationMapToNewLocDialog(lat, lon))
+        NavHostFragment.findNavController(fragment).navigate(MapDirections.actionNavigationMapToNewLocDialog(lat, lon))
     }
 
     private fun isMarkerInNewcastle() =

@@ -21,7 +21,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-class GraphFragment : Fragment() {
+class Fragment : Fragment() {
     private val dates = createDates()
     private lateinit var lineChart: LineChart
 

@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vladislaviliev.newair.data.Downloader
-import com.vladislaviliev.newair.data.Sensor
-import com.vladislaviliev.newair.data.UserLocation
+import com.vladislaviliev.newair.sensor.Downloader
+import com.vladislaviliev.newair.sensor.Sensor
+import com.vladislaviliev.newair.userlocation.UserLocation
 import kotlinx.coroutines.launch
 import java.util.Collections
 

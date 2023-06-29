@@ -34,8 +34,7 @@ class Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeData.setLocations(appData.userLocations)
-        homeData.setPosition(0)
+        homeData.reset(appData.userLocations)
         isColorBlind =
             PreferenceManager.getDefaultSharedPreferences(requireContext()).getBoolean(getString(R.string.color_blind_switch_key), false)
         carousel = Carousel(requireView(), homeData)

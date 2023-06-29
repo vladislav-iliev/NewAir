@@ -15,14 +15,19 @@ internal class Data : ViewModel() {
     val position: LiveData<Int> = _position
     val positionInt get() = position.value!!
 
-    fun setLocations(userLocations: List<UserLocation>) {
+    fun reset(userLocations: List<UserLocation>) {
+        _position.value = 0
         _locations.clear()
         _locations.add("City")
         _locations.addAll(userLocations.map { it.name })
     }
 
-    fun setPosition(pos: Int) {
-        _position.value = pos
+    fun incrementPosition() {
+        _position.value = positionInt + 1
+    }
+
+    fun decrementPosition() {
+        _position.value = positionInt - 1
     }
 
     fun getCurrentLatLng(userLocations: List<UserLocation>) = if (positionInt == 0) null else userLocations[positionInt - 1].latLng

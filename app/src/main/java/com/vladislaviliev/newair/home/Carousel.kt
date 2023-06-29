@@ -13,8 +13,8 @@ internal class Carousel(root: View, private val data: Data) {
     init {
         carouselView.adapter = CarouselAdapter(data.locations)
         carouselView.isUserInputEnabled = false
-        arrowLeft.setOnClickListener { data.setPosition(data.positionInt - 1) }
-        arrowRight.setOnClickListener { data.setPosition(data.positionInt + 1) }
+        arrowLeft.setOnClickListener { data.decrementPosition() }
+        arrowRight.setOnClickListener { data.incrementPosition() }
     }
 
     fun redrawPosition() {

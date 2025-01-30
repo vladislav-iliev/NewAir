@@ -1,49 +1,18 @@
 <resources>
     <string name="app_name">NewAir</string>
-    <!--Fragments-->
-    <string name="title_loading">Loading</string>
-    <string name="title_map">Map</string>
-    <string name="title_home">Home</string>
-    <string name="title_graph">History</string>
-    <string name="title_settings">Settings</string>
+    <string name="about_dialog_contents">
+        B. Wilsher\n
+        I. Gylaris\n
+        I. Watt\n
+        L.P. Stannard\n
+        Vladislav Iliev\n
+        V.M.T. Godsell\n
+        External resources:\n
+        Freepik\n
+        com.himanshoe.charty:2.0.0-alpha01</string>
 
-    <!--Graph-->
-    <string name="line_data_set_label">Dates</string>
-    <string name="calendar_format">dd/MM/yyyy</string>
-    <string name="date_format">%d %s</string>
-
-    <!--Settings-->
-    <string name="preference_category_appearance">Appearance</string>
-    <string name="preference_category_data">Data</string>
-    <string name="preference_category_locations">Locations</string>
-    <string name="preference_category_miscellaneous">Miscellaneous</string>
-
-    <!--Colorblind-->
-    <string name="color_blind_switch_key">color_blind_checkbox_key</string>
-    <string name="color_mode_switch_title">Colour blind</string>
-    <string name="color_mode_switch_summary">Enable a colour blind palette</string>
-
-    <!--Locations-->
-    <string name="delete_user_locations_button_key">delete_user_locations_preference</string>
-    <string name="delete_all_locations_button_title">Delete all locations</string>
-    <string name="delete_user_location_button_key">delete_user_location_preference</string>
-    <string name="delete_user_location_button_title">Delete location</string>
-    <string name="delete_user_location_dialog_title">Select location to delete</string>
-
-    <!--About-->
-    <string name="about_dialog_key">about_dialog</string>
-    <string name="about_dialog_title">About</string>
-    <string name="about_dialog_contents">Lead programmer:\nVladislav Iliev\nArt direction:\nV.M.T. Godsell\nTechnical assistance:\nI. Gylaris, L.P. Stannard\nQA:\nB. Wilsher, I. Watt\nExternal resources:\nFreepik\ncom.github.PhilJay:MPAndroidChart:v3.1.0\n
-    </string>
-
-    <!--Add new location dialog-->
-    <string name="add_custom_location_dialog_title">Enter name</string>
-    <string name="location_empty">Enter a valid name</string>
-    <string name="location_outside_newcastle">Location outside sensor coverage</string>
-    <string name="location_already_exists_format">%s %s</string>
-    <string name="location_already_exists_toast">Location already exists:</string>
-
-    <!--Dates-->
-    <string name="date_condensed_format">yyyyMMdd</string>
-    <string name="date_hyphenated_format">yyyy-MM-dd HH:mm:ss</string>
+    <string name="question_mark">\?</string>
+    <string name="loading">Loading</string>
+    <string name="no_data">No data</string>
+    <string name="never">Never</string>
 </resources>

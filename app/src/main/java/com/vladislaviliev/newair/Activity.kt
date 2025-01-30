@@ -1,49 +1,35 @@
 package com.vladislaviliev.newair
 
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationBarView
-import com.vladislaviliev.newair.home.FragmentDirections
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
+import androidx.compose.runtime.getValue
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.vladislaviliev.newair.content.ContentContainer
+import com.vladislaviliev.newair.navigation.suiteItems
+import com.vladislaviliev.newair.ui.theme.NewAirComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
-class Activity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener, NavController.OnDestinationChangedListener {
-
-    private val runtimeData: RuntimeData by viewModels()
-    private lateinit var navController: NavController
-    private lateinit var navBar: NavigationBarView
-
+@AndroidEntryPoint
+class Activity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        navController = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
-        navBar = findViewById(R.id.nav_view)
-        navBar.setupWithNavController(navController)
-        navBar.setOnItemSelectedListener(this)
-        navController.addOnDestinationChangedListener(this)
-        runtimeData.addUserLocations(PersistentData(filesDir).read())
-        runtimeData.download()
-    }
+        enableEdgeToEdge()
+        setContent {
+            NewAirComposeTheme {
 
-    override fun onPause() {
-        PersistentData(filesDir).save(runtimeData.userLocations)
-        super.onPause()
-    }
+                val navController = rememberNavController()
+                val currentEntry by navController.currentBackStackEntryAsState()
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        navController.navigate(
-            if (item.itemId == R.id.navigation_map) FragmentDirections.actionNavigationHomeToNavigationMap(true)
-            else FragmentDirections.actionNavigationHomeToNavigationGraph()
-        )
-        return true
-    }
+                NavigationSuiteScaffold(
+                    navigationSuiteItems = { suiteItems(navController, currentEntry) },
+                    content = { ContentContainer(navController) }
+                )
 
-    override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
-        navBar.visibility = if (destination.id == R.id.navigation_home) View.VISIBLE else View.GONE
+            }
+        }
     }
 }

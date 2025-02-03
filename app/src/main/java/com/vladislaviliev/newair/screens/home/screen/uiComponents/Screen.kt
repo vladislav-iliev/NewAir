@@ -109,7 +109,7 @@ private fun Screen(
                     .weight(5f),
             )
 
-            Indicators(temperature, humidity, Modifier.fillMaxWidth())
+            TempHumidIndicators(temperature, humidity, Modifier.fillMaxWidth())
 
             Spacer(Modifier.weight(3f))
 

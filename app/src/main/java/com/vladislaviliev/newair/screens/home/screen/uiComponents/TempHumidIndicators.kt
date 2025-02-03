@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 
 @Composable
-internal fun Indicators(temp: String, humidity: String, modifier: Modifier = Modifier) {
+internal fun TempHumidIndicators(temp: String, humidity: String, modifier: Modifier = Modifier) {
 
     ConstraintLayout(modifier) {
 
@@ -60,7 +60,7 @@ private fun Indicator(
 @Preview(showSystemUi = true, device = "id:pixel_4")
 @Composable
 private fun ScreenPreviewIndicators() {
-    Indicators(
+    TempHumidIndicators(
         "4.0", "20.0",
         Modifier
             .fillMaxWidth()

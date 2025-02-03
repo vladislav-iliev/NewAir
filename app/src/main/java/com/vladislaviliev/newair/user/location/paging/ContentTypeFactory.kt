@@ -1,7 +1,7 @@
 package com.vladislaviliev.newair.user.location.paging
 
-fun contentTypeFactory(item: UserLocationPagerModel) = when (item) {
-    is UserLocationPagerModel.Location -> 0
-    is UserLocationPagerModel.Header -> 1
+fun contentTypeFactory(item: Model) = when (item) {
+    is Model.Location -> 0
+    is Model.Header -> 1
     else -> 2
 }

@@ -12,15 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.vladislaviliev.newair.user.location.paging.UserLocationPagerModel
+import com.vladislaviliev.newair.user.location.paging.Model
 import com.vladislaviliev.newair.user.location.paging.contentTypeFactory
 import com.vladislaviliev.newair.user.location.paging.keyFactory
 
-abstract class ItemsProvider {
+abstract class ItemProvider {
 
     @Composable
     operator fun invoke(
-        items: LazyPagingItems<UserLocationPagerModel>,
+        items: LazyPagingItems<Model>,
         selectedIds: Collection<Int>,
         onItemClicked: (Int) -> Unit,
         modifier: Modifier = Modifier
@@ -41,7 +41,7 @@ abstract class ItemsProvider {
 
     private fun paginatedItems(
         scope: LazyListScope,
-        items: LazyPagingItems<UserLocationPagerModel>,
+        items: LazyPagingItems<Model>,
         selectedIds: Collection<Int>,
         onItemClicked: (Int) -> Unit,
     ) {
@@ -54,10 +54,10 @@ abstract class ItemsProvider {
             val item = items[index]!!
             val widthModifier = Modifier.fillMaxWidth()
 
-            if (item is UserLocationPagerModel.Location)
+            if (item is Model.Location)
                 ItemRow(item.id in selectedIds, onItemClicked, item, widthModifier)
             else
-                Text((item as UserLocationPagerModel.Header).char.toString(), widthModifier)
+                Text((item as Model.Header).char.toString(), widthModifier)
         }
     }
 
@@ -65,7 +65,7 @@ abstract class ItemsProvider {
     private fun ItemRow(
         isChecked: Boolean,
         onClick: (Int) -> Unit,
-        item: UserLocationPagerModel.Location,
+        item: Model.Location,
         modifier: Modifier = Modifier
     ) {
         Row(

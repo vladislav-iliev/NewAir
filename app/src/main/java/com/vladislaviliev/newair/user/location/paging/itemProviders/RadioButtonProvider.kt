@@ -4,7 +4,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
-class RadioButtonProvider : ItemsProvider() {
+class RadioButtonProvider : ItemProvider() {
 
     @Composable
     override fun ProvideItem(isChecked: Boolean, modifier: Modifier) {

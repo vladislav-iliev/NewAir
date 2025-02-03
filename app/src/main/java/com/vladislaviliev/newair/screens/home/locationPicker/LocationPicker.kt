@@ -12,12 +12,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.vladislaviliev.newair.user.location.paging.UserLocationPagerModel
+import com.vladislaviliev.newair.user.location.paging.Model
 import com.vladislaviliev.newair.user.location.paging.itemProviders.RadioButtonProvider
 
 @Composable
 fun LocationPicker(
-    items: LazyPagingItems<UserLocationPagerModel>,
+    items: LazyPagingItems<Model>,
     idToPreselect: Int,
     onLocationSelected: (Int) -> Unit,
     onDismiss: () -> Unit,

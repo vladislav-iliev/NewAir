@@ -1,6 +1,6 @@
 package com.vladislaviliev.newair.user.location
 
-import com.vladislaviliev.newair.user.location.paging.UserLocationsPagingProvider
+import com.vladislaviliev.newair.user.location.paging.PagingProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -10,7 +10,7 @@ class UserLocationsRepository(
     private val scope: CoroutineScope,
     private val ioDispatcher: CoroutineDispatcher,
     private val dao: UserLocationDao,
-    private val pagingProvider: UserLocationsPagingProvider,
+    private val pagingProvider: PagingProvider,
 ) {
 
     /** @throws NoSuchElementException if location does not exist **/

@@ -9,12 +9,12 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.vladislaviliev.newair.user.location.paging.UserLocationPagerModel
+import com.vladislaviliev.newair.user.location.paging.Model
 import com.vladislaviliev.newair.user.location.paging.itemProviders.CheckboxProvider
 
 @Composable
 internal fun Dialog(
-    items: LazyPagingItems<UserLocationPagerModel>,
+    items: LazyPagingItems<Model>,
     onLocationsSelected: (Collection<Int>) -> Unit,
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier,

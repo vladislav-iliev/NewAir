@@ -1,6 +1,6 @@
 package com.vladislaviliev.newair.user.location.paging
 
-fun keyFactory(item: UserLocationPagerModel) = when (item) {
-    is UserLocationPagerModel.Location -> item.id
-    else -> (item as UserLocationPagerModel.Header).char
+fun keyFactory(item: Model) = when (item) {
+    is Model.Location -> item.id
+    else -> (item as Model.Header).char
 }

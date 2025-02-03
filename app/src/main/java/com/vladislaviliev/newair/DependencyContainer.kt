@@ -6,13 +6,13 @@ import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.vladislaviliev.newair.readings.ReadingsDatabase
-import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.readings.downloader.Downloader
 import com.vladislaviliev.newair.readings.downloader.metadata.MetadataRepository
+import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.location.paging.UserLocationsPagingProvider
+import com.vladislaviliev.newair.user.location.paging.PagingProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,8 +34,7 @@ class DependencyContainer {
     @Provides
     @Singleton
     fun provideLocationsRepository(
-        @ApplicationContext appContext: Context,
-        scope: CoroutineScope,
+        @ApplicationContext appContext: Context, scope: CoroutineScope,
     ): UserLocationsRepository {
 
         val db = Room.databaseBuilder(appContext, UserDatabase::class.java, "user_database").build()
@@ -49,7 +48,7 @@ class DependencyContainer {
             maxSize = 2 * pagingPrefetchDistance + pagingPageSize,
             enablePlaceholders = false,
         )
-        val pagingProvider = UserLocationsPagingProvider(db.userLocationDao(), pagingConfig)
+        val pagingProvider = PagingProvider(db.userLocationDao(), pagingConfig)
 
         return UserLocationsRepository(scope, Dispatchers.IO, db.userLocationDao(), pagingProvider)
     }
@@ -57,8 +56,7 @@ class DependencyContainer {
     @Provides
     @Singleton
     fun provideResponseRepository(
-        @ApplicationContext appContext: Context,
-        scope: CoroutineScope,
+        @ApplicationContext appContext: Context, scope: CoroutineScope,
     ): ResponseRepository {
 
         val metadataDataStore = PreferenceDataStoreFactory.create(
@@ -81,8 +79,7 @@ class DependencyContainer {
     @Provides
     @Singleton
     fun provideSettingsRepository(
-        @ApplicationContext appContext: Context,
-        scope: CoroutineScope
+        @ApplicationContext appContext: Context, scope: CoroutineScope
     ): SettingsRepository {
 
         val dataStore = PreferenceDataStoreFactory.create(

@@ -10,10 +10,7 @@ import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationDao
 import kotlinx.coroutines.flow.map
 
-class UserLocationsPagingProvider(
-    private val dao: UserLocationDao,
-    private val config: PagingConfig,
-) {
+class PagingProvider(private val dao: UserLocationDao, private val config: PagingConfig) {
 
     private fun newPagingSource() = dao.newPagingSource(emptyList())
     private fun newPagingSourceDelete() = dao.newPagingSource(listOf(DefaultUserLocation.value.id))
@@ -22,8 +19,8 @@ class UserLocationsPagingProvider(
         Pager(config, pagingSourceFactory = pagingSourceFactory)
             .flow
             .map {
-                it.map(UserLocationPagerTransformers::toPagerModel)
-                    .insertSeparators(generator = UserLocationPagerTransformers::insertSeparators)
+                it.map(Transformers::toPagerModel)
+                    .insertSeparators(generator = Transformers::insertSeparators)
             }
 
     fun newPagingFlowSelect() = newPagingFlow(::newPagingSource)

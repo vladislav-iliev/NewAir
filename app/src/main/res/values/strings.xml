@@ -20,4 +20,14 @@
     <string name="health_msg_possible_discomfort">Possible experience of discomfort</string>
     <string name="health_msg_consider_reducing">If uncomfortable consider reducing activity</string>
     <string name="health_msg_reduce_exertion">Reduce physical exertion</string>
+
+    <string name="location_x">Location: %1$s</string>
+    <string name="select_location">Click to change location</string>
+
+    <string name="air_pollution">Air pollution</string>
+
+    <string name="message_x">Message: %1$s</string>
+    <string name="error_message_x">Error message: %1$s</string>
+
+    <string name="timestamp_x">Timestamp: %1$s</string>
 </resources>

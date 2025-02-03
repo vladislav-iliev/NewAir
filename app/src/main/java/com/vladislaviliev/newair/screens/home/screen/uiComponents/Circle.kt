@@ -11,19 +11,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vladislaviliev.newair.R
 
 @Composable
 fun Circle(pollution: String, modifier: Modifier = Modifier) {
-    Box(modifier, contentAlignment = Alignment.Center) {
-        CircleImage()
-        CircleTexts(pollution)
+    val description = stringResource(R.string.air_pollution, pollution)
+    Box(modifier.semantics(true) { contentDescription = description }, Alignment.Center) {
+        Image()
+        Texts(pollution)
     }
 }
 
 @Composable
-private fun CircleImage() {
+private fun Image() {
     val size = 180.dp
     Canvas(Modifier.size(size)) {
         val strokeWidth = 8.dp
@@ -36,7 +41,7 @@ private fun CircleImage() {
 }
 
 @Composable
-private fun CircleTexts(pollution: String) {
+private fun Texts(pollution: String) {
     Column(Modifier.padding(top = 7.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(pollution, fontSize = 60.sp)
         Text("PM10 μg/m", fontSize = 14.sp)

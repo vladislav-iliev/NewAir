@@ -2,12 +2,12 @@ package com.vladislaviliev.newair.screens.home.screen.state
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
-import com.vladislaviliev.newair.screens.StateConstants
 import com.vladislaviliev.newair.readings.ReadingType
 import com.vladislaviliev.newair.readings.calculations.Health
 import com.vladislaviliev.newair.readings.calculations.Maths.closestReadingTo
 import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
 import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
+import com.vladislaviliev.newair.screens.StateConstants
 import com.vladislaviliev.newair.user.location.UserLocation
 
 object Transformer {

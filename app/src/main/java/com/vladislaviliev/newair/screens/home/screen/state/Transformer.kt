@@ -1,0 +1,58 @@
+package com.vladislaviliev.newair.screens.home.screen.state
+
+import androidx.annotation.StringRes
+import androidx.compose.ui.graphics.Color
+import com.vladislaviliev.newair.screens.StateConstants
+import com.vladislaviliev.newair.readings.ReadingType
+import com.vladislaviliev.newair.readings.calculations.Health
+import com.vladislaviliev.newair.readings.calculations.Maths.closestReadingTo
+import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
+import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
+import com.vladislaviliev.newair.user.location.UserLocation
+
+object Transformer {
+
+    private fun unknownStateOf(
+        location: String, @StringRes message: Int, errorMessage: String, timestamp: String
+    ) = Loading.value.copy(location, message, errorMessage, timestamp)
+
+    fun stateOf(
+        isColorBlind: Boolean, userLocation: UserLocation, response: LiveResponse,
+    ): State {
+
+        val locationName = userLocation.name
+
+        if (response.isLoading) return Loading.value.copy(location = locationName)
+
+        val metadata = response.metadata
+
+        if (metadata == MetadataNotFound.value) return unknownStateOf(
+            locationName, StateConstants.noData, "", ""
+        )
+
+        if (metadata.errorMsg.isNotBlank()) return unknownStateOf(
+            locationName, StateConstants.error, metadata.errorMsg, metadata.timestamp
+        )
+
+        if (response.readings.isEmpty()) return unknownStateOf(
+            locationName, StateConstants.noData, "", metadata.timestamp
+        )
+
+        val readings = response.readings
+        val latitude = userLocation.latitude
+        val longitude = userLocation.longitude
+        val pollution = readings.closestReadingTo(latitude, longitude, ReadingType.PM10)
+
+        return State(
+            locationName,
+            Health.getHealthMessage(pollution),
+            "",
+            metadata.timestamp,
+            pollution.toString(),
+            readings.closestReadingTo(latitude, longitude, ReadingType.TEMP).toString() + "°C",
+            readings.closestReadingTo(latitude, longitude, ReadingType.HUMID).toString() + "%",
+            Health.getColor(isColorBlind, pollution),
+            Color.White,
+        )
+    }
+}

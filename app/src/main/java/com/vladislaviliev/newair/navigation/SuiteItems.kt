@@ -16,14 +16,14 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavOptionsBuilder
-import com.vladislaviliev.newair.content.graph.GraphRoute
-import com.vladislaviliev.newair.content.home.HomeGraphRoute
-import com.vladislaviliev.newair.content.map.readingMap.ReadingDisplayRoute
-import com.vladislaviliev.newair.content.settings.SettingsGraphRoute
+import com.vladislaviliev.newair.screens.graph.GraphRoute
+import com.vladislaviliev.newair.screens.home.HomeGraphRoute
+import com.vladislaviliev.newair.screens.map.reading.ReadingMapRoute
+import com.vladislaviliev.newair.screens.settings.SettingsGraphRoute
 
 fun NavigationSuiteScope.suiteItems(controller: NavController, currentEntry: NavBackStackEntry?) {
     val items = listOf(
-        RouteItem("Map", Icons.Default.Map, ReadingDisplayRoute),
+        RouteItem("Map", Icons.Default.Map, ReadingMapRoute),
         RouteItem("Home", Icons.Default.Home, HomeGraphRoute),
         RouteItem("Graph", Icons.Default.BarChart, GraphRoute),
         RouteItem("Settings", Icons.Default.Settings, SettingsGraphRoute),

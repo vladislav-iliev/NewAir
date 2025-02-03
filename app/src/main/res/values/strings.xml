@@ -11,8 +11,13 @@
         Freepik\n
         com.himanshoe.charty:2.0.0-alpha01</string>
 
-    <string name="question_mark">\?</string>
-    <string name="loading">Loading</string>
+    <string name="loading">Loading…</string>
     <string name="no_data">No data</string>
-    <string name="never">Never</string>
+    <string name="error">Error</string>
+    <string name="empty_placeholder">_</string>
+
+    <string name="health_msg_enjoy">Enjoy your usual outdoor activities</string>
+    <string name="health_msg_possible_discomfort">Possible experience of discomfort</string>
+    <string name="health_msg_consider_reducing">If uncomfortable consider reducing activity</string>
+    <string name="health_msg_reduce_exertion">Reduce physical exertion</string>
 </resources>

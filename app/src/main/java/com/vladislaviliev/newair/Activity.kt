@@ -8,7 +8,6 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffo
 import androidx.compose.runtime.getValue
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.vladislaviliev.newair.content.ContentContainer
 import com.vladislaviliev.newair.navigation.suiteItems
 import com.vladislaviliev.newair.ui.theme.NewAirComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +25,7 @@ class Activity : ComponentActivity() {
 
                 NavigationSuiteScaffold(
                     navigationSuiteItems = { suiteItems(navController, currentEntry) },
-                    content = { ContentContainer(navController) }
+                    content = { ScreenContainer(navController) }
                 )
 
             }

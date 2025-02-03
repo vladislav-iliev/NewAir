@@ -1,25 +1,29 @@
 package com.vladislaviliev.newair.readings.calculations
 
+import androidx.annotation.StringRes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
+import com.vladislaviliev.newair.R
 import kotlin.collections.windowed
 
 object Health {
     private val thresholds = listOf(0, 6, 17, 34, 51, 59, 67, 76, 84, 92, 101)
+
+    @StringRes
     private val healthMessages = listOf(
-        "Enjoy your usual\noutdoor activities",
-        "Enjoy your usual\noutdoor activities",
-        "Enjoy your usual\noutdoor activities",
-        "Enjoy your usual\noutdoor activities",
-        "Possible experience\nof discomfort",
-        "Possible experience\nof discomfort",
-        "Possible experience\nof discomfort",
-        "If uncomfortable\nconsider reducing activity",
-        "If uncomfortable\nconsider reducing activity",
-        "If uncomfortable\nconsider reducing activity",
-        "Reduce physical\nexertion"
+        R.string.health_msg_enjoy,
+        R.string.health_msg_enjoy,
+        R.string.health_msg_enjoy,
+        R.string.health_msg_enjoy,
+        R.string.health_msg_possible_discomfort,
+        R.string.health_msg_possible_discomfort,
+        R.string.health_msg_possible_discomfort,
+        R.string.health_msg_consider_reducing,
+        R.string.health_msg_consider_reducing,
+        R.string.health_msg_consider_reducing,
+        R.string.health_msg_reduce_exertion,
     )
 
     private val backgroundColors = listOf(
@@ -65,6 +69,7 @@ object Health {
     fun getColor(isColorBlind: Boolean, pollution: Double) =
         getColors(isColorBlind)[getThresholdIndex(pollution)]
 
+    @StringRes
     fun getHealthMessage(pollution: Double) = healthMessages[getThresholdIndex(pollution)]
 
     @Composable
@@ -75,7 +80,7 @@ object Health {
     fun checkUnspecifiedContentColor(color: Color) =
         color.takeOrElse(MaterialTheme.colorScheme::onSurface)
 
-    /** ["0 - 6" -> Blue], ["6 - 17" -> Green] ... */
+    /** ["0 - 6" -> Blue], ["6 - 17" -> Green], ..., ["101 - " -> Purple] */
     fun getThresholdsToColors(isColorBlind: Boolean) = thresholds
         .windowed(size = 2, partialWindows = true) {
             if (it.size > 1) "${it[0]} - ${it[1]}" else "${it[0]} - "

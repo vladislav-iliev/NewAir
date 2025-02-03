@@ -19,7 +19,7 @@ import com.vladislaviliev.newair.readings.downloader.metadata.Metadata
 import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
 import com.vladislaviliev.newair.screens.home.screen.state.State
 import com.vladislaviliev.newair.screens.home.screen.state.Transformer
-import com.vladislaviliev.newair.ui.theme.NewAirComposeTheme
+import com.vladislaviliev.newair.ui.theme.NewAirTheme
 import com.vladislaviliev.newair.user.location.DefaultUserLocation
 
 @Composable
@@ -112,7 +112,7 @@ private fun Screen(
 @Preview(showSystemUi = true, device = "id:pixel_4")
 @Composable
 private fun ScreenPreviewHome() {
-    NewAirComposeTheme {
+    NewAirTheme {
         val metadata = Metadata("", "now")
         val state = Transformer.stateOf(
             false,

@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair
+package com.vladislaviliev.newair.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

@@ -1,29 +1,40 @@
 package com.vladislaviliev.newair.content.home.mainScreen.state
 
 import androidx.compose.ui.graphics.Color
+import com.vladislaviliev.newair.content.ScreenStateConstants
 import com.vladislaviliev.newair.readings.ReadingType
 import com.vladislaviliev.newair.readings.calculations.Health
 import com.vladislaviliev.newair.readings.calculations.Maths.closestReadingTo
+import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
 import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
 import com.vladislaviliev.newair.user.location.UserLocation
 
 object HomeScreenStateTransformers {
 
-    fun homeStateOf(
+    private fun unknownStateOf(location: String, message: String, timestamp: String) =
+        HomeScreenStateLoading.value.copy(
+            location = location, message = message, timestamp = timestamp
+        )
+
+    fun stateOf(
         isColorBlind: Boolean, userLocation: UserLocation, response: LiveResponse,
     ): HomeScreenState {
 
-        val name = userLocation.name
+        val locationName = userLocation.name
 
-        if (response.errorMsg.isNotEmpty()) return HomeScreenStateUnspecified.value.copy(
-            location = name, message = response.errorMsg, timestamp = response.timestamp
+        if (response.isLoading) return HomeScreenStateLoading.value.copy(location = locationName)
+
+        val metadata = response.metadata
+
+        if (metadata == MetadataNotFound.value) return unknownStateOf(
+            locationName, ScreenStateConstants.NO_DATA, ScreenStateConstants.NO_DATA
         )
 
-        if (response.readings.isEmpty()) return HomeScreenStateUnspecified.value.copy(
-            location = name,
-            message = HomeScreenStateConstants.NO_DATA,
-            timestamp = response.timestamp
-        )
+        if (metadata.errorMsg.isNotBlank())
+            return unknownStateOf(locationName, metadata.errorMsg, metadata.timestamp)
+
+        if (response.readings.isEmpty())
+            return unknownStateOf(locationName, ScreenStateConstants.NO_DATA, metadata.timestamp)
 
         val readings = response.readings
         val latitude = userLocation.latitude
@@ -33,12 +44,12 @@ object HomeScreenStateTransformers {
         return HomeScreenState(
             Health.getColor(isColorBlind, pollution),
             Color.White,
-            name,
+            locationName,
             pollution.toString(),
             Health.getHealthMessage(pollution),
             readings.closestReadingTo(latitude, longitude, ReadingType.TEMP).toString(),
             readings.closestReadingTo(latitude, longitude, ReadingType.HUMID).toString(),
-            response.timestamp,
+            metadata.timestamp,
         )
     }
 }

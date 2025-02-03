@@ -16,14 +16,14 @@ class DeleteAllViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository
 ) : ViewModel() {
 
-    private val _isDone = MutableStateFlow(false)
-    val isDone = _isDone
+    private val _message = MutableStateFlow("")
+    val message = _message
 
     fun deleteAll() {
         viewModelScope.launch {
             settingsRepository.setCurrentUserLocation(DefaultUserLocation.value.id)
             userLocationsRepository.deleteAll()
-            _isDone.emit(true)
+            _message.emit("Done!")
         }
     }
 }

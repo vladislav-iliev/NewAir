@@ -16,14 +16,20 @@ class DeleteFromListViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository
 ) : ViewModel() {
 
+    private var isDeleting = false
+
     val pagingFlow = locationsRepository.pagingFlowDelete()
 
     fun delete(ids: Collection<Int>) {
+        if (isDeleting) return
+        isDeleting = true
+
         viewModelScope.launch {
             if (settingsRepository.currentUserLocationId.first() in ids)
                 settingsRepository.setCurrentUserLocation(DefaultUserLocation.value.id)
 
             locationsRepository.deleteLocations(ids)
+            isDeleting = false
         }
     }
 }

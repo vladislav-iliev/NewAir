@@ -30,23 +30,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.Circle
 import com.vladislaviliev.newair.content.map.NewcastleMap
+import com.vladislaviliev.newair.content.map.readingMap.state.ReadingMapState
 import com.vladislaviliev.newair.readings.calculations.Health
 import com.vladislaviliev.newair.readings.live.LiveReading
 import kotlin.collections.forEach
 
 @Composable
 fun ReadingDisplay(
-    state: ReadingMapState,
+    state: ReadingMapState, onRefreshClick: () -> Unit, modifier: Modifier = Modifier,
+) {
+    ReadingDisplay(state.isColorBlind, state.readings, state.message, onRefreshClick, modifier)
+}
+
+@Composable
+private fun ReadingDisplay(
+    isColorBlind: Boolean,
+    readings: Iterable<LiveReading>,
+    message: String,
     onRefreshClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(modifier.fillMaxSize()) {
-        Map(state.isColorBlind, state.response.readings, modifier)
+        Map(isColorBlind, readings, modifier)
         Ui(
-            state.isColorBlind,
+            isColorBlind,
+            message,
             onRefreshClick,
             Modifier
                 .align(Alignment.TopEnd)
@@ -74,13 +86,21 @@ private fun Map(
 }
 
 @Composable
-private fun Ui(isColorBlind: Boolean, onRefreshClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun Ui(
+    isColorBlind: Boolean,
+    message: String,
+    onRefreshClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Column(modifier, horizontalAlignment = Alignment.End) {
 
-        var isShowingLegend by rememberSaveable { mutableStateOf(false) }
+        Surface { Text(message, fontSize = 20.sp) }
+
         Button(onRefreshClick) {
             Icon(Icons.Default.Refresh, "Refresh")
         }
+
+        var isShowingLegend by rememberSaveable { mutableStateOf(false) }
         Button({ isShowingLegend = !isShowingLegend }) {
             Icon(Icons.Default.Info, "Legend")
         }
@@ -123,5 +143,5 @@ private fun LegendRow(data: Pair<String, Color>, modifier: Modifier = Modifier) 
 @Preview(showSystemUi = true, device = "id:pixel_4")
 @Composable
 private fun ScreenPreviewCircleMap() {
-    Ui(true, {}, Modifier.fillMaxWidth())
+    Ui(true, "No data", {}, Modifier.fillMaxWidth())
 }

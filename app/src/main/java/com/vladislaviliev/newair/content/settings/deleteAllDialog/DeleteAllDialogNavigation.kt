@@ -19,8 +19,8 @@ fun NavGraphBuilder.addDeleteAllDialogDestination(onDismissRequest: () -> Unit) 
 @Composable
 private fun Content(onDismissRequest: () -> Unit) {
     val viewModel = hiltViewModel<DeleteAllViewModel>()
-    val isDone by viewModel.isDone.collectAsStateWithLifecycle()
-    DeleteAllDialog(isDone, viewModel::deleteAll, onDismissRequest)
+    val message by viewModel.message.collectAsStateWithLifecycle()
+    DeleteAllDialog(message, viewModel::deleteAll, onDismissRequest)
 }
 
 fun NavController.navigateToDeleteAllDialog() {

@@ -10,11 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.himanshoe.charty.common.toChartDataCollection
 import com.himanshoe.charty.point.PointChart
 import com.himanshoe.charty.point.model.PointData
-import com.vladislaviliev.newair.readings.downloader.responses.HistoryResponse
-import com.vladislaviliev.newair.readings.downloader.responses.HistoryResponseAppStartup
+import com.vladislaviliev.newair.content.graph.state.GraphState
+import com.vladislaviliev.newair.content.graph.state.GraphStateLoading
 import com.vladislaviliev.newair.readings.history.HistoryReading
 import java.text.DateFormatSymbols
 import java.util.Calendar
@@ -23,29 +24,33 @@ import java.util.Locale
 
 @Composable
 internal fun GraphScreen(
-    response: HistoryResponse,
+    state: GraphState, onRefreshClick: () -> Unit, modifier: Modifier = Modifier
+) {
+    GraphScreen(state.readings, state.message, onRefreshClick, modifier)
+}
+
+@Composable
+private fun GraphScreen(
+    readings: Collection<HistoryReading>, message: String,
     onRefreshClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Surface(modifier.fillMaxSize()) {
         Column {
             GraphTopAppBar(onRefreshClick)
-            Content(response)
+            Content(readings, message)
         }
     }
 }
 
 @Composable
-private fun Content(response: HistoryResponse, modifier: Modifier = Modifier) {
-    if (response.readings.isEmpty()) {
-        Text("No data", modifier)
+private fun Content(readings: Collection<HistoryReading>, message: String) {
+    if (message.isNotBlank()) {
+        Text(message, fontSize = 20.sp)
         return
     }
-    if (response.errorMsg.isNotBlank()) {
-        Text(response.errorMsg, modifier)
-        return
-    }
-    Graph(createDates(), response.readings, modifier)
+    if (readings.isEmpty()) return
+    Graph(createDates(), readings)
 }
 
 @Composable
@@ -95,9 +100,5 @@ private fun createDates(): Array<String> {
 @Preview(showSystemUi = true, device = "id:pixel_4")
 @Composable
 private fun ScreenPreviewGraph() {
-    GraphScreen(
-        HistoryResponseAppStartup.value,
-        {},
-        Modifier.fillMaxSize()
-    )
+    GraphScreen(GraphStateLoading.value, {}, Modifier.fillMaxSize())
 }

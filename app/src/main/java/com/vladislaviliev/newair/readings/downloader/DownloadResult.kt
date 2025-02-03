@@ -1,11 +1,11 @@
-package com.vladislaviliev.newair.readings.downloader.responses
+package com.vladislaviliev.newair.readings.downloader
 
+import com.vladislaviliev.newair.readings.downloader.metadata.Metadata
 import com.vladislaviliev.newair.readings.history.HistoryReading
 import com.vladislaviliev.newair.readings.live.LiveReading
 
-data class Response(
+data class DownloadResult(
     val liveReadings: List<LiveReading>,
     val historyReadings: List<HistoryReading>,
-    val errorMsg: String,
-    val timestamp: String,
+    val metadata: Metadata,
 )

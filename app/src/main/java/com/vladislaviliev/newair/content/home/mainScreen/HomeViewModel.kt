@@ -2,9 +2,9 @@ package com.vladislaviliev.newair.content.home.mainScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vladislaviliev.newair.content.home.mainScreen.state.HomeScreenStateLoading
 import com.vladislaviliev.newair.content.home.mainScreen.state.HomeScreenStateTransformers
-import com.vladislaviliev.newair.content.home.mainScreen.state.HomeScreenStateUnspecified
-import com.vladislaviliev.newair.readings.ResponseRepository
+import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.location.DefaultUserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
@@ -28,23 +28,21 @@ class HomeViewModel @Inject constructor(
         .map(userLocationsRepository::getLocation)
         .retry(predicate = ::whenDatabaseCannotFetchLocation)
 
-    private suspend fun whenDatabaseCannotFetchLocation(t: Throwable): Boolean {
-        if (t !is NoSuchElementException) return false
-        userLocationsRepository.addInitial() // on first app startup, the DB is empty
-        settingsRepository.setCurrentUserLocation(DefaultUserLocation.value.id)
-        return true
-    }
-
     val screenState = combine(
         settingsRepository.isColorBlind,
         userLocation,
         responseRepository.liveResponses(),
-        HomeScreenStateTransformers::homeStateOf
+        HomeScreenStateTransformers::stateOf
     ).stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(5000),
-        HomeScreenStateUnspecified.value
+        viewModelScope, SharingStarted.WhileSubscribed(5000), HomeScreenStateLoading.value
     )
+
+    private suspend fun whenDatabaseCannotFetchLocation(t: Throwable): Boolean {
+        if (t !is NoSuchElementException) return false
+        userLocationsRepository.addInitial() // will trigger on fresh installs
+        settingsRepository.setCurrentUserLocation(DefaultUserLocation.value.id)
+        return true
+    }
 
     fun onRefreshClick() {
         viewModelScope.launch { responseRepository.refresh() }

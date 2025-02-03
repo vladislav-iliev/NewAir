@@ -6,7 +6,7 @@ import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.vladislaviliev.newair.readings.ReadingsDatabase
-import com.vladislaviliev.newair.readings.ResponseRepository
+import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.readings.downloader.Downloader
 import com.vladislaviliev.newair.readings.downloader.metadata.MetadataRepository
 import com.vladislaviliev.newair.user.SettingsRepository

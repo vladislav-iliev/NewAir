@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vladislaviliev.newair.content.home.mainScreen.state.HomeScreenState
-import com.vladislaviliev.newair.content.home.mainScreen.state.HomeScreenStateUnspecified
+import com.vladislaviliev.newair.content.home.mainScreen.state.HomeScreenStateLoading
 import com.vladislaviliev.newair.readings.calculations.Health
 
 @Composable
@@ -123,5 +123,5 @@ private fun HomeScreen(
 @Preview(showSystemUi = true, device = "id:pixel_4")
 @Composable
 private fun ScreenPreviewHome() {
-    HomeScreen(HomeScreenStateUnspecified.value, {}, {}, {}, Modifier.fillMaxSize())
+    HomeScreen(HomeScreenStateLoading.value, {}, {}, {}, Modifier.fillMaxSize())
 }

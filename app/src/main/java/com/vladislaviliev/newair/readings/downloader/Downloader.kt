@@ -1,7 +1,7 @@
 package com.vladislaviliev.newair.readings.downloader
 
 import com.vladislaviliev.newair.readings.ReadingType
-import com.vladislaviliev.newair.readings.downloader.responses.Response
+import com.vladislaviliev.newair.readings.downloader.metadata.Metadata
 import com.vladislaviliev.newair.readings.history.HistoryReading
 import com.vladislaviliev.newair.readings.live.LiveReading
 import kotlinx.datetime.Clock
@@ -52,10 +52,9 @@ class Downloader {
         HistoryReading(6, ReadingType.PM10, random()),
     )
 
-    fun newResponse() = Response(
+    fun download() = DownloadResult(
         newLiveReadings(),
         newHistoryReadings(),
-        "",
-        Clock.System.now().toLocalDateTime(TimeZone.UTC).toString()
+        Metadata("", Clock.System.now().toLocalDateTime(TimeZone.UTC).toString())
     )
 }

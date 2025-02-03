@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 internal fun DeleteAllDialog(
-    isDone: Boolean,
+    message: String,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier
@@ -24,12 +24,12 @@ internal fun DeleteAllDialog(
         dismissButton = { TextButton(onDismiss) { Text("Cancel") } },
         icon = { Icon(Icons.Default.Delete, null) },
         title = { Text("Delete all user locations?") },
-        text = { if (isDone) Text("Deletion successful") },
+        text = { if (message.isNotBlank()) Text("Deletion successful") },
     )
 }
 
 @Preview(showSystemUi = true, device = "id:pixel_4")
 @Composable
 private fun DeleteAllPreview() {
-    DeleteAllDialog(true, {}, {})
+    DeleteAllDialog("", {}, {})
 }

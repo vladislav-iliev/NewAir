@@ -1,7 +1,7 @@
-package com.vladislaviliev.newair.content.home.mainScreen.state
+package com.vladislaviliev.newair.content
 
 /** Constants to be replaced with localised strings at render **/
-object HomeScreenStateConstants {
+object ScreenStateConstants {
     const val UNKNOWN = "?"
     const val LOADING = "Loading..."
     const val NO_DATA = "No data"

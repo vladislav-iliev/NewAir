@@ -1,20 +1,34 @@
 package com.vladislaviliev.newair.readings.downloader.metadata
 
 import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.map
 
 class MetadataRepository(private val dataStore: DataStore<Preferences>) {
-    private val errorMsgKey = stringPreferencesKey("ERROR_MSG")
-    private val timestampKey = stringPreferencesKey("TIMESTAMP")
 
-    val errorMsg = dataStore.data.map { it[errorMsgKey] ?: MetadataConstants.METADATA_NOT_FOUND }
-    val timestamp = dataStore.data.map { it[timestampKey] ?: MetadataConstants.METADATA_NOT_FOUND }
+    private val encodeConcat = "~"
+    private val prefsKey = stringPreferencesKey("METADATA_KEY")
 
-    suspend fun storeData(errorMsg: String, timestamp: String) {
-        dataStore.edit { it[errorMsgKey] = errorMsg }
-        dataStore.edit { it[timestampKey] = timestamp }
+    val flow = dataStore.data.map(::decode)
+
+    suspend fun store(metadata: Metadata) {
+        dataStore.edit { it[prefsKey] = encode(metadata) }
+    }
+
+    suspend fun clear() {
+        dataStore.edit(MutablePreferences::clear)
+    }
+
+    private fun encode(metadata: Metadata) = metadata.errorMsg + encodeConcat + metadata.timestamp
+
+    private fun decode(str: String) = str.split(encodeConcat).let { Metadata(it[0], it[1]) }
+
+    private fun decode(prefs: Preferences): Metadata {
+        val str = prefs[prefsKey]
+        if (str == null) return MetadataNotFound.value
+        return decode(str)
     }
 }

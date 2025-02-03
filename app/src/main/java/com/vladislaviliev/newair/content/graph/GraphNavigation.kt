@@ -18,6 +18,6 @@ fun NavGraphBuilder.addGraphDestination() {
 @Composable
 private fun Content() {
     val viewModel = hiltViewModel<GraphViewModel>()
-    val uiState by viewModel.state.collectAsStateWithLifecycle()
-    GraphScreen(uiState, viewModel::onRefreshClick)
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    GraphScreen(state, viewModel::onRefreshClick)
 }

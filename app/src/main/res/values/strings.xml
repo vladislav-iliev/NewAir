@@ -16,6 +16,9 @@
     <string name="error">Error</string>
     <string name="empty_placeholder">_</string>
 
+    <string name="add_new_location">Add new location</string>
+    <string name="refresh">Refresh</string>
+
     <string name="health_msg_enjoy">Enjoy your usual outdoor activities</string>
     <string name="health_msg_possible_discomfort">Possible experience of discomfort</string>
     <string name="health_msg_consider_reducing">If uncomfortable consider reducing activity</string>
@@ -26,8 +29,14 @@
 
     <string name="air_pollution">Air pollution</string>
 
+    <string name="message">Message</string>
     <string name="message_x">Message: %1$s</string>
+    <string name="error_message">Error message</string>
     <string name="error_message_x">Error message: %1$s</string>
 
+    <string name="temperature">Temperature</string>
+    <string name="humidity">Humidity</string>
+
+    <string name="timestamp">Timestamp</string>
     <string name="timestamp_x">Timestamp: %1$s</string>
 </resources>

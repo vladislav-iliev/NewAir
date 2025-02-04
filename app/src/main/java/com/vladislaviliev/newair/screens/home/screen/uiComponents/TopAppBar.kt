@@ -10,6 +10,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.vladislaviliev.newair.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -18,11 +20,11 @@ fun TopAppBar(
 ) {
     Row(modifier, Arrangement.End) {
         IconButton(onAddLocationClick) {
-            Icon(Icons.Default.Add, "Add new location")
+            Icon(Icons.Default.Add, stringResource(R.string.add_new_location))
         }
 
         IconButton(onRefreshClick) {
-            Icon(Icons.Default.Refresh, "Refresh")
+            Icon(Icons.Default.Refresh, stringResource(R.string.refresh))
         }
     }
 }

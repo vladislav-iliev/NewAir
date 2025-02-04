@@ -13,10 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.vladislaviliev.newair.R
 
 @Composable
 internal fun TempHumidIndicators(temp: String, humidity: String, modifier: Modifier = Modifier) {
@@ -29,7 +31,7 @@ internal fun TempHumidIndicators(temp: String, humidity: String, modifier: Modif
 
         Indicator(
             Icons.Default.Thermostat,
-            "Temperature",
+            stringResource(R.string.temperature),
             temp,
             Modifier.constrainAs(temperatureIndicator) {
                 start.linkTo(guidelineTemp)
@@ -37,7 +39,7 @@ internal fun TempHumidIndicators(temp: String, humidity: String, modifier: Modif
 
         Indicator(
             Icons.Default.WaterDrop,
-            "Humidity",
+            stringResource(R.string.humidity),
             humidity,
             Modifier.constrainAs(humidityIndicator) {
                 start.linkTo(guidelineHumidity)

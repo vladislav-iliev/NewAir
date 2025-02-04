@@ -6,7 +6,6 @@ import com.vladislaviliev.newair.readings.history.HistoryDao
 import com.vladislaviliev.newair.readings.live.LiveDao
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -15,13 +14,13 @@ import kotlinx.coroutines.launch
 
 class ResponseRepository(
     private val scope: CoroutineScope,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val ioDispatcher: CoroutineDispatcher,
     private val downloader: Downloader,
     private val liveDao: LiveDao,
     private val historyDao: HistoryDao,
     private val metadataRepository: MetadataRepository,
 ) {
-    /** Database and DataStore emit very quickly after each other and
+    /** Database and DataStore could emit very quickly after each other and
      * bombard the receivers with fast data. The determined purpose is to
      * collect both metadata and stored readings at once, if possible **/
     private val flowDebounceMillis = 200L
@@ -44,7 +43,7 @@ class ResponseRepository(
         ::HistoryResponse
     ).debounce(flowDebounceMillis)
 
-    suspend fun refresh() = scope.launch(ioDispatcher) {
+    suspend fun refresh() = if (isLoading.value) Unit else scope.launch(ioDispatcher) {
         isLoading.emit(true)
 
         liveDao.deleteAll()

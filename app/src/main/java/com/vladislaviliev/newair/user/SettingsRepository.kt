@@ -8,13 +8,12 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import com.vladislaviliev.newair.user.location.DefaultUserLocation
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class SettingsRepository(
     private val scope: CoroutineScope,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val ioDispatcher: CoroutineDispatcher,
     private val dataStore: DataStore<Preferences>,
 ) {
 

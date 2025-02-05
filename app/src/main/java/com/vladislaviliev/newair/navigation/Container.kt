@@ -9,7 +9,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.vladislaviliev.newair.screens.home.HomeGraphRoute
 
 @Composable
 fun Container(modifier: Modifier = Modifier) {
@@ -21,7 +20,5 @@ fun Container(modifier: Modifier = Modifier) {
 
 @Composable
 private fun ScreenContainer(navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController, HomeGraphRoute, modifier, route = AppGraphRoute::class) {
-        addAppGraphDestinations(navController)
-    }
+    NavHost(navController, createAppGraph(navController), modifier)
 }

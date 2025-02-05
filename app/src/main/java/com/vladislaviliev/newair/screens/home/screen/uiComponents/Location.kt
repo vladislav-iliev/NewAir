@@ -32,6 +32,6 @@ fun Location(location: String, onLocationPickerClick: () -> Unit, modifier: Modi
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.width(ButtonDefaults.IconSpacing))
-        Icon(Icons.Default.ArrowDropDown, stringResource(R.string.select_location))
+        Icon(Icons.Default.ArrowDropDown, stringResource(R.string.click_to_change_location))
     }
 }

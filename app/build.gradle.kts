@@ -95,6 +95,7 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
 
+    androidTestImplementation(libs.androidx.navigation.testing)
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.paging.runtime)

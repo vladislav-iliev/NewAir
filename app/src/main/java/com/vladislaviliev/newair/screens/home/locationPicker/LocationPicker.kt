@@ -10,8 +10,10 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
+import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.user.location.paging.Model
 import com.vladislaviliev.newair.user.location.paging.itemProviders.RadioButtonProvider
 
@@ -30,9 +32,9 @@ fun LocationPicker(
     AlertDialog(
         modifier = modifier.heightIn(max = 400.dp),
         onDismissRequest = onDismiss,
-        title = { Text("Select location") },
+        title = { Text(stringResource(R.string.select_location)) },
         text = { RadioButtonProvider()(items, setOf(selectedItem), onItemClicked) },
-        confirmButton = { Button(onConfirm) { Text("Confirm") } },
-        dismissButton = { Button(onDismiss) { Text("Cancel") } }
+        confirmButton = { Button(onConfirm) { Text(stringResource(android.R.string.ok)) } },
+        dismissButton = { Button(onDismiss) { Text(stringResource(android.R.string.cancel)) } }
     )
 }

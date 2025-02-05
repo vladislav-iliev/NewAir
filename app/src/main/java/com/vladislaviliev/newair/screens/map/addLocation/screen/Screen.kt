@@ -19,6 +19,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.google.android.gms.maps.model.LatLng
@@ -26,6 +27,7 @@ import com.google.maps.android.compose.GoogleMapComposable
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberMarkerState
+import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.screens.map.NewcastleMap
 
 @Composable
@@ -69,7 +71,9 @@ private fun Ui(
             .windowInsetsPadding(WindowInsets.safeDrawing)
     ) {
 
-        Surface(Modifier.align(Alignment.TopCenter)) { Text("Add location", fontSize = 20.sp) }
+        Surface(Modifier.align(Alignment.TopCenter)) {
+            Text(stringResource(R.string.select_location), fontSize = 20.sp)
+        }
 
         FilledIconButton(
             onAddLocationClick, Modifier.align(Alignment.BottomCenter), isMarkerPlaced

@@ -17,6 +17,7 @@
     <string name="empty_placeholder">_</string>
 
     <string name="add_new_location">Add new location</string>
+    <string name="select_location">Select location</string>
     <string name="refresh">Refresh</string>
 
     <string name="health_msg_enjoy">Enjoy your usual outdoor activities</string>
@@ -25,7 +26,7 @@
     <string name="health_msg_reduce_exertion">Reduce physical exertion</string>
 
     <string name="location_x">Location: %1$s</string>
-    <string name="select_location">Click to change location</string>
+    <string name="click_to_change_location">Click to change location</string>
 
     <string name="air_pollution">Air pollution</string>
 

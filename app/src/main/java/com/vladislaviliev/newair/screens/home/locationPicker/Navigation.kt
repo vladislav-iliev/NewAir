@@ -12,7 +12,7 @@ import com.vladislaviliev.newair.user.location.DefaultUserLocation
 import kotlinx.serialization.Serializable
 
 @Serializable
-private object Route
+object Route
 
 fun NavGraphBuilder.addLocationPickerDestination(onDismissRequest: () -> Unit) {
     dialog<Route>(content = { Content(onDismissRequest) })

@@ -26,6 +26,7 @@ room = "2.6.1"
 hilt = "2.55"
 hilt-navigation-compose = "1.2.0"
 
+navigation = "2.8.6"
 navigationCompose = "2.8.6"
 
 paging = "3.3.5"
@@ -72,6 +73,7 @@ hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt"
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 
+androidx-navigation-testing = { group = "androidx.navigation", name = "navigation-testing", version.ref = "navigation" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }

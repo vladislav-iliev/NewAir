@@ -1,16 +1,16 @@
 package com.vladislaviliev.newair
 
-import androidx.annotation.StringRes
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
+import com.vladislaviliev.newair.CommonFunctions.getString
 import com.vladislaviliev.newair.screens.home.screen.state.Loading
 import com.vladislaviliev.newair.screens.home.screen.state.State
 import com.vladislaviliev.newair.screens.home.screen.uiComponents.Screen
@@ -24,8 +24,48 @@ class HomeTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val context get() = InstrumentationRegistry.getInstrumentation().targetContext
-    private fun getStr(id: Int) = context.getString(id)
+    private val location
+        get() =
+            composeTestRule.onNodeWithContentDescription(
+                getString(R.string.click_to_change_location), true
+            )
+
+    private val pollution
+        get() = composeTestRule.onNodeWithContentDescription(
+            getString(R.string.air_pollution), true
+        )
+
+    private val message
+        get() = composeTestRule.onNodeWithContentDescription(
+            getString(R.string.message), true
+        )
+
+    private val messageLoading get() = composeTestRule.onNodeWithText(getString(R.string.loading))
+
+    private val errorMessage
+        get() = composeTestRule.onNodeWithContentDescription(
+            getString(R.string.error_message), true
+        )
+
+    private val progressIndicator
+        get() = composeTestRule.onNode(
+            SemanticsMatcher.keyIsDefined(
+                SemanticsProperties.ProgressBarRangeInfo
+            )
+        )
+
+    private val humidity
+        get() = composeTestRule.onNodeWithContentDescription(
+            getString(R.string.humidity), true
+        )
+
+    private val temperature =
+        composeTestRule.onNodeWithContentDescription(getString(R.string.temperature), true)
+
+    private val timestamp
+        get() = composeTestRule.onNodeWithContentDescription(
+            getString(R.string.timestamp), true
+        )
 
     @Test
     fun top_app_bar_always_displayed() {
@@ -34,122 +74,131 @@ class HomeTest {
     }
 
     @Test
-    fun location_displayed_reflects_state() {
+    fun location_not_displayed_when_loading() {
         composeTestRule.startHome(Loading.value)
-        locationDisplayed(false)
+        location.assertDoesNotExist()
+    }
+
+    @Test
+    fun location_displayed_when_state_has_it() {
         composeTestRule.startHome(Loading.value.copy(location = "Test"))
-        locationDisplayed(true)
+        location.assertIsDisplayed()
     }
 
     @Test
-    fun pollution_displayed_reflects_state() {
+    fun pollution_not_displayed_when_loading() {
         composeTestRule.startHome(Loading.value)
-        pollutionDisplayed(false)
-        composeTestRule.startHome(Loading.value.copy(pollution = "Test"))
-        pollutionDisplayed(true)
+        pollution.assertDoesNotExist()
     }
 
     @Test
-    fun message_displayed_reflects_state() {
+    fun pollution_displayed_when_state_has_it() {
+        composeTestRule.startHome(Loading.value.copy(pollution = "Test"))
+        pollution.assertIsDisplayed()
+    }
+
+    @Test
+    fun message_loading_displayed_when_loading() {
         composeTestRule.startHome(Loading.value)
         loadingMessageDisplayed(true)
+    }
+
+    @Test
+    fun message_loading_not_displayed_when_another_message_shown() {
         composeTestRule.startHome(Loading.value.copy(message = R.string.refresh))
         loadingMessageDisplayed(false)
     }
 
     @Test
-    fun error_message_displayed_reflects_state() {
+    fun error_message_not_displayed_when_loading() {
         composeTestRule.startHome(Loading.value)
         loadingMessageDisplayed(true)
-        errorMessageDisplayed(false)
+        errorMessage.assertDoesNotExist()
+    }
+
+    @Test
+    fun error_message_displayed_when_state_has_it() {
         composeTestRule.startHome(Loading.value.copy(errorMessage = "Test"))
-        messageDisplayed(true)
-        errorMessageDisplayed(true)
+        message.assertIsDisplayed()
+        errorMessage.assertIsDisplayed()
     }
 
     @Test
-    fun temperature_displayed_reflects_state() {
+    fun temperature_not_displayed_when_loading() {
         composeTestRule.startHome(Loading.value)
-        temperatureDisplayed(false)
+        temperature.assertDoesNotExist()
+    }
+
+    @Test
+    fun humidity_not_displayed_when_loading() {
+        composeTestRule.startHome(Loading.value)
+        humidity.assertDoesNotExist()
+    }
+
+    @Test
+    fun humidity_and_temp_not_shown_when_only_temp() {
         composeTestRule.startHome(Loading.value.copy(temperature = "Test"))
-        temperatureDisplayed(true)
+        humidity.assertDoesNotExist()
+        temperature.assertDoesNotExist()
     }
 
     @Test
-    fun humidity_displayed_reflects_state() {
-        composeTestRule.startHome(Loading.value)
-        humidityDisplayed(false)
+    fun humidity_and_temp_not_shown_when_only_humidity() {
         composeTestRule.startHome(Loading.value.copy(humidity = "Test"))
-        humidityDisplayed(true)
+        humidity.assertDoesNotExist()
+        temperature.assertDoesNotExist()
     }
 
     @Test
-    fun timestamp_displayed_reflects_state() {
-        composeTestRule.startHome(Loading.value)
-        timestampDisplayed(false)
-        composeTestRule.startHome(Loading.value.copy(timestamp = "Test"))
-        timestampDisplayed(true)
+    fun humidity_and_temp_shown_when_both_available() {
+        composeTestRule.startHome(Loading.value.copy(temperature = "Test", humidity = "Test"))
+        temperature.assertIsDisplayed()
+        humidity.assertIsDisplayed()
     }
+
+    @Test
+    fun timestamp_not_displayed_when_loading() {
+        composeTestRule.startHome(Loading.value)
+        timestamp.assertDoesNotExist()
+    }
+
+    @Test
+    fun timestamp_displayed_when_state_has_it() {
+        val testVal = "TestTimestamp"
+        composeTestRule.startHome(Loading.value.copy(timestamp = testVal))
+        timestamp.assertTextContains(testVal)
+    }
+
 
     @Test
     fun startup_tate_displays_only_loading_message() {
         composeTestRule.startHome(Loading.value)
         topAppBarDisplayed()
-        locationDisplayed(false)
-        pollutionDisplayed(false)
-        loadingMessageDisplayed(true)
-        temperatureDisplayed(false)
-        humidityDisplayed(false)
+        location.assertDoesNotExist()
+        pollution.assertDoesNotExist()
+        messageLoading.assertIsDisplayed()
+        temperature.assertDoesNotExist()
+        humidity.assertDoesNotExist()
     }
 
-    private fun SemanticsNodeInteraction.isDisplayed(displayed: Boolean) =
-        if (displayed) assertIsDisplayed() else assertDoesNotExist()
-
-    private fun assertIsDisplayedByContentDescription(
-        displayed: Boolean, @StringRes vararg descriptions: Int
-    ) {
-        for (@StringRes res in descriptions)
-            composeTestRule.onNodeWithContentDescription(getStr(res), true).isDisplayed(displayed)
+    private fun topAppBarDisplayed() {
+        composeTestRule.onNodeWithContentDescription(getString(R.string.add_new_location))
+            .assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription(getString(R.string.refresh))
+            .assertIsDisplayed()
     }
-
-    private fun topAppBarDisplayed() =
-        assertIsDisplayedByContentDescription(true, R.string.add_new_location, R.string.refresh)
-
-
-    private fun locationDisplayed(yes: Boolean) =
-        assertIsDisplayedByContentDescription(yes, R.string.select_location)
-
-
-    private fun pollutionDisplayed(yes: Boolean) =
-        assertIsDisplayedByContentDescription(yes, R.string.air_pollution)
-
-
-    private fun messageDisplayed(yes: Boolean) =
-        assertIsDisplayedByContentDescription(yes, R.string.message)
-
-
-    private fun errorMessageDisplayed(yes: Boolean) =
-        assertIsDisplayedByContentDescription(yes, R.string.error_message)
-
 
     private fun loadingMessageDisplayed(yes: Boolean) {
-        messageDisplayed(yes)
-        errorMessageDisplayed(false)
-        composeTestRule.onNodeWithText(context.getString(R.string.loading)).isDisplayed(yes)
-        composeTestRule
-            .onNode(SemanticsMatcher.keyIsDefined(SemanticsProperties.ProgressBarRangeInfo))
-            .isDisplayed(yes)
+
+        fun SemanticsNodeInteraction.toAssert(yes: Boolean) =
+            if (yes) SemanticsNodeInteraction::assertIsDisplayed
+            else SemanticsNodeInteraction::assertDoesNotExist
+
+        message.toAssert(yes)
+        errorMessage.toAssert(yes)
+        messageLoading.toAssert(yes)
+        progressIndicator.toAssert(yes)
     }
-
-    private fun temperatureDisplayed(yes: Boolean) =
-        assertIsDisplayedByContentDescription(yes, R.string.temperature)
-
-
-    private fun humidityDisplayed(yes: Boolean) =
-        assertIsDisplayedByContentDescription(yes, R.string.humidity)
-
-    private fun timestampDisplayed(yes: Boolean) =
-        assertIsDisplayedByContentDescription(yes, R.string.timestamp)
 
     private fun ComposeContentTestRule.startHome(state: State) = setContent {
         Screen({}, {}, {}, state)

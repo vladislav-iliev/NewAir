@@ -41,7 +41,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.vladislaviliev.newair.HiltTestRunner"
     }
 
     buildTypes {
@@ -94,7 +94,8 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
-    kapt(libs.hilt.android.testing)
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.compiler)
 
     androidTestImplementation(libs.androidx.navigation.testing)
     implementation(libs.androidx.navigation.compose)

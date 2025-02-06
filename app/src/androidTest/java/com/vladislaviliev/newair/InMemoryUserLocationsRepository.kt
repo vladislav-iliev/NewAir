@@ -9,6 +9,7 @@ import com.vladislaviliev.newair.user.location.paging.Model
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.atomic.AtomicInteger
 
+//TODO: Add delays to test background work after navigating away
 class InMemoryUserLocationsRepository : UserLocationsRepository {
 
     private var lastId = AtomicInteger(0)

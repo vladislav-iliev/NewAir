@@ -1,16 +1,16 @@
 package com.vladislaviliev.newair.screens.map.reading.state
 
 import androidx.annotation.StringRes
-import com.vladislaviliev.newair.screens.StateConstants
 import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
 import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
+import com.vladislaviliev.newair.screens.StateConstants
 
 object Transformer {
 
     private fun messageStateOf(@StringRes msg: Int, errorMsg: String, timestamp: String) =
         Loading.value.copy(msg, errorMsg, timestamp)
 
-    fun stateOf(isColorBlind: Boolean, response: LiveResponse): State {
+    fun stateOf(response: LiveResponse): State {
         if (response.isLoading) return Loading.value
 
         val metadata = response.metadata
@@ -28,7 +28,6 @@ object Transformer {
             StateConstants.emptyPlaceholder,
             "",
             metadata.timestamp,
-            isColorBlind,
             response.readings
         )
     }

@@ -9,9 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.vladislaviliev.newair.readings.live.LiveReading
 import com.vladislaviliev.newair.screens.StateConstants
 import com.vladislaviliev.newair.screens.map.reading.state.State
-import com.vladislaviliev.newair.readings.live.LiveReading
 
 @Composable
 fun Screen(onRefreshClick: () -> Unit, state: State, modifier: Modifier = Modifier) {
@@ -20,7 +20,6 @@ fun Screen(onRefreshClick: () -> Unit, state: State, modifier: Modifier = Modifi
         state.message,
         state.errorMessage,
         state.timestamp,
-        state.isColorBlind,
         state.readings,
         modifier
     )
@@ -32,18 +31,16 @@ private fun Screen(
     @StringRes message: Int,
     errorMessage: String,
     timestamp: String,
-    isColorBlind: Boolean,
     readings: Iterable<LiveReading>,
     modifier: Modifier = Modifier
 ) {
     Box(modifier.fillMaxSize()) {
-        Map(isColorBlind, readings, modifier)
+        Map(readings, modifier)
         Ui(
             onRefreshClick,
             message,
             errorMessage,
             timestamp,
-            isColorBlind,
             Modifier
                 .align(Alignment.TopEnd)
                 .systemBarsPadding()
@@ -54,5 +51,5 @@ private fun Screen(
 @Preview(showSystemUi = true, device = "id:pixel_4")
 @Composable
 private fun ScreenPreviewCircleMap() {
-    Ui({}, StateConstants.loading, "Error", "time", true, Modifier.fillMaxWidth())
+    Ui({}, StateConstants.loading, "Error", "time", Modifier.fillMaxWidth())
 }

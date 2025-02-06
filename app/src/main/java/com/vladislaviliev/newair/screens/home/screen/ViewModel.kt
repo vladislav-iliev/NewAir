@@ -2,9 +2,9 @@ package com.vladislaviliev.newair.screens.home.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.screens.home.screen.state.Loading
 import com.vladislaviliev.newair.screens.home.screen.state.Transformer
-import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.location.DefaultUserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
@@ -25,11 +25,10 @@ class ViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val userLocation = settingsRepository.currentUserLocationId
-        .map(userLocationsRepository::getLocation)
+        .map(userLocationsRepository::get)
         .retry(predicate = ::whenDatabaseCannotFetchLocation)
 
     val screenState = combine(
-        settingsRepository.isColorBlind,
         userLocation,
         responseRepository.liveResponses(),
         Transformer::stateOf

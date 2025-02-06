@@ -16,9 +16,7 @@ object Transformer {
         location: String, @StringRes message: Int, errorMessage: String, timestamp: String
     ) = Loading.value.copy(location, message, errorMessage, timestamp)
 
-    fun stateOf(
-        isColorBlind: Boolean, userLocation: UserLocation, response: LiveResponse,
-    ): State {
+    fun stateOf(userLocation: UserLocation, response: LiveResponse): State {
 
         val locationName = userLocation.name
 
@@ -51,7 +49,7 @@ object Transformer {
             pollution.toString(),
             readings.closestReadingTo(latitude, longitude, ReadingType.TEMP).toString() + "°C",
             readings.closestReadingTo(latitude, longitude, ReadingType.HUMID).toString() + "%",
-            Health.getColor(isColorBlind, pollution),
+            Health.getColor(pollution),
             Color.White,
         )
     }

@@ -1,44 +1,26 @@
 package com.vladislaviliev.newair.user.location
 
-import com.vladislaviliev.newair.user.location.paging.PagingProvider
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
+import androidx.paging.PagingData
+import com.vladislaviliev.newair.user.location.paging.Model
+import kotlinx.coroutines.flow.Flow
 
-class UserLocationsRepository(
-    private val scope: CoroutineScope,
-    private val ioDispatcher: CoroutineDispatcher,
-    private val dao: UserLocationDao,
-    private val pagingProvider: PagingProvider,
-) {
+interface UserLocationsRepository {
 
-    /** @throws NoSuchElementException if location does not exist **/
-    suspend fun getLocation(id: Int) = withContext(ioDispatcher) {
-        dao.getById(id) ?: throw NoSuchElementException()
-    }
+    suspend operator fun get(id: Int): UserLocation
 
-    suspend fun addInitial() = scope.async(ioDispatcher) {
-        dao.upsert(DefaultUserLocation.value)
-        dao.upsert(SampleLocations.locations)
-    }.await()
+    suspend fun add(name: String, lat: Double, lng: Double)
 
-    suspend fun existsByName(name: String) = withContext(ioDispatcher) { dao.existsByName(name) }
+    suspend fun addInitial()
 
-    suspend fun addLocation(name: String, lat: Double, lng: Double) = scope.async(ioDispatcher) {
-        dao.upsert(UserLocation(0, name, lat, lng))
-    }.await()
+    suspend fun exists(name: String): Boolean
 
-    suspend fun getLastLocationId() = withContext(ioDispatcher) { dao.getLastLocationId() }
+    suspend fun getLastId(): Int
 
-    suspend fun deleteLocations(ids: Collection<Int>) = scope.async(ioDispatcher) {
-        dao.deleteLocationsByIds(ids)
-    }.await()
+    suspend fun delete(ids: Collection<Int>)
 
-    suspend fun deleteAll() = scope.async(ioDispatcher) {
-        dao.deleteAllExcept(DefaultUserLocation.value.id)
-    }.await()
+    suspend fun deleteAll()
 
-    fun pagingFlowSelect() = pagingProvider.newPagingFlowSelect()
-    fun pagingFlowDelete() = pagingProvider.newPagingFlowDelete()
+    fun newPagingSelect(): Flow<PagingData<Model>>
+
+    fun newPagingDelete(): Flow<PagingData<Model>>
 }

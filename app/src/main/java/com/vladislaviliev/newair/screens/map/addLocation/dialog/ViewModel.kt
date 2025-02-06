@@ -31,12 +31,12 @@ class ViewModel @Inject constructor(
     private suspend fun addLocation(name: String, lat: Double, lng: Double) {
         _state.emit(defaultState)
 
-        if (userRepository.existsByName(name)) {
+        if (userRepository.exists(name)) {
             _state.emit(State(false, "", "\"$name\" already exists"))
             return
         }
-        userRepository.addLocation(name, lat, lng)
-        val newId = userRepository.getLastLocationId()
+        userRepository.add(name, lat, lng)
+        val newId = userRepository.getLastId()
         settingsRepository.setCurrentUserLocation(newId)
         _state.emit(State(false, "Successfully added $name", ""))
     }

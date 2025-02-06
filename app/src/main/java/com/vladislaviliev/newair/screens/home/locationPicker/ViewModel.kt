@@ -19,7 +19,7 @@ class ViewModel @Inject constructor(
     private val _hasSelected = MutableStateFlow(false)
     val hasSelected = _hasSelected.asStateFlow()
 
-    val pagingFlow = locationsRepository.pagingFlowSelect()
+    val pagingFlow = locationsRepository.newPagingSelect()
 
     fun onLocationSelected(id: Int) {
         viewModelScope.launch {

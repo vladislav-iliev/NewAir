@@ -18,7 +18,7 @@ class ViewModel @Inject constructor(
 
     private var isDeleting = false
 
-    val pagingFlow = locationsRepository.pagingFlowDelete()
+    val pagingFlow = locationsRepository.newPagingDelete()
 
     fun delete(ids: Collection<Int>) {
         if (isDeleting) return
@@ -28,7 +28,7 @@ class ViewModel @Inject constructor(
             if (settingsRepository.currentUserLocationId.first() in ids)
                 settingsRepository.setCurrentUserLocation(DefaultUserLocation.value.id)
 
-            locationsRepository.deleteLocations(ids)
+            locationsRepository.delete(ids)
             isDeleting = false
         }
     }

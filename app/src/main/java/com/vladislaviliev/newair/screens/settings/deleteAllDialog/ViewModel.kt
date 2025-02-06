@@ -2,8 +2,8 @@ package com.vladislaviliev.newair.screens.settings.deleteAllDialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.location.DefaultUserLocation
+import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

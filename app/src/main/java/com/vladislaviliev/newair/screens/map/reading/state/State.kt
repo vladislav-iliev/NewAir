@@ -7,6 +7,5 @@ data class State(
     @StringRes val message: Int,
     val errorMessage: String,
     val timestamp: String,
-    val isColorBlind: Boolean,
     val readings: Iterable<LiveReading>
 )

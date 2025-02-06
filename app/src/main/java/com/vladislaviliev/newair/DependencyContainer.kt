@@ -9,9 +9,12 @@ import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.readings.downloader.Downloader
 import com.vladislaviliev.newair.readings.downloader.metadata.MetadataRepository
 import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
+import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepositoryImpl
 import com.vladislaviliev.newair.user.SettingsRepository
+import com.vladislaviliev.newair.user.SettingsRepositoryImpl
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
+import com.vladislaviliev.newair.user.location.UserLocationsRepositoryImpl
 import com.vladislaviliev.newair.user.location.paging.PagingProvider
 import dagger.Module
 import dagger.Provides
@@ -50,7 +53,9 @@ class DependencyContainer {
         )
         val pagingProvider = PagingProvider(db.userLocationDao(), pagingConfig)
 
-        return UserLocationsRepository(scope, Dispatchers.IO, db.userLocationDao(), pagingProvider)
+        return UserLocationsRepositoryImpl(
+            scope, Dispatchers.IO, db.userLocationDao(), pagingProvider
+        )
     }
 
     @Provides
@@ -66,7 +71,7 @@ class DependencyContainer {
         val db = Room.databaseBuilder(appContext, ReadingsDatabase::class.java, "readings_database")
             .build()
 
-        return ResponseRepository(
+        return ResponseRepositoryImpl(
             scope,
             Dispatchers.IO,
             Downloader(),
@@ -81,11 +86,9 @@ class DependencyContainer {
     fun provideSettingsRepository(
         @ApplicationContext appContext: Context, scope: CoroutineScope
     ): SettingsRepository {
-
         val dataStore = PreferenceDataStoreFactory.create(
             produceFile = { appContext.preferencesDataStoreFile("user_preferences") }
         )
-
-        return SettingsRepository(scope, Dispatchers.IO, dataStore)
+        return SettingsRepositoryImpl(scope, Dispatchers.IO, dataStore)
     }
 }

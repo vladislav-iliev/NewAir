@@ -29,8 +29,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vladislaviliev.newair.screens.StateConstants
 import com.vladislaviliev.newair.readings.calculations.Health
+import com.vladislaviliev.newair.screens.StateConstants
 
 @Composable
 fun Ui(
@@ -38,7 +38,6 @@ fun Ui(
     @StringRes message: Int,
     errorMessage: String,
     timestamp: String,
-    isColorBlind: Boolean,
     modifier: Modifier = Modifier
 ) {
     Column(modifier, horizontalAlignment = Alignment.End) {
@@ -53,7 +52,7 @@ fun Ui(
         Button({ isShowingLegend = !isShowingLegend }) {
             Icon(Icons.Default.Info, "Legend")
         }
-        if (isShowingLegend) Legend(isColorBlind)
+        if (isShowingLegend) Legend()
     }
 }
 
@@ -76,12 +75,12 @@ fun Messages(
 }
 
 @Composable
-private fun Legend(isColorBlind: Boolean, modifier: Modifier = Modifier) {
+private fun Legend(modifier: Modifier = Modifier) {
     Surface(shape = MaterialTheme.shapes.large) {
         Column(modifier) {
             Spacer(Modifier.height(10.dp))
 
-            val rowsData = Health.getThresholdsToColors(isColorBlind)
+            val rowsData = Health.getThresholdsToColors()
             rowsData.forEach { LegendRow(it) }
 
             Spacer(Modifier.height(2.dp))

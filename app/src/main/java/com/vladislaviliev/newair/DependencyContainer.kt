@@ -45,7 +45,7 @@ class DependencyContainer {
         val pagingPageSize = 20
         val pagingPrefetchDistance = 10
         val pagingConfig = PagingConfig(
-            pageSize = 10,
+            pageSize = pagingPageSize,
             initialLoadSize = pagingPageSize * 2,
             prefetchDistance = pagingPrefetchDistance,
             maxSize = 2 * pagingPrefetchDistance + pagingPageSize,

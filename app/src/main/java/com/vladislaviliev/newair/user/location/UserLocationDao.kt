@@ -23,8 +23,8 @@ interface UserLocationDao {
     @Query("SELECT id FROM UserLocation ORDER BY id DESC LIMIT 1")
     suspend fun getLastId(): Int
 
-    @Query("DELETE FROM UserLocation WHERE id IN (:locationIds)")
-    suspend fun delete(locationIds: Collection<Int>)
+    @Query("DELETE FROM UserLocation WHERE id IN (:ids)")
+    suspend fun delete(ids: Collection<Int>)
 
     @Query("DELETE FROM UserLocation WHERE id != :except")
     suspend fun deleteAllExcept(except: Int)

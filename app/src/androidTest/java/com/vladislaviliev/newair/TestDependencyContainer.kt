@@ -11,15 +11,4 @@ import com.vladislaviliev.newair.DependencyContainer as ProductionContainer
 @TestInstallIn(components = [SingletonComponent::class], replaces = [ProductionContainer::class])
 class TestDependencyContainer {
 
-    @Provides
-    @Singleton
-    fun provideLocationsRepository() = InMemoryUserLocationsRepository()
-
-    @Provides
-    @Singleton
-    fun provideResponseRepository() = InMemoryResponseRepository()
-
-    @Provides
-    @Singleton
-    fun provideSettingsRepository() = InMemorySettingsDao()
 }

@@ -8,7 +8,6 @@ import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.readings.downloader.Downloader
 import com.vladislaviliev.newair.readings.downloader.metadata.MetadataRepository
 import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
-import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepositoryImpl
 import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
@@ -52,7 +51,7 @@ class DependencyContainer {
         val db = Room.databaseBuilder(appContext, ReadingsDatabase::class.java, "readings_database")
             .build()
 
-        return ResponseRepositoryImpl(
+        return ResponseRepository(
             scope,
             Dispatchers.IO,
             Downloader(),

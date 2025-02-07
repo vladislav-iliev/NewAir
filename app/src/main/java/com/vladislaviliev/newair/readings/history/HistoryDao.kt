@@ -12,10 +12,7 @@ interface HistoryDao {
     suspend fun upsert(historyReading: Iterable<HistoryReading>)
 
     @Query("SELECT * FROM HistoryReading")
-    suspend fun getAll(): List<HistoryReading>
-
-    @Query("SELECT * FROM HistoryReading")
-    fun getAllFlow(): Flow<List<HistoryReading>>
+    fun getAll(): Flow<List<HistoryReading>>
 
     @Query("DELETE FROM HistoryReading")
     suspend fun deleteAll()

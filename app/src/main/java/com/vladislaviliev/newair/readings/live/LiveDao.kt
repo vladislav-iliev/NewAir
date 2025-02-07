@@ -9,13 +9,10 @@ import kotlinx.coroutines.flow.Flow
 interface LiveDao {
 
     @Upsert
-    suspend fun upsert(readings: Collection<LiveReading>)
+    suspend fun upsert(readings: Iterable<LiveReading>)
 
     @Query("SELECT * FROM LiveReading")
-    suspend fun getAll(): List<LiveReading>
-
-    @Query("SELECT * FROM LiveReading")
-    fun getAllFlow(): Flow<List<LiveReading>>
+    fun getAll(): Flow<List<LiveReading>>
 
     @Query("DELETE FROM LiveReading")
     suspend fun deleteAll()

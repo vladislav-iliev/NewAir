@@ -26,9 +26,9 @@ interface UserLocationDao {
     @Query("DELETE FROM UserLocation WHERE id IN (:ids)")
     suspend fun delete(ids: Collection<Int>)
 
-    @Query("DELETE FROM UserLocation WHERE id != :except")
-    suspend fun deleteAllExcept(except: Int)
+    @Query("DELETE FROM UserLocation WHERE id != :id")
+    suspend fun deleteAllExcept(id: Int)
 
-    @Query("SELECT * FROM UserLocation WHERE id NOT IN (:excludedIds) ORDER BY name COLLATE NOCASE ASC")
-    fun newPagingSource(excludedIds: Collection<Int>): PagingSource<Int, UserLocation>
+    @Query("SELECT * FROM UserLocation WHERE id != :excluding ORDER BY name COLLATE NOCASE ASC")
+    fun newPagingSource(excluding: Int = Int.MAX_VALUE): PagingSource<Int, UserLocation>
 }

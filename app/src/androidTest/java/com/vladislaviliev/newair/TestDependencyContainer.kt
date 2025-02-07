@@ -8,10 +8,7 @@ import javax.inject.Singleton
 import com.vladislaviliev.newair.DependencyContainer as ProductionContainer
 
 @Module
-@TestInstallIn(
-    components = [SingletonComponent::class],
-    replaces = [ProductionContainer::class]
-)
+@TestInstallIn(components = [SingletonComponent::class], replaces = [ProductionContainer::class])
 class TestDependencyContainer {
 
     @Provides

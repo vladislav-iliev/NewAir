@@ -3,7 +3,6 @@ package com.vladislaviliev.newair
 import android.content.Context
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.preferencesDataStoreFile
-import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.readings.downloader.Downloader
@@ -15,7 +14,6 @@ import com.vladislaviliev.newair.user.SettingsRepositoryImpl
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import com.vladislaviliev.newair.user.location.UserLocationsRepositoryImpl
-import com.vladislaviliev.newair.user.location.paging.PagingProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,23 +37,8 @@ class DependencyContainer {
     fun provideLocationsRepository(
         @ApplicationContext appContext: Context, scope: CoroutineScope,
     ): UserLocationsRepository {
-
         val db = Room.databaseBuilder(appContext, UserDatabase::class.java, "user_database").build()
-
-        val pagingPageSize = 20
-        val pagingPrefetchDistance = 10
-        val pagingConfig = PagingConfig(
-            pageSize = pagingPageSize,
-            initialLoadSize = pagingPageSize * 2,
-            prefetchDistance = pagingPrefetchDistance,
-            maxSize = 2 * pagingPrefetchDistance + pagingPageSize,
-            enablePlaceholders = false,
-        )
-        val pagingProvider = PagingProvider(db.userLocationDao(), pagingConfig)
-
-        return UserLocationsRepositoryImpl(
-            scope, Dispatchers.IO, db.userLocationDao(), pagingProvider
-        )
+        return UserLocationsRepositoryImpl(scope, Dispatchers.IO, db.userLocationDao())
     }
 
     @Provides

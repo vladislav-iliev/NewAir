@@ -6,7 +6,7 @@ import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepositor
 import com.vladislaviliev.newair.screens.home.screen.state.Loading
 import com.vladislaviliev.newair.screens.home.screen.state.Transformer
 import com.vladislaviliev.newair.user.SettingsRepository
-import com.vladislaviliev.newair.user.location.DefaultUserLocation
+import com.vladislaviliev.newair.user.location.City
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -39,7 +39,7 @@ class ViewModel @Inject constructor(
     private suspend fun whenDatabaseCannotFetchLocation(t: Throwable): Boolean {
         if (t !is NoSuchElementException) return false
         userLocationsRepository.addInitial() // will trigger on fresh installs
-        settingsRepository.setCurrentUserLocation(DefaultUserLocation.value.id)
+        settingsRepository.setCurrentUserLocation(City.value.id)
         return true
     }
 

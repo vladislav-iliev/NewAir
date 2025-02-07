@@ -2,7 +2,7 @@ package com.vladislaviliev.newair.screens.settings.deleteAllDialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vladislaviliev.newair.user.location.DefaultUserLocation
+import com.vladislaviliev.newair.user.location.City
 import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +21,8 @@ class ViewModel @Inject constructor(
 
     fun deleteAll() {
         viewModelScope.launch {
-            settingsRepository.setCurrentUserLocation(DefaultUserLocation.value.id)
-            userLocationsRepository.deleteAll()
+            settingsRepository.setCurrentUserLocation(City.value.id)
+            userLocationsRepository.deleteAllExceptCity()
             _message.emit("Done!")
         }
     }

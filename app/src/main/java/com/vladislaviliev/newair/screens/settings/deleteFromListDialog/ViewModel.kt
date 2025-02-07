@@ -3,7 +3,7 @@ package com.vladislaviliev.newair.screens.settings.deleteFromListDialog
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vladislaviliev.newair.user.SettingsRepository
-import com.vladislaviliev.newair.user.location.DefaultUserLocation
+import com.vladislaviliev.newair.user.location.City
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
@@ -26,7 +26,7 @@ class ViewModel @Inject constructor(
 
         viewModelScope.launch {
             if (settingsRepository.currentUserLocationId.first() in ids)
-                settingsRepository.setCurrentUserLocation(DefaultUserLocation.value.id)
+                settingsRepository.setCurrentUserLocation(City.value.id)
 
             locationsRepository.delete(ids)
             isDeleting = false

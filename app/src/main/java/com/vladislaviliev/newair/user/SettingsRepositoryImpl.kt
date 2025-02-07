@@ -4,7 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
-import com.vladislaviliev.newair.user.location.DefaultUserLocation
+import com.vladislaviliev.newair.user.location.City
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.map
@@ -19,7 +19,7 @@ class SettingsRepositoryImpl(
     private val currentLocationIdKey = intPreferencesKey("CURRENT_LOCATION_ID")
 
     override val currentUserLocationId =
-        dataStore.data.map { it[currentLocationIdKey] ?: DefaultUserLocation.value.id }
+        dataStore.data.map { it[currentLocationIdKey] ?: City.value.id }
 
     override suspend fun setCurrentUserLocation(id: Int) {
         scope.launch(ioDispatcher) {

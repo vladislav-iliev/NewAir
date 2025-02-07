@@ -1,6 +1,6 @@
 package com.vladislaviliev.newair.user.location
 
-import com.vladislaviliev.newair.user.location.paging.PagingProvider
+import com.vladislaviliev.newair.user.location.paging.Transformer
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -10,8 +10,7 @@ class UserLocationsRepositoryImpl(
     private val scope: CoroutineScope,
     private val ioDispatcher: CoroutineDispatcher,
     private val dao: UserLocationDao,
-    private val pagingProvider: PagingProvider,
-): UserLocationsRepository {
+) : UserLocationsRepository {
 
     override suspend operator fun get(id: Int) = withContext(ioDispatcher) {
         dao.get(id) ?: throw NoSuchElementException()
@@ -22,7 +21,7 @@ class UserLocationsRepositoryImpl(
     }.await()
 
     override suspend fun addInitial() = scope.async(ioDispatcher) {
-        dao.upsert(DefaultUserLocation.value)
+        dao.upsert(City.value)
         dao.upsert(SampleLocations.locations)
     }.await()
 
@@ -34,10 +33,11 @@ class UserLocationsRepositoryImpl(
         dao.delete(ids)
     }.await()
 
-    override suspend fun deleteAll() = scope.async(ioDispatcher) {
-        dao.deleteAllExcept(DefaultUserLocation.value.id)
+    override suspend fun deleteAllExceptCity() = scope.async(ioDispatcher) {
+        dao.deleteAllExcept(City.value.id)
     }.await()
 
-    override fun newPagingSelect() = pagingProvider.newPagingFlowSelect()
-    override fun newPagingDelete() = pagingProvider.newPagingFlowDelete()
+    override fun newPagingSelect() = Transformer.flowOf(dao.newPagingSource())
+
+    override fun newPagingDelete() = Transformer.flowOf(dao.newPagingSource(City.value.id))
 }

@@ -8,7 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.dialog
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.vladislaviliev.newair.user.location.DefaultUserLocation
+import com.vladislaviliev.newair.user.location.City
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -29,12 +29,7 @@ private fun Content(onDismissRequest: () -> Unit) {
     }
 
     val items = viewModel.pagingFlow.collectAsLazyPagingItems()
-    LocationPicker(
-        items,
-        DefaultUserLocation.value.id,
-        viewModel::onLocationSelected,
-        onDismissRequest,
-    )
+    LocationPicker(items, City.value.id, viewModel::onLocationSelected, onDismissRequest)
 }
 
 fun NavController.navigateToLocationPicker() {

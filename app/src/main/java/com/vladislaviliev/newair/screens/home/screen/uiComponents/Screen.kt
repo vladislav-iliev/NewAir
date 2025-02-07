@@ -20,7 +20,7 @@ import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
 import com.vladislaviliev.newair.screens.home.screen.state.State
 import com.vladislaviliev.newair.screens.home.screen.state.Transformer
 import com.vladislaviliev.newair.ui.theme.NewAirTheme
-import com.vladislaviliev.newair.user.location.DefaultUserLocation
+import com.vladislaviliev.newair.user.location.City
 
 @Composable
 internal fun Screen(
@@ -115,7 +115,7 @@ private fun ScreenPreviewHome() {
     NewAirTheme {
         val metadata = Metadata("", "now")
         val state = Transformer.stateOf(
-            DefaultUserLocation.value,
+            City.value,
             LiveResponse(false, emptyList(), metadata)
         )
         Screen({}, {}, {}, state, Modifier.fillMaxSize())

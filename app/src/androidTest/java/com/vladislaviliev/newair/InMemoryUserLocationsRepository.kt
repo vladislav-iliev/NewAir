@@ -1,12 +1,10 @@
 package com.vladislaviliev.newair
 
-import androidx.paging.PagingData
-import com.vladislaviliev.newair.user.location.DefaultUserLocation
+import com.vladislaviliev.newair.user.location.City
 import com.vladislaviliev.newair.user.location.SampleLocations
 import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.location.paging.Model
-import kotlinx.coroutines.flow.Flow
+import com.vladislaviliev.newair.user.location.paging.Transformer
 import java.util.concurrent.atomic.AtomicInteger
 
 //TODO: Add delays to test background work after navigating away
@@ -28,7 +26,7 @@ class InMemoryUserLocationsRepository : UserLocationsRepository {
     }
 
     override suspend fun addInitial() {
-        add(DefaultUserLocation.value)
+        add(City.value)
         SampleLocations.locations.forEach { add(it) }
     }
 
@@ -37,13 +35,15 @@ class InMemoryUserLocationsRepository : UserLocationsRepository {
     override suspend fun exists(name: String) = locations.values.any { it.name == name }
 
     override suspend fun delete(ids: Collection<Int>) {
-        locations.keys.removeAll(ids)
+        ids.forEach { locations.remove(it) }
     }
 
-    override suspend fun deleteAll() {
-        locations.clear()
+    override suspend fun deleteAllExceptCity() {
+        delete(setOf(City.value.id))
     }
 
-    override fun newPagingSelect(): Flow<PagingData<Model>> = TODO("Not yet implemented")
-    override fun newPagingDelete(): Flow<PagingData<Model>> = TODO("Not yet implemented")
+    override fun newPagingSelect() = Transformer.flowOf(TestPagingSource(locations.values.toList()))
+
+    override fun newPagingDelete() =
+        Transformer.flowOf(TestPagingSource(locations.values.filter { it != City.value }.toList()))
 }

@@ -18,7 +18,7 @@ interface UserLocationsRepository {
 
     suspend fun delete(ids: Collection<Int>)
 
-    suspend fun deleteAll()
+    suspend fun deleteAllExceptCity()
 
     fun newPagingSelect(): Flow<PagingData<Model>>
 

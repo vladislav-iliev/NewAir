@@ -25,8 +25,8 @@ class ViewModel @Inject constructor(
         isDeleting = true
 
         viewModelScope.launch {
-            if (settingsRepository.currentUserLocationId.first() in ids)
-                settingsRepository.setCurrentUserLocation(City.value.id)
+            if (settingsRepository.currentLocation.first() in ids)
+                settingsRepository.setCurrentLocation(City.value.id)
 
             locationsRepository.delete(ids)
             isDeleting = false

@@ -21,7 +21,7 @@ class ViewModel @Inject constructor(
 
     fun deleteAll() {
         viewModelScope.launch {
-            settingsRepository.setCurrentUserLocation(City.value.id)
+            settingsRepository.setCurrentLocation(City.value.id)
             userLocationsRepository.deleteAllExceptCity()
             _message.emit("Done!")
         }

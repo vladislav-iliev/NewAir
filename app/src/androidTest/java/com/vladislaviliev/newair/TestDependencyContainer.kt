@@ -21,5 +21,5 @@ class TestDependencyContainer {
 
     @Provides
     @Singleton
-    fun provideSettingsRepository() = InMemorySettingsRepository()
+    fun provideSettingsRepository() = InMemorySettingsDao()
 }

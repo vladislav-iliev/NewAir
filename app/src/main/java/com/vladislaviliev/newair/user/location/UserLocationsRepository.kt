@@ -1,26 +1,42 @@
 package com.vladislaviliev.newair.user.location
 
-import androidx.paging.PagingData
-import com.vladislaviliev.newair.user.location.paging.Model
-import kotlinx.coroutines.flow.Flow
+import com.vladislaviliev.newair.user.location.paging.Transformer
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 
-interface UserLocationsRepository {
+class UserLocationsRepository(
+    private val scope: CoroutineScope,
+    private val ioDispatcher: CoroutineDispatcher,
+    private val dao: UserLocationDao,
+) {
+    suspend operator fun get(id: Int) = withContext(ioDispatcher) {
+        dao.get(id) ?: throw NoSuchElementException()
+    }
 
-    suspend operator fun get(id: Int): UserLocation
+    suspend fun add(name: String, lat: Double, lng: Double) = scope.async(ioDispatcher) {
+        dao.upsert(UserLocation(0, name, lat, lng))
+    }.await()
 
-    suspend fun add(name: String, lat: Double, lng: Double)
+    suspend fun addInitial() = scope.async(ioDispatcher) {
+        dao.upsert(City.value)
+        dao.upsert(SampleLocations.locations)
+    }.await()
 
-    suspend fun addInitial()
+    suspend fun getLastId() = withContext(ioDispatcher) { dao.getLastId() }
 
-    suspend fun exists(name: String): Boolean
+    suspend fun exists(name: String) = withContext(ioDispatcher) { dao.exists(name) }
 
-    suspend fun getLastId(): Int
+    suspend fun delete(ids: Collection<Int>) = scope.async(ioDispatcher) {
+        dao.delete(ids)
+    }.await()
 
-    suspend fun delete(ids: Collection<Int>)
+    suspend fun deleteAllExceptCity() = scope.async(ioDispatcher) {
+        dao.deleteAllExcept(City.value.id)
+    }.await()
 
-    suspend fun deleteAllExceptCity()
+    fun newPagingSelect() = Transformer.flowOf(dao.newPagingSource())
 
-    fun newPagingSelect(): Flow<PagingData<Model>>
-
-    fun newPagingDelete(): Flow<PagingData<Model>>
+    fun newPagingDelete() = Transformer.flowOf(dao.newPagingSource(City.value.id))
 }

@@ -37,7 +37,7 @@ class ViewModel @Inject constructor(
         }
         userRepository.add(name, lat, lng)
         val newId = userRepository.getLastId()
-        settingsRepository.setCurrentUserLocation(newId)
+        settingsRepository.setCurrentLocation(newId)
         _state.emit(State(false, "Successfully added $name", ""))
     }
 }

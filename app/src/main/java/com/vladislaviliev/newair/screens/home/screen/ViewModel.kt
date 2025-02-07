@@ -24,7 +24,7 @@ class ViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
-    private val userLocation = settingsRepository.currentUserLocationId
+    private val userLocation = settingsRepository.currentLocation
         .map(userLocationsRepository::get)
         .retry(predicate = ::whenDatabaseCannotFetchLocation)
 
@@ -39,7 +39,7 @@ class ViewModel @Inject constructor(
     private suspend fun whenDatabaseCannotFetchLocation(t: Throwable): Boolean {
         if (t !is NoSuchElementException) return false
         userLocationsRepository.addInitial() // will trigger on fresh installs
-        settingsRepository.setCurrentUserLocation(City.value.id)
+        settingsRepository.setCurrentLocation(City.value.id)
         return true
     }
 

@@ -23,7 +23,7 @@ class ViewModel @Inject constructor(
 
     fun onLocationSelected(id: Int) {
         viewModelScope.launch {
-            settingsRepository.setCurrentUserLocation(id)
+            settingsRepository.setCurrentLocation(id)
             _hasSelected.emit(true)
         }
     }

@@ -10,10 +10,8 @@ import com.vladislaviliev.newair.readings.downloader.metadata.MetadataRepository
 import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepositoryImpl
 import com.vladislaviliev.newair.user.SettingsRepository
-import com.vladislaviliev.newair.user.SettingsRepositoryImpl
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.location.UserLocationsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,7 +36,7 @@ class DependencyContainer {
         @ApplicationContext appContext: Context, scope: CoroutineScope,
     ): UserLocationsRepository {
         val db = Room.databaseBuilder(appContext, UserDatabase::class.java, "user_database").build()
-        return UserLocationsRepositoryImpl(scope, Dispatchers.IO, db.userLocationDao())
+        return UserLocationsRepository(scope, Dispatchers.IO, db.userLocationDao())
     }
 
     @Provides
@@ -72,6 +70,6 @@ class DependencyContainer {
         val dataStore = PreferenceDataStoreFactory.create(
             produceFile = { appContext.preferencesDataStoreFile("user_preferences") }
         )
-        return SettingsRepositoryImpl(scope, Dispatchers.IO, dataStore)
+        return SettingsRepository(scope, Dispatchers.IO, dataStore)
     }
 }

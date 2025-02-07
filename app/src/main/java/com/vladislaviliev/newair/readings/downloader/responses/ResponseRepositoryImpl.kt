@@ -1,7 +1,7 @@
 package com.vladislaviliev.newair.readings.downloader.responses
 
 import com.vladislaviliev.newair.readings.downloader.Downloader
-import com.vladislaviliev.newair.readings.downloader.metadata.MetadataRepository
+import com.vladislaviliev.newair.readings.downloader.metadata.MetadataDao
 import com.vladislaviliev.newair.readings.history.HistoryDao
 import com.vladislaviliev.newair.readings.live.LiveDao
 import kotlinx.coroutines.CoroutineDispatcher
@@ -18,7 +18,7 @@ class ResponseRepositoryImpl(
     private val downloader: Downloader,
     private val liveDao: LiveDao,
     private val historyDao: HistoryDao,
-    private val metadataRepository: MetadataRepository,
+    private val metadataDao: MetadataDao,
 ) : ResponseRepository {
     /** Database and DataStore could emit very quickly after each other and
      * bombard the receivers with fast data. The determined purpose is to
@@ -31,7 +31,7 @@ class ResponseRepositoryImpl(
     override fun liveResponses() = combine(
         isLoading,
         liveDao.getAllFlow(),
-        metadataRepository.flow,
+        metadataDao.data,
         ::LiveResponse
     ).debounce(flowDebounceMillis)
 
@@ -39,7 +39,7 @@ class ResponseRepositoryImpl(
     override fun historyResponses() = combine(
         isLoading,
         historyDao.getAllFlow(),
-        metadataRepository.flow,
+        metadataDao.data,
         ::HistoryResponse
     ).debounce(flowDebounceMillis)
 
@@ -48,13 +48,13 @@ class ResponseRepositoryImpl(
 
         liveDao.deleteAll()
         historyDao.deleteAll()
-        metadataRepository.clear()
+        metadataDao.clear()
 
         val download = downloader.download()
 
         liveDao.upsert(download.liveReadings)
         historyDao.upsert(download.historyReadings)
-        metadataRepository.store(download.metadata)
+        metadataDao.store(download.metadata)
 
         isLoading.emit(false)
     }.join()

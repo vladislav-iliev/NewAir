@@ -7,18 +7,18 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.map
 
-class MetadataRepository(private val dataStore: DataStore<Preferences>) {
+class MetadataRepository(private val dataStore: DataStore<Preferences>): MetadataDao {
 
     private val encodeConcat = "~"
     private val prefsKey = stringPreferencesKey("METADATA_KEY")
 
-    val flow = dataStore.data.map(::decode)
+    override val data = dataStore.data.map(::decode)
 
-    suspend fun store(metadata: Metadata) {
+    override suspend fun store(metadata: Metadata) {
         dataStore.edit { it[prefsKey] = encode(metadata) }
     }
 
-    suspend fun clear() {
+    override suspend fun clear() {
         dataStore.edit(MutablePreferences::clear)
     }
 

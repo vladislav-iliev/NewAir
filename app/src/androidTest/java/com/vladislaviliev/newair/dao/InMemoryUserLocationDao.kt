@@ -1,6 +1,7 @@
-package com.vladislaviliev.newair
+package com.vladislaviliev.newair.dao
 
 import androidx.paging.PagingSource
+import com.vladislaviliev.newair.TestPagingSource
 import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationDao
 import java.util.concurrent.atomic.AtomicInteger

@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair
+package com.vladislaviliev.newair.dao
 
 import com.vladislaviliev.newair.user.SettingsDao
 import com.vladislaviliev.newair.user.location.City

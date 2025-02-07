@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair
+package com.vladislaviliev.newair.dao
 
 import com.vladislaviliev.newair.readings.live.LiveDao
 import com.vladislaviliev.newair.readings.live.LiveReading

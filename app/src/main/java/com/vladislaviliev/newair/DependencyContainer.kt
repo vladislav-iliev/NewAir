@@ -6,7 +6,6 @@ import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.readings.downloader.Downloader
-import com.vladislaviliev.newair.readings.downloader.metadata.MetadataRepository
 import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.UserDatabase
@@ -20,6 +19,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
+import com.vladislaviliev.newair.readings.downloader.metadata.PersistentDao as MetadataDao
+import com.vladislaviliev.newair.user.settings.PersistentDao as SettingsDao
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -57,7 +58,7 @@ class DependencyContainer {
             Downloader(),
             db.liveDao(),
             db.historyDao(),
-            MetadataRepository(metadataDataStore)
+            MetadataDao(metadataDataStore)
         )
     }
 
@@ -69,6 +70,6 @@ class DependencyContainer {
         val dataStore = PreferenceDataStoreFactory.create(
             produceFile = { appContext.preferencesDataStoreFile("user_preferences") }
         )
-        return SettingsRepository(scope, Dispatchers.IO, dataStore)
+        return SettingsRepository(scope, Dispatchers.IO, SettingsDao(dataStore))
     }
 }

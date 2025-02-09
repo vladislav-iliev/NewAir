@@ -1,13 +1,11 @@
 package com.vladislaviliev.newair.dao
 
-import androidx.paging.PagingSource
-import com.vladislaviliev.newair.TestPagingSource
+import com.vladislaviliev.newair.ListPagingSource
+import com.vladislaviliev.newair.user.location.Dao
 import com.vladislaviliev.newair.user.location.UserLocation
-import com.vladislaviliev.newair.user.location.UserLocationDao
 import java.util.concurrent.atomic.AtomicInteger
 
-//TODO: Add delays to test background work after navigating away
-class InMemoryUserLocationDao : UserLocationDao {
+class InMemoryUserLocationDao : Dao {
 
     private var lastId = AtomicInteger(0)
     private val locations = sortedMapOf<Int, UserLocation>(Int::compareTo)
@@ -34,7 +32,6 @@ class InMemoryUserLocationDao : UserLocationDao {
         locations.keys.filter { it != id }.forEach { locations.remove(it) }
     }
 
-    override fun newPagingSource(excluding: Int): PagingSource<Int, UserLocation> {
-        return TestPagingSource(locations.values.filter { it.id != excluding }.toList())
-    }
+    override fun newPagingSource(excluding: Int) =
+        ListPagingSource(locations.values.filter { it.id != excluding }.toList())
 }

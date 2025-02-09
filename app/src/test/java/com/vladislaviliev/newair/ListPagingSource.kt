@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.vladislaviliev.newair.user.location.UserLocation
 
-class TestPagingSource(private val data: List<UserLocation>) : PagingSource<Int, UserLocation>() {
+class ListPagingSource(private val data: List<UserLocation>) : PagingSource<Int, UserLocation>() {
 
     override fun getRefreshKey(state: PagingState<Int, UserLocation>): Int {
         val anchor = state.anchorPosition ?: return 0
@@ -30,5 +30,4 @@ class TestPagingSource(private val data: List<UserLocation>) : PagingSource<Int,
 
         return LoadResult.Page(response, prevKey, nextKey)
     }
-
 }

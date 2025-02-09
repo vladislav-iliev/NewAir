@@ -1,8 +1,8 @@
-package com.vladislaviliev.newair.user
+package com.vladislaviliev.newair.user.settings
 
 import kotlinx.coroutines.flow.Flow
 
-interface SettingsDao {
+interface Dao {
     val currentLocation: Flow<Int>
     suspend fun setCurrentLocation(id: Int)
 }

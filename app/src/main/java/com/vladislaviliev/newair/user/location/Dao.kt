@@ -6,7 +6,7 @@ import androidx.room.Query
 import androidx.room.Upsert
 
 @Dao
-interface UserLocationDao {
+interface Dao {
 
     @Upsert
     suspend fun upsert(userLocation: UserLocation)

@@ -1,7 +1,6 @@
 package com.vladislaviliev.newair.readings.downloader.responses
 
 import com.vladislaviliev.newair.readings.downloader.Downloader
-import com.vladislaviliev.newair.readings.downloader.metadata.MetadataDao
 import com.vladislaviliev.newair.readings.history.HistoryDao
 import com.vladislaviliev.newair.readings.live.LiveDao
 import kotlinx.coroutines.CoroutineDispatcher
@@ -11,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
+import com.vladislaviliev.newair.readings.downloader.metadata.Dao as MetadataDao
 
 class ResponseRepository(
     private val scope: CoroutineScope,

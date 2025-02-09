@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 class UserLocationsRepository(
     private val scope: CoroutineScope,
     private val ioDispatcher: CoroutineDispatcher,
-    private val dao: UserLocationDao,
+    private val dao: Dao
 ) {
     suspend operator fun get(id: Int) = withContext(ioDispatcher) {
         dao.get(id) ?: throw NoSuchElementException()
@@ -36,7 +36,7 @@ class UserLocationsRepository(
         dao.deleteAllExcept(City.value.id)
     }.await()
 
-    fun newPagingSelect() = Transformer.flowOf(dao.newPagingSource())
+    fun newPagingSelect() = Transformer.flowOf(dao::newPagingSource)
 
-    fun newPagingDelete() = Transformer.flowOf(dao.newPagingSource(City.value.id))
+    fun newPagingDelete() = Transformer.flowOf { dao.newPagingSource(City.value.id) }
 }

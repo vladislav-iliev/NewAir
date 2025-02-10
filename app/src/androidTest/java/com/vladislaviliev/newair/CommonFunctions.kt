@@ -1,13 +1,14 @@
 package com.vladislaviliev.newair
 
+import android.content.Context
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.DialogNavigator
 import androidx.navigation.testing.TestNavHostController
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.core.app.ApplicationProvider
 
 internal object CommonFunctions {
 
-    fun getContext() = InstrumentationRegistry.getInstrumentation().targetContext
+    fun getContext() = ApplicationProvider.getApplicationContext<Context>()
 
     fun getString(id: Int) = getContext().getString(id)
 

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 
 object Transformer {
 
-    fun flowOf(p: PagingSource<Int, UserLocation>): Flow<PagingData<Model>> {
+    fun flowOf(factory: () -> PagingSource<Int, UserLocation>): Flow<PagingData<Model>> {
 
         val pageSize = 20
         val prefetchDistance = 10
@@ -24,7 +24,7 @@ object Transformer {
             enablePlaceholders = false,
         )
 
-        return Pager(config) { p }.flow.map {
+        return Pager(config, pagingSourceFactory = factory).flow.map {
             it.map(Transformer::toPagerModel)
                 .insertSeparators(generator = Transformer::insertSeparators)
         }

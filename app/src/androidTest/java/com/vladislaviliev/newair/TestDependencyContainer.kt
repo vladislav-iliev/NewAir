@@ -15,8 +15,9 @@ import dagger.Provides
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 import com.vladislaviliev.newair.DependencyContainer as ProductionContainer
 import com.vladislaviliev.newair.readings.downloader.metadata.PersistentDao as MetadataDao
@@ -28,13 +29,16 @@ class TestDependencyContainer {
 
     @Provides
     @Singleton
+    fun provideCoroutineScope() = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
+    @Provides
+    @Singleton
     fun provideLocationsRepository(
         @ApplicationContext appContext: Context,
         scope: CoroutineScope
     ): UserLocationsRepository {
         val db = Room.inMemoryDatabaseBuilder(appContext, UserDatabase::class.java).build()
-        val dispatcher = scope.coroutineContext[CoroutineDispatcher]!!
-        return UserLocationsRepository(scope, dispatcher, db.userLocationDao())
+        return UserLocationsRepository(scope, Dispatchers.IO, db.userLocationDao())
     }
 
     @Provides
@@ -50,10 +54,9 @@ class TestDependencyContainer {
             scope = scope,
             produceFile = { appContext.preferencesDataStoreFile("download_metadata_test") }
         )
-        val dispatcher = scope.coroutineContext[CoroutineDispatcher]!!
         return ResponseRepository(
             scope,
-            dispatcher,
+            Dispatchers.IO,
             Downloader(),
             db.liveDao(),
             db.historyDao(),
@@ -72,7 +75,6 @@ class TestDependencyContainer {
             produceFile = { appContext.preferencesDataStoreFile("user_preferences") }
         )
 
-        val dispatcher = scope.coroutineContext[CoroutineDispatcher]!!
-        return SettingsRepository(scope, dispatcher, SettingsDao(dataStore))
+        return SettingsRepository(scope, Dispatchers.IO, SettingsDao(dataStore))
     }
 }

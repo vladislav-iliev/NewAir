@@ -1,6 +1,6 @@
 package com.vladislaviliev.newair.dao
 
-import com.vladislaviliev.newair.ListPagingSource
+import com.vladislaviliev.newair.StaticListPagingSource
 import com.vladislaviliev.newair.user.location.Dao
 import com.vladislaviliev.newair.user.location.UserLocation
 import java.util.concurrent.atomic.AtomicInteger
@@ -33,5 +33,5 @@ class InMemoryUserLocationDao : Dao {
     }
 
     override fun newPagingSource(excluding: Int) =
-        ListPagingSource(locations.values.filter { it.id != excluding }.toList())
+        StaticListPagingSource(locations.values.filter { it.id != excluding })
 }

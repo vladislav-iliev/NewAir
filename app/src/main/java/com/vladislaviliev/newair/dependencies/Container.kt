@@ -6,6 +6,7 @@ import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.user.UserDatabase
+import com.vladislaviliev.newair.user.location.PrepopulateDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +28,9 @@ class Container {
     @Provides
     @Singleton
     fun provideLocationsDatabase(@ApplicationContext appContext: Context) =
-        Room.databaseBuilder(appContext, UserDatabase::class.java, "user_database").build()
+        Room.databaseBuilder(appContext, UserDatabase::class.java, "user_database")
+            .addCallback(PrepopulateDatabase())
+            .build()
 
     @Provides
     @Singleton

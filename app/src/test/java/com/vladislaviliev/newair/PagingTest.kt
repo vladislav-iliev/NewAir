@@ -43,7 +43,8 @@ class PagingTest {
     private fun getLocationsRepo(scope: CoroutineScope, dispatcher: CoroutineDispatcher) =
         UserLocationsRepository(scope, dispatcher, InMemoryUserLocationDao())
 
-    private suspend fun UserLocationsRepository.addSampleLocations() {
+    private suspend fun UserLocationsRepository.addInitialLocations() {
+        add(City.value.name, City.value.latitude, City.value.longitude)
         SampleLocations.locations.forEach { add(it.name, it.latitude, it.longitude) }
     }
 
@@ -77,9 +78,7 @@ class PagingTest {
         val scope = this
         val dispatcher = coroutineContext[CoroutineDispatcher]!!
 
-        val locationsRepo =
-            getLocationsRepo(scope, dispatcher).apply { addInitial(); addSampleLocations() }
-
+        val locationsRepo = getLocationsRepo(scope, dispatcher).apply { addInitialLocations() }
         val vm = SelectViewModel(locationsRepo, getSettingsRepo(scope, dispatcher), pagingConfig())
 
         SampleLocations.locations.forEach {
@@ -94,9 +93,7 @@ class PagingTest {
         val scope = this
         val dispatcher = coroutineContext[CoroutineDispatcher]!!
 
-        val locationsRepo =
-            getLocationsRepo(scope, dispatcher).apply { addInitial(); addSampleLocations() }
-
+        val locationsRepo = getLocationsRepo(scope, dispatcher).apply { addInitialLocations() }
         val vm = DeleteViewModel(locationsRepo, getSettingsRepo(scope, dispatcher), pagingConfig())
 
         has_location(false, vm.pagingFlow, City.value)

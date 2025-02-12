@@ -6,6 +6,7 @@ import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepositor
 import com.vladislaviliev.newair.screens.home.screen.state.Loading
 import com.vladislaviliev.newair.screens.home.screen.state.Transformer
 import com.vladislaviliev.newair.user.location.City
+import com.vladislaviliev.newair.user.location.LocationNotFoundException
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import com.vladislaviliev.newair.user.settings.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,8 +38,7 @@ class ViewModel @Inject constructor(
     )
 
     private suspend fun whenDatabaseCannotFetchLocation(t: Throwable): Boolean {
-        if (t !is NoSuchElementException) return false
-        userLocationsRepository.addInitial() // will trigger on fresh installs
+        if (t !is LocationNotFoundException) return false
         settingsRepository.setCurrentLocation(City.id)
         return true
     }

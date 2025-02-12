@@ -9,6 +9,7 @@ import com.vladislaviliev.newair.dependencies.PreferencesDependency
 import com.vladislaviliev.newair.dependencies.ReadingsDependency
 import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.user.UserDatabase
+import com.vladislaviliev.newair.user.location.PrepopulateDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -30,7 +31,9 @@ class TestDependencyContainer {
     @Provides
     @Singleton
     fun provideLocationsDatabase(@ApplicationContext appContext: Context) =
-        Room.inMemoryDatabaseBuilder(appContext, UserDatabase::class.java).build()
+        Room.inMemoryDatabaseBuilder(appContext, UserDatabase::class.java)
+            .addCallback(PrepopulateDatabase())
+            .build()
 
     @Provides
     @Singleton

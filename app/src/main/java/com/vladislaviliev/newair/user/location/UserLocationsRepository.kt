@@ -11,15 +11,11 @@ class UserLocationsRepository(
     private val dao: Dao
 ) {
     suspend operator fun get(id: Int) = withContext(ioDispatcher) {
-        dao.get(id) ?: throw NoSuchElementException()
+        dao.get(id) ?: throw LocationNotFoundException()
     }
 
     suspend fun add(name: String, lat: Double, lng: Double) = scope.async(ioDispatcher) {
         dao.upsert(UserLocation(0, name, lat, lng))
-    }.await()
-
-    suspend fun addInitial() = scope.async(ioDispatcher) {
-        dao.upsert(City.value)
     }.await()
 
     suspend fun getLastId() = withContext(ioDispatcher) { dao.getLastId() }

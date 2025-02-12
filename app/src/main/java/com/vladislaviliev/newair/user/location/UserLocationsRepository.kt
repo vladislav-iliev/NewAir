@@ -31,10 +31,10 @@ class UserLocationsRepository(
     }.await()
 
     suspend fun deleteAllExceptCity() = scope.async(ioDispatcher) {
-        dao.deleteAllExcept(City.value.id)
+        dao.deleteAllExcept(City.id)
     }.await()
 
     fun newPagingSourceSelect() = dao.newPagingSource()
 
-    fun newPagingSourceDelete() = dao.newPagingSource(City.value.id)
+    fun newPagingSourceDelete() = dao.newPagingSource(City.id)
 }

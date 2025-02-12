@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class InMemorySettingsDao : Dao {
 
-    private val _currentLocation = MutableStateFlow(City.value.id)
+    private val _currentLocation = MutableStateFlow(City.id)
 
     override val currentLocation: Flow<Int> = _currentLocation
 

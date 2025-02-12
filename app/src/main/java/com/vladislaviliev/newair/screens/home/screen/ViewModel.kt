@@ -39,7 +39,7 @@ class ViewModel @Inject constructor(
     private suspend fun whenDatabaseCannotFetchLocation(t: Throwable): Boolean {
         if (t !is NoSuchElementException) return false
         userLocationsRepository.addInitial() // will trigger on fresh installs
-        settingsRepository.setCurrentLocation(City.value.id)
+        settingsRepository.setCurrentLocation(City.id)
         return true
     }
 

@@ -29,7 +29,7 @@ private fun Content(onDismissRequest: () -> Unit) {
     }
 
     val items = viewModel.pagingFlow.collectAsLazyPagingItems()
-    LocationPicker(items, City.value.id, viewModel::onLocationSelected, onDismissRequest)
+    LocationPicker(items, City.id, viewModel::onLocationSelected, onDismissRequest)
 }
 
 fun NavController.navigateToLocationPicker() {

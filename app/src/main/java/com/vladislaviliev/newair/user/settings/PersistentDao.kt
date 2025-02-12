@@ -11,7 +11,7 @@ class PersistentDao(private val dataStore: DataStore<Preferences>) : Dao {
 
     private val currentLocationIdKey = intPreferencesKey("CURRENT_LOCATION_ID")
 
-    override val currentLocation = dataStore.data.map { it[currentLocationIdKey] ?: City.value.id }
+    override val currentLocation = dataStore.data.map { it[currentLocationIdKey] ?: City.id }
 
     override suspend fun setCurrentLocation(id: Int) {
         dataStore.edit { it[currentLocationIdKey] = id }

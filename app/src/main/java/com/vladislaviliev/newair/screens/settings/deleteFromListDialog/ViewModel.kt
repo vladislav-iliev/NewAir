@@ -33,7 +33,7 @@ class ViewModel @Inject constructor(
 
         viewModelScope.launch {
             if (settingsRepository.currentLocation.first() in ids)
-                settingsRepository.setCurrentLocation(City.value.id)
+                settingsRepository.setCurrentLocation(City.id)
 
             locationsRepository.delete(ids)
         }.invokeOnCompletion { isDeleting.set(false) }

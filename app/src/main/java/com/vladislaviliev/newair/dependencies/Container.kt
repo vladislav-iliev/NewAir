@@ -1,27 +1,24 @@
-package com.vladislaviliev.newair
+package com.vladislaviliev.newair.dependencies
 
 import android.content.Context
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
-import com.vladislaviliev.newair.dependencies.Container
-import com.vladislaviliev.newair.dependencies.ReadingsDependency
-import com.vladislaviliev.newair.dependencies.PreferencesDependency
 import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.user.UserDatabase
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import dagger.hilt.testing.TestInstallIn
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
 @Module
-@TestInstallIn(components = [SingletonComponent::class], replaces = [Container::class])
-class TestDependencyContainer {
+@InstallIn(SingletonComponent::class)
+class Container {
 
     @Provides
     @Singleton
@@ -30,19 +27,19 @@ class TestDependencyContainer {
     @Provides
     @Singleton
     fun provideLocationsDatabase(@ApplicationContext appContext: Context) =
-        Room.inMemoryDatabaseBuilder(appContext, UserDatabase::class.java).build()
+        Room.databaseBuilder(appContext, UserDatabase::class.java, "user_database").build()
 
     @Provides
     @Singleton
     fun provideReadingsDatabase(@ApplicationContext appContext: Context) =
-        Room.inMemoryDatabaseBuilder(appContext, ReadingsDatabase::class.java).build()
+        Room.databaseBuilder(appContext, ReadingsDatabase::class.java, "readings_database").build()
 
     @Provides
     @Singleton
     @ReadingsDependency
     fun providesDownloadMetadataDataStore(@ApplicationContext appContext: Context) =
         PreferenceDataStoreFactory.create(
-            produceFile = { appContext.preferencesDataStoreFile("download_metadata_test") }
+            produceFile = { appContext.preferencesDataStoreFile("download_metadata") }
         )
 
     @Provides
@@ -50,6 +47,6 @@ class TestDependencyContainer {
     @PreferencesDependency
     fun providesPreferencesDataStore(@ApplicationContext appContext: Context) =
         PreferenceDataStoreFactory.create(
-            produceFile = { appContext.preferencesDataStoreFile("preferences_test") }
+            produceFile = { appContext.preferencesDataStoreFile("preferences") }
         )
 }

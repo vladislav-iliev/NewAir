@@ -1,39 +1,15 @@
 package com.vladislaviliev.newair.user.location.paging
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.PagingSource
 import androidx.paging.insertSeparators
 import androidx.paging.map
 import com.vladislaviliev.newair.user.location.UserLocation
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 object Transformer {
-
-    fun flowOf(factory: () -> PagingSource<Int, UserLocation>): Flow<PagingData<Model>> {
-
-        val pageSize = 20
-        val prefetchDistance = 10
-        val config = PagingConfig(
-            pageSize = pageSize,
-            initialLoadSize = pageSize * 2,
-            prefetchDistance = prefetchDistance,
-            maxSize = 2 * prefetchDistance + pageSize,
-            enablePlaceholders = false,
-        )
-
-        return Pager(config, pagingSourceFactory = factory).flow.map {
-            it.map(Transformer::toPagerModel)
-                .insertSeparators(generator = Transformer::insertSeparators)
-        }
-    }
 
     private fun toPagerModel(loc: UserLocation) = Model.Location(loc.id, loc.name)
 
     private fun insertSeparators(before: Model?, after: Model?): Model.Header? {
-
         if (isFirstItem(before, after)
             || isBetweenTwoLocationsWithDifferentLetters(before, after)
         ) {
@@ -50,4 +26,7 @@ object Transformer {
         before is Model.Location
                 && after is Model.Location
                 && before.title.first().uppercaseChar() != after.title.first().uppercaseChar()
+
+    fun transform(data: PagingData<UserLocation>) =
+        data.map(::toPagerModel).insertSeparators(generator = ::insertSeparators)
 }

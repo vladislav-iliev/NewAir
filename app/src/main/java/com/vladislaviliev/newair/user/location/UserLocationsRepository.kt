@@ -1,6 +1,5 @@
 package com.vladislaviliev.newair.user.location
 
-import com.vladislaviliev.newair.user.location.paging.Transformer
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -21,7 +20,6 @@ class UserLocationsRepository(
 
     suspend fun addInitial() = scope.async(ioDispatcher) {
         dao.upsert(City.value)
-        dao.upsert(SampleLocations.locations)
     }.await()
 
     suspend fun getLastId() = withContext(ioDispatcher) { dao.getLastId() }
@@ -36,7 +34,7 @@ class UserLocationsRepository(
         dao.deleteAllExcept(City.value.id)
     }.await()
 
-    fun newPagingSelect() = Transformer.flowOf(dao::newPagingSource)
+    fun newPagingSourceSelect() = dao.newPagingSource()
 
-    fun newPagingDelete() = Transformer.flowOf { dao.newPagingSource(City.value.id) }
+    fun newPagingSourceDelete() = dao.newPagingSource(City.value.id)
 }

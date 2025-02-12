@@ -2,34 +2,40 @@ package com.vladislaviliev.newair.screens.settings.deleteFromListDialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.location.City
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
+import com.vladislaviliev.newair.user.location.paging.Transformer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 @HiltViewModel
 class ViewModel @Inject constructor(
     private val locationsRepository: UserLocationsRepository,
-    private val settingsRepository: SettingsRepository
+    private val settingsRepository: SettingsRepository,
+    pagingConfig: PagingConfig,
 ) : ViewModel() {
 
-    private var isDeleting = false
+    private var isDeleting = AtomicBoolean(false)
 
-    val pagingFlow = locationsRepository.newPagingDelete()
+    val pagingFlow = Pager(
+        pagingConfig, pagingSourceFactory = locationsRepository::newPagingSourceDelete
+    ).flow.map(Transformer::transform)
 
     fun delete(ids: Collection<Int>) {
-        if (isDeleting) return
-        isDeleting = true
+        if (!isDeleting.compareAndSet(false, true)) return
 
         viewModelScope.launch {
             if (settingsRepository.currentLocation.first() in ids)
                 settingsRepository.setCurrentLocation(City.value.id)
 
             locationsRepository.delete(ids)
-            isDeleting = false
-        }
+        }.invokeOnCompletion { isDeleting.set(false) }
     }
 }

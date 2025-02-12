@@ -13,7 +13,8 @@ class InMemoryUserLocationDao : Dao {
     override suspend fun get(id: Int) = locations[id] ?: throw NoSuchElementException()
 
     override suspend fun upsert(userLocation: UserLocation) {
-        locations[userLocation.id] = userLocation
+        val newId = if (userLocation.id == 0) lastId.incrementAndGet() else userLocation.id
+        locations[newId] = userLocation
     }
 
     override suspend fun upsert(userLocations: Collection<UserLocation>) {
@@ -32,6 +33,7 @@ class InMemoryUserLocationDao : Dao {
         locations.keys.filter { it != id }.forEach { locations.remove(it) }
     }
 
-    override fun newPagingSource(excluding: Int) =
-        StaticListPagingSource(locations.values.filter { it.id != excluding })
+    override fun newPagingSource(excluding: Int) = StaticListPagingSource(
+        locations.values.filter { it.id != excluding }.sortedBy { it.name.first().uppercaseChar() }
+    )
 }

@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.screens.home.screen.state.Loading
 import com.vladislaviliev.newair.screens.home.screen.state.Transformer
-import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.location.City
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
+import com.vladislaviliev.newair.user.settings.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine

@@ -5,11 +5,11 @@ import androidx.paging.PagingData
 import androidx.paging.testing.asSnapshot
 import com.vladislaviliev.newair.dao.InMemorySettingsDao
 import com.vladislaviliev.newair.dao.InMemoryUserLocationDao
-import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.location.City
 import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import com.vladislaviliev.newair.user.location.paging.Model
+import com.vladislaviliev.newair.user.settings.SettingsRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi

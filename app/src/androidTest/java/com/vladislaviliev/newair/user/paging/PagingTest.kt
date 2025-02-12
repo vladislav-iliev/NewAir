@@ -1,9 +1,9 @@
-package com.vladislaviliev.newair.paging
+package com.vladislaviliev.newair.user.paging
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.vladislaviliev.newair.screens.home.locationPicker.ViewModel
-import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
+import com.vladislaviliev.newair.user.settings.SettingsRepository
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi

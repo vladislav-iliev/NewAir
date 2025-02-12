@@ -1,6 +1,5 @@
-package com.vladislaviliev.newair.user
+package com.vladislaviliev.newair.user.settings
 
-import com.vladislaviliev.newair.user.settings.Dao
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

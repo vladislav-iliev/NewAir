@@ -8,9 +8,9 @@ import com.vladislaviliev.newair.dependencies.ReadingsDependency
 import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.readings.downloader.Downloader
 import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
-import com.vladislaviliev.newair.user.SettingsRepository
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
+import com.vladislaviliev.newair.user.settings.SettingsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -10,6 +10,7 @@ import com.vladislaviliev.newair.dependencies.ReadingsDependency
 import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.PrepopulateDatabase
+import com.vladislaviliev.newair.user.location.UserLocation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -29,11 +30,16 @@ class TestDependencyContainer {
     fun provideCoroutineScope() = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
     @Provides
+    fun providesCity() = UserLocation(1, "City", 0.0, 0.0)
+
+    @Provides
     @Singleton
-    fun provideLocationsDatabase(@ApplicationContext appContext: Context) =
-        Room.inMemoryDatabaseBuilder(appContext, UserDatabase::class.java)
-            .addCallback(PrepopulateDatabase())
-            .build()
+    fun provideLocationsDatabase(
+        @ApplicationContext appContext: Context,
+        preloadedUserLocation: UserLocation,
+    ) = Room.inMemoryDatabaseBuilder(appContext, UserDatabase::class.java)
+        .addCallback(PrepopulateDatabase(preloadedUserLocation))
+        .build()
 
     @Provides
     @Singleton

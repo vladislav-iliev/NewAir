@@ -9,6 +9,7 @@ import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.readings.downloader.Downloader
 import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.user.UserDatabase
+import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import com.vladislaviliev.newair.user.settings.SettingsRepository
 import dagger.Module
@@ -38,8 +39,17 @@ class DependencyContainer {
     }
 
     @Provides
-    fun provideLocationsRepository(scope: CoroutineScope, db: UserDatabase) =
-        UserLocationsRepository(scope, Dispatchers.IO, db.userLocationDao())
+    fun provideLocationsRepository(
+        scope: CoroutineScope,
+        db: UserDatabase,
+        preloadedUserLocation: UserLocation
+    ) =
+        UserLocationsRepository(
+            scope,
+            Dispatchers.IO,
+            db.userLocationDao(),
+            preloadedUserLocation.id,
+        )
 
     @Provides
     fun provideReadingsRepository(
@@ -57,6 +67,10 @@ class DependencyContainer {
 
     @Provides
     fun providesSettingsRepository(
-        scope: CoroutineScope, @PreferencesDependency settingsDataStore: DataStore<Preferences>
-    ) = SettingsRepository(scope, Dispatchers.IO, SettingsDao(settingsDataStore))
+        scope: CoroutineScope,
+        @PreferencesDependency settingsDataStore: DataStore<Preferences>,
+        city: UserLocation,
+    ) = SettingsRepository(
+        scope, Dispatchers.IO, SettingsDao(settingsDataStore, city.id),
+    )
 }

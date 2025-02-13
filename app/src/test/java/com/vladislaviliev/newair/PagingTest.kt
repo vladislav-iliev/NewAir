@@ -5,7 +5,6 @@ import androidx.paging.PagingData
 import androidx.paging.testing.asSnapshot
 import com.vladislaviliev.newair.dao.InMemorySettingsDao
 import com.vladislaviliev.newair.dao.InMemoryUserLocationDao
-import com.vladislaviliev.newair.user.location.City
 import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import com.vladislaviliev.newair.user.location.paging.Model
@@ -40,16 +39,18 @@ class PagingTest {
         )
     }
 
+    private val city = UserLocation(1, "City", 0.0, 0.0)
+
     private fun getLocationsRepo(scope: CoroutineScope, dispatcher: CoroutineDispatcher) =
-        UserLocationsRepository(scope, dispatcher, InMemoryUserLocationDao())
+        UserLocationsRepository(scope, dispatcher, InMemoryUserLocationDao(), city.id)
 
     private suspend fun UserLocationsRepository.addInitialLocations() {
-        add(City.name, City.latitude, City.longitude)
+        add(city.name, city.latitude, city.longitude)
         SampleLocations.locations.forEach { add(it.name, it.latitude, it.longitude) }
     }
 
     private fun getSettingsRepo(scope: CoroutineScope, dispatcher: CoroutineDispatcher) =
-        SettingsRepository(scope, dispatcher, InMemorySettingsDao())
+        SettingsRepository(scope, dispatcher, InMemorySettingsDao(city.id))
 
     private suspend fun has_header(has: Boolean, flow: Flow<PagingData<Model>>, char: Char) {
         val model = Model.Header(char)
@@ -79,7 +80,12 @@ class PagingTest {
         val dispatcher = coroutineContext[CoroutineDispatcher]!!
 
         val locationsRepo = getLocationsRepo(scope, dispatcher).apply { addInitialLocations() }
-        val vm = SelectViewModel(locationsRepo, getSettingsRepo(scope, dispatcher), pagingConfig())
+        val vm = SelectViewModel(
+            locationsRepo,
+            pagingConfig(),
+            getSettingsRepo(scope, dispatcher),
+            city.id,
+        )
 
         SampleLocations.locations.forEach {
             has_header(true, vm.pagingFlow, it.name.first().uppercaseChar())
@@ -94,9 +100,14 @@ class PagingTest {
         val dispatcher = coroutineContext[CoroutineDispatcher]!!
 
         val locationsRepo = getLocationsRepo(scope, dispatcher).apply { addInitialLocations() }
-        val vm = DeleteViewModel(locationsRepo, getSettingsRepo(scope, dispatcher), pagingConfig())
+        val vm = DeleteViewModel(
+            city.id,
+            locationsRepo,
+            getSettingsRepo(scope, dispatcher),
+            pagingConfig(),
+        )
 
-        has_location(false, vm.pagingFlow, City)
+        has_location(false, vm.pagingFlow, city)
         SampleLocations.locations.forEach {
             has_header(true, vm.pagingFlow, it.name.first().uppercaseChar())
             has_location(true, vm.pagingFlow, it)

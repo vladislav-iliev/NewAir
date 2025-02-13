@@ -7,7 +7,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.dialog
-import com.vladislaviliev.newair.user.location.City
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -27,7 +26,9 @@ private fun Content(onDismissRequest: () -> Unit) {
         return
     }
 
-    LocationPicker(viewModel.pagingFlow, City.id, viewModel::onLocationSelected, onDismissRequest)
+    LocationPicker(
+        viewModel.pagingFlow, viewModel.cityId, viewModel::onLocationSelected, onDismissRequest,
+    )
 }
 
 fun NavController.navigateToLocationPicker() {

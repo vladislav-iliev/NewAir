@@ -8,7 +8,8 @@ import kotlinx.coroutines.withContext
 class UserLocationsRepository(
     private val scope: CoroutineScope,
     private val ioDispatcher: CoroutineDispatcher,
-    private val dao: Dao
+    private val dao: Dao,
+    private val cityId: Int,
 ) {
     suspend operator fun get(id: Int) = withContext(ioDispatcher) {
         dao.get(id) ?: throw LocationNotFoundException()
@@ -27,10 +28,10 @@ class UserLocationsRepository(
     }.await()
 
     suspend fun deleteAllExceptCity() = scope.async(ioDispatcher) {
-        dao.deleteAllExcept(City.id)
+        dao.deleteAllExcept(cityId)
     }.await()
 
     fun newPagingSourceSelect() = dao.newPagingSource()
 
-    fun newPagingSourceDelete() = dao.newPagingSource(City.id)
+    fun newPagingSourceDelete() = dao.newPagingSource(cityId)
 }

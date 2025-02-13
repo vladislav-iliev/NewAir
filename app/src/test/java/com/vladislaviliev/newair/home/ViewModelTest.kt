@@ -12,7 +12,7 @@ import com.vladislaviliev.newair.readings.history.HistoryDao
 import com.vladislaviliev.newair.readings.live.LiveDao
 import com.vladislaviliev.newair.screens.home.screen.ViewModel
 import com.vladislaviliev.newair.screens.home.screen.state.Loading
-import com.vladislaviliev.newair.user.location.City
+import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import com.vladislaviliev.newair.user.settings.SettingsRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -37,6 +37,8 @@ class ViewModelTest {
     @get:Rule
     val mainRule = MainDispatcherRule()
 
+    private val city = UserLocation(1, "City", 0.0, 0.0)
+
     private lateinit var locationsDao: UserLocationDao
     private lateinit var liveDao: LiveDao
     private lateinit var historyDao: HistoryDao
@@ -44,7 +46,7 @@ class ViewModelTest {
     private lateinit var settingsDao: SettingsDao
 
     private fun getLocationsRepo(scope: CoroutineScope, dispatcher: CoroutineDispatcher) =
-        UserLocationsRepository(scope, dispatcher, locationsDao)
+        UserLocationsRepository(scope, dispatcher, locationsDao, city.id)
 
     private fun getResponseRepo(scope: CoroutineScope, dispatcher: CoroutineDispatcher) =
         ResponseRepository(scope, dispatcher, Downloader(), liveDao, historyDao, metadataDao)
@@ -61,7 +63,7 @@ class ViewModelTest {
         liveDao = InMemoryLiveDao()
         historyDao = InMemoryHistoryDao()
         metadataDao = InMemoryMetadataDao()
-        settingsDao = InMemorySettingsDao()
+        settingsDao = InMemorySettingsDao(city.id)
     }
 
     @Test
@@ -69,6 +71,7 @@ class ViewModelTest {
         val (scope, dispatcher) = getCoroutineElements()
 
         val vm = ViewModel(
+            city.id,
             getLocationsRepo(scope, dispatcher),
             getResponseRepo(scope, dispatcher),
             getSettingsRepo(scope, dispatcher)
@@ -81,15 +84,16 @@ class ViewModelTest {
     @Test
     fun on_clean_install_city_is_selected() = runTest {
         val (scope, dispatcher) = getCoroutineElements()
-        locationsDao.upsert(City)
+        locationsDao.upsert(city)
 
         val vm = ViewModel(
+            city.id,
             getLocationsRepo(scope, dispatcher),
             getResponseRepo(scope, dispatcher),
             getSettingsRepo(scope, dispatcher)
         )
 
         val firstTwoEmissions = vm.screenState.take(2).toList()
-        Assert.assertEquals(City.name, firstTwoEmissions[1].location)
+        Assert.assertEquals(city.name, firstTwoEmissions[1].location)
     }
 }

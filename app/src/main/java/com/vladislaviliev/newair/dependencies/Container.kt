@@ -7,6 +7,7 @@ import androidx.room.Room
 import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.PrepopulateDatabase
+import com.vladislaviliev.newair.user.location.UserLocation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,11 +27,16 @@ class Container {
     fun provideCoroutineScope() = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
     @Provides
+    fun providesCity() = UserLocation(1, "City", 0.0, 0.0)
+
+    @Provides
     @Singleton
-    fun provideLocationsDatabase(@ApplicationContext appContext: Context) =
-        Room.databaseBuilder(appContext, UserDatabase::class.java, "user_database")
-            .addCallback(PrepopulateDatabase())
-            .build()
+    fun provideLocationsDatabase(
+        @ApplicationContext appContext: Context,
+        city: UserLocation,
+    ) = Room.databaseBuilder(appContext, UserDatabase::class.java, "user_database")
+        .addCallback(PrepopulateDatabase(city))
+        .build()
 
     @Provides
     @Singleton

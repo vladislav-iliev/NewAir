@@ -17,8 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModel @Inject constructor(
     locationsRepository: UserLocationsRepository,
-    private val settingsRepository: SettingsRepository,
     pagingConfig: PagingConfig,
+    private val settingsRepository: SettingsRepository,
+    val cityId: Int,
 ) : ViewModel() {
 
     private val _hasSelected = MutableStateFlow(false)

@@ -115,7 +115,7 @@ private fun ScreenPreviewHome() {
     NewAirTheme {
         val metadata = Metadata("", "now")
         val state = Transformer.stateOf(
-            City.value,
+            City,
             LiveResponse(false, emptyList(), metadata)
         )
         Screen({}, {}, {}, state, Modifier.fillMaxSize())

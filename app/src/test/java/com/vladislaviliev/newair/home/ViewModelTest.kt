@@ -81,7 +81,7 @@ class ViewModelTest {
     @Test
     fun on_clean_install_city_is_selected() = runTest {
         val (scope, dispatcher) = getCoroutineElements()
-        locationsDao.upsert(City.value)
+        locationsDao.upsert(City)
 
         val vm = ViewModel(
             getLocationsRepo(scope, dispatcher),

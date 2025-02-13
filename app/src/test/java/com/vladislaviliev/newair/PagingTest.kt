@@ -44,7 +44,7 @@ class PagingTest {
         UserLocationsRepository(scope, dispatcher, InMemoryUserLocationDao())
 
     private suspend fun UserLocationsRepository.addInitialLocations() {
-        add(City.value.name, City.value.latitude, City.value.longitude)
+        add(City.name, City.latitude, City.longitude)
         SampleLocations.locations.forEach { add(it.name, it.latitude, it.longitude) }
     }
 
@@ -96,7 +96,7 @@ class PagingTest {
         val locationsRepo = getLocationsRepo(scope, dispatcher).apply { addInitialLocations() }
         val vm = DeleteViewModel(locationsRepo, getSettingsRepo(scope, dispatcher), pagingConfig())
 
-        has_location(false, vm.pagingFlow, City.value)
+        has_location(false, vm.pagingFlow, City)
         SampleLocations.locations.forEach {
             has_header(true, vm.pagingFlow, it.name.first().uppercaseChar())
             has_location(true, vm.pagingFlow, it)

@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair
+package com.vladislaviliev.newair.screens.home
 
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
@@ -11,6 +11,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.vladislaviliev.newair.CommonFunctions.getString
+import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.screens.home.screen.state.Loading
 import com.vladislaviliev.newair.screens.home.screen.state.State
 import com.vladislaviliev.newair.screens.home.screen.uiComponents.Screen

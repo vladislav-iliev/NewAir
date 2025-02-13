@@ -1,13 +1,21 @@
 package com.vladislaviliev.newair.user.location.paging.itemProviders
 
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.Checkbox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 
 class CheckboxProvider : ItemProvider() {
 
     @Composable
-    override fun ProvideItem(isChecked: Boolean, modifier: Modifier) {
+    override fun Indicator(isChecked: Boolean, modifier: Modifier) {
         Checkbox(isChecked, null, modifier)
     }
+
+    override fun Modifier.columnModifier() = this then selectableGroup()
+
+    override fun Modifier.itemModifier(selected: Boolean, onClick: () -> Unit) =
+        this then toggleable(selected, role = Role.Checkbox) { onClick() }
 }

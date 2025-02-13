@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair
+package com.vladislaviliev.newair.screens.home
 
 import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -11,6 +11,7 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.vladislaviliev.newair.CommonFunctions.getNavController
 import com.vladislaviliev.newair.CommonFunctions.getString
+import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.navigation.createAppGraph
 import com.vladislaviliev.newair.screens.home.locationPicker.navigateToLocationPicker
 import com.vladislaviliev.newair.screens.home.screen.state.Loading
@@ -51,7 +52,12 @@ class HomeNavTest {
 
         composeTestRule.setContent {
             navController.setGraph(createAppGraph(navController), null)
-            Screen({}, {}, navController::navigateToLocationPicker, Loading.value.copy(location = "Test"))
+            Screen(
+                {},
+                {},
+                navController::navigateToLocationPicker,
+                Loading.value.copy(location = "Test")
+            )
         }
 
         composeTestRule.onRoot().printToLog("TAG")

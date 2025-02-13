@@ -10,15 +10,30 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.user.location.paging.Model
 import com.vladislaviliev.newair.user.location.paging.itemProviders.RadioButtonProvider
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun LocationPicker(
+    items: Flow<PagingData<Model>>,
+    idToPreselect: Int,
+    onLocationSelected: (Int) -> Unit,
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val lazyItems = items.collectAsLazyPagingItems()
+    LocationPicker(lazyItems, idToPreselect, onLocationSelected, onDismiss, modifier)
+}
+
+@Composable
+private fun LocationPicker(
     items: LazyPagingItems<Model>,
     idToPreselect: Int,
     onLocationSelected: (Int) -> Unit,
@@ -30,7 +45,7 @@ fun LocationPicker(
     val onConfirm = { onLocationSelected(selectedItem) }
 
     AlertDialog(
-        modifier = modifier.heightIn(max = 400.dp),
+        modifier = modifier.heightIn(max = dimensionResource(R.dimen.picker_dialog_max_height)),
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.select_location)) },
         text = { RadioButtonProvider()(items, setOf(selectedItem), onItemClicked) },

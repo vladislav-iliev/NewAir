@@ -5,9 +5,12 @@ import androidx.compose.ui.graphics.Color
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.readings.ReadingType
 import com.vladislaviliev.newair.readings.calculations.Health
+import com.vladislaviliev.newair.readings.calculations.Maths.average
 import com.vladislaviliev.newair.readings.calculations.Maths.closestReadingTo
 import com.vladislaviliev.newair.readings.downloader.metadata.isBlank
 import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
+import com.vladislaviliev.newair.readings.live.LiveReading
+import com.vladislaviliev.newair.screens.home.screen.uiComponents.cityNamePlaceholder
 import com.vladislaviliev.newair.user.location.UserLocation
 
 class Transformer {
@@ -39,7 +42,12 @@ class Transformer {
         val readings = response.readings
         val latitude = userLocation.latitude
         val longitude = userLocation.longitude
-        val pollution = readings.closestReadingTo(latitude, longitude, ReadingType.PM10)
+
+        val shouldBeAverage = locationName == cityNamePlaceholder
+        fun Collection<LiveReading>.getReading(type: ReadingType) =
+            if (shouldBeAverage) average() else closestReadingTo(latitude, longitude, type)
+
+        val pollution = readings.getReading(ReadingType.PM10)
 
         return State(
             locationName,
@@ -47,8 +55,8 @@ class Transformer {
             "",
             metadata.timestamp,
             pollution.toString(),
-            readings.closestReadingTo(latitude, longitude, ReadingType.TEMP).toString() + "°C",
-            readings.closestReadingTo(latitude, longitude, ReadingType.HUMID).toString() + "%",
+            readings.getReading(ReadingType.TEMP).toString() + "°C",
+            readings.getReading(ReadingType.HUMID).toString() + "%",
             Health.getColor(pollution),
             Color.White,
         )

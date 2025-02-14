@@ -3,6 +3,7 @@ package com.vladislaviliev.newair.screens.home
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assertContentDescriptionContains
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
@@ -15,6 +16,7 @@ import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.screens.home.screen.state.Loading
 import com.vladislaviliev.newair.screens.home.screen.state.State
 import com.vladislaviliev.newair.screens.home.screen.uiComponents.Screen
+import com.vladislaviliev.newair.screens.home.screen.uiComponents.cityNamePlaceholder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -180,6 +182,12 @@ class HomeTest {
         messageLoading.assertIsDisplayed()
         temperature.assertDoesNotExist()
         humidity.assertDoesNotExist()
+    }
+
+    @Test
+    fun city_name_is_localised() {
+        composeTestRule.startHome(Loading.value.copy(location = cityNamePlaceholder))
+        location.assertContentDescriptionContains(getString(R.string.city))
     }
 
     private fun topAppBarDisplayed() {

@@ -20,6 +20,8 @@
     <string name="select_location">Select location</string>
     <string name="refresh">Refresh</string>
 
+    <string name="city">City</string>
+
     <string name="health_msg_enjoy">Enjoy your usual outdoor activities</string>
     <string name="health_msg_possible_discomfort">Possible experience of discomfort</string>
     <string name="health_msg_consider_reducing">If uncomfortable consider reducing activity</string>

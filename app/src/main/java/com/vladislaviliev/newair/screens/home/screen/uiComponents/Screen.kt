@@ -114,7 +114,7 @@ private fun Screen(
 private fun ScreenPreviewHome() {
     NewAirTheme {
         val metadata = Metadata("", "now")
-        val state = Transformer.stateOf(
+        val state = Transformer().stateOf(
             UserLocation(0, "TestLocation", 0.0, 0.0),
             LiveResponse(false, emptyList(), metadata)
         )

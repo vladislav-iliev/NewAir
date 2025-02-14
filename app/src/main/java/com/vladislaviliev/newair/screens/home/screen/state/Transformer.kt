@@ -10,7 +10,7 @@ import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
 import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
 import com.vladislaviliev.newair.user.location.UserLocation
 
-object Transformer {
+class Transformer {
 
     private fun unknownStateOf(
         location: String, @StringRes message: Int, errorMessage: String, timestamp: String

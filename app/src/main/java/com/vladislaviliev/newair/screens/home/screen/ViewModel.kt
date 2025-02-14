@@ -32,7 +32,7 @@ class ViewModel @Inject constructor(
     val screenState = combine(
         userLocation,
         responseRepository.liveResponses(),
-        Transformer::stateOf
+        Transformer()::stateOf
     ).stateIn(
         viewModelScope, SharingStarted.WhileSubscribed(5000), Loading.value
     )

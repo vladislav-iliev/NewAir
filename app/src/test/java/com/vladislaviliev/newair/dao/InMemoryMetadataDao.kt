@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class InMemoryMetadataDao : Dao {
 
-    private val _data = MutableStateFlow(Metadata.Blank)
+    private val _data = MutableStateFlow(Blank)
 
     override val data: Flow<Metadata> = _data
 
@@ -17,6 +17,6 @@ class InMemoryMetadataDao : Dao {
     }
 
     override suspend fun clear() {
-        _data.emit(Metadata.Blank)
+        _data.emit(Blank)
     }
 }

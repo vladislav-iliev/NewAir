@@ -17,7 +17,7 @@ internal class ViewModel @Inject constructor(
     private val responseRepository: ResponseRepository,
 ) : ViewModel() {
 
-    val state = responseRepository.liveResponses().map(Transformer::stateOf).stateIn(
+    val state = responseRepository.liveResponses().map(Transformer()::stateOf).stateIn(
         viewModelScope, SharingStarted.WhileSubscribed(5000), Loading.value
     )
 

@@ -1,9 +1,9 @@
 package com.vladislaviliev.newair.screens.graph.state
 
 import androidx.annotation.StringRes
+import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
 import com.vladislaviliev.newair.readings.downloader.responses.HistoryResponse
-import com.vladislaviliev.newair.screens.StateConstants
 
 object Transformer {
 
@@ -15,16 +15,16 @@ object Transformer {
 
         val metadata = response.metadata
 
-        if (metadata == MetadataNotFound.value) return messageStateOf(StateConstants.noData, "", "")
+        if (metadata == MetadataNotFound.value) return messageStateOf(R.string.no_data, "", "")
 
         if (metadata.errorMsg.isNotBlank()) return messageStateOf(
-            StateConstants.error, metadata.errorMsg, metadata.timestamp
+            R.string.error, metadata.errorMsg, metadata.timestamp
         )
         if (response.readings.isEmpty()) return messageStateOf(
-            StateConstants.noData, "", metadata.timestamp
+            R.string.no_data, "", metadata.timestamp
         )
         return State(
-            StateConstants.emptyPlaceholder, "", metadata.timestamp, response.readings
+            R.string.empty_placeholder, "", metadata.timestamp, response.readings
         )
     }
 }

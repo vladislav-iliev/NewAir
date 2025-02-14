@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.readings.live.LiveReading
-import com.vladislaviliev.newair.screens.StateConstants
 import com.vladislaviliev.newair.screens.map.reading.state.State
 
 @Composable
@@ -51,5 +51,5 @@ private fun Screen(
 @Preview(showSystemUi = true, device = "id:pixel_4")
 @Composable
 private fun ScreenPreviewCircleMap() {
-    Ui({}, StateConstants.loading, "Error", "time", Modifier.fillMaxWidth())
+    Ui({}, R.string.loading, "Error", "time", Modifier.fillMaxWidth())
 }

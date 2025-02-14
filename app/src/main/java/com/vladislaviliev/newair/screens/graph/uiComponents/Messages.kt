@@ -7,14 +7,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
-import com.vladislaviliev.newair.screens.StateConstants
+import com.vladislaviliev.newair.R
 
 @Composable
 fun Messages(@StringRes message: Int, errorMessage: String, timestamp: String) {
     val fontSize = 20.sp
 
     Column {
-        if (message != StateConstants.emptyPlaceholder)
+        if (message != R.string.empty_placeholder)
             Text(stringResource(message), fontSize = fontSize)
 
         if (errorMessage.isNotBlank())

@@ -1,7 +1,7 @@
 package com.vladislaviliev.newair.screens.graph.state
 
-import com.vladislaviliev.newair.screens.StateConstants
+import com.vladislaviliev.newair.R
 
 object Loading {
-    val value = State(StateConstants.loading, "", "", emptyList())
+    val value = State(R.string.loading, "", "", emptyList())
 }

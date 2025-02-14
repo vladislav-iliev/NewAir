@@ -29,8 +29,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.readings.calculations.Health
-import com.vladislaviliev.newair.screens.StateConstants
 
 @Composable
 fun Ui(
@@ -64,7 +64,7 @@ fun Messages(
         val fontSize = 20.sp
 
         Column {
-            if (message != StateConstants.emptyPlaceholder)
+            if (message != R.string.empty_placeholder)
                 Text(stringResource(message), fontSize = fontSize)
             if (errorMessage.isNotBlank())
                 Text(errorMessage, color = MaterialTheme.colorScheme.error, fontSize = fontSize)

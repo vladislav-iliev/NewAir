@@ -19,14 +19,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.screens.StateConstants
 
 @Composable
 fun Messages(@StringRes messageRes: Int, errorMessage: String, modifier: Modifier = Modifier) {
     Column(modifier, Arrangement.Center) {
 
         val messageColor =
-            if (messageRes == StateConstants.error) MaterialTheme.colorScheme.error
+            if (messageRes == R.string.error) MaterialTheme.colorScheme.error
             else Color.Unspecified
         val message = stringResource(messageRes)
         val messageDescription = stringResource(R.string.message_x, message)

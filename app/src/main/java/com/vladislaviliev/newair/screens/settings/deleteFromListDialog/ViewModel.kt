@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.vladislaviliev.newair.screens.paging.Transformer
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.settings.SettingsRepository
+import com.vladislaviliev.newair.user.preferences.PreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class ViewModel @Inject constructor(
     private val defaultLocationId: Int,
     private val locationsRepository: UserLocationsRepository,
-    private val settingsRepository: SettingsRepository,
+    private val preferencesRepository: PreferencesRepository,
     pagingConfig: PagingConfig,
 ) : ViewModel() {
 
@@ -32,8 +32,8 @@ class ViewModel @Inject constructor(
         if (!isDeleting.compareAndSet(false, true)) return
 
         viewModelScope.launch {
-            if (settingsRepository.currentLocation.first() in ids)
-                settingsRepository.setCurrentLocation(defaultLocationId)
+            if (preferencesRepository.currentLocation.first() in ids)
+                preferencesRepository.setCurrentLocation(defaultLocationId)
 
             locationsRepository.delete(ids)
         }.invokeOnCompletion { isDeleting.set(false) }

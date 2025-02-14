@@ -70,7 +70,7 @@ class PagingTest {
         val vm = SelectViewModel(
             repos.locations.apply { addInitialLocations() },
             pagingConfig(),
-            repos.settings,
+            repos.preferences,
             CommonFunctions.city.id,
         )
         SampleLocations.locations.forEach {
@@ -86,7 +86,7 @@ class PagingTest {
         val vm = DeleteViewModel(
             CommonFunctions.city.id,
             repos.locations.apply { addInitialLocations() },
-            repos.settings,
+            repos.preferences,
             pagingConfig(),
         )
         has_location(false, vm.pagingFlow, CommonFunctions.city)

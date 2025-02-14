@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vladislaviliev.newair.screens.map.addLocation.screen.State
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.settings.SettingsRepository
+import com.vladislaviliev.newair.user.preferences.PreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModel @Inject constructor(
     private val userRepository: UserLocationsRepository,
-    private val settingsRepository: SettingsRepository,
+    private val preferencesRepository: PreferencesRepository,
 ) : ViewModel() {
 
     private val defaultState = State(
@@ -37,7 +37,7 @@ class ViewModel @Inject constructor(
         }
         userRepository.add(name, lat, lng)
         val newId = userRepository.getLastId()
-        settingsRepository.setCurrentLocation(newId)
+        preferencesRepository.setCurrentLocation(newId)
         _state.emit(State(false, "Successfully added $name", ""))
     }
 }

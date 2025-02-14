@@ -1,10 +1,10 @@
 package com.vladislaviliev.newair.dao
 
-import com.vladislaviliev.newair.user.settings.Dao
+import com.vladislaviliev.newair.user.preferences.Dao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class InMemorySettingsDao(defaultLocationId: Int) : Dao {
+class InMemoryPreferencesDao(defaultLocationId: Int) : Dao {
 
     private val _currentLocation = MutableStateFlow(defaultLocationId)
 

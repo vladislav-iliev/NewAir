@@ -32,12 +32,10 @@ class Container {
 
     @Provides
     @Singleton
-    fun provideLocationsDatabase(
-        @ApplicationContext appContext: Context,
-        city: UserLocation,
-    ) = Room.databaseBuilder(appContext, UserDatabase::class.java, "user_database")
-        .addCallback(PrepopulateDatabase(city))
-        .build()
+    fun provideLocationsDatabase(@ApplicationContext appContext: Context, city: UserLocation) =
+        Room.databaseBuilder(appContext, UserDatabase::class.java, "user_database")
+            .addCallback(PrepopulateDatabase(city))
+            .build()
 
     @Provides
     @Singleton

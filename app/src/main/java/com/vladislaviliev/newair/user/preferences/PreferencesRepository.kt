@@ -1,10 +1,10 @@
-package com.vladislaviliev.newair.user.settings
+package com.vladislaviliev.newair.user.preferences
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class SettingsRepository(
+class PreferencesRepository(
     private val scope: CoroutineScope,
     private val ioDispatcher: CoroutineDispatcher,
     private val dao: Dao,

@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.user.settings
+package com.vladislaviliev.newair.user.preferences
 
 import kotlinx.coroutines.flow.Flow
 

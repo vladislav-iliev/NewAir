@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.vladislaviliev.newair.screens.paging.Transformer
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.settings.SettingsRepository
+import com.vladislaviliev.newair.user.preferences.PreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class ViewModel @Inject constructor(
     locationsRepository: UserLocationsRepository,
     pagingConfig: PagingConfig,
-    private val settingsRepository: SettingsRepository,
+    private val preferencesRepository: PreferencesRepository,
     val preselectId: Int,
 ) : ViewModel() {
 
@@ -31,7 +31,7 @@ class ViewModel @Inject constructor(
 
     fun onLocationSelected(id: Int) {
         viewModelScope.launch {
-            settingsRepository.setCurrentLocation(id)
+            preferencesRepository.setCurrentLocation(id)
             _hasSelected.emit(true)
         }
     }

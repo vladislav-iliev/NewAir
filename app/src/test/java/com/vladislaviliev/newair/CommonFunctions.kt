@@ -3,14 +3,14 @@ package com.vladislaviliev.newair
 import com.vladislaviliev.newair.dao.InMemoryHistoryDao
 import com.vladislaviliev.newair.dao.InMemoryLiveDao
 import com.vladislaviliev.newair.dao.InMemoryMetadataDao
-import com.vladislaviliev.newair.dao.InMemorySettingsDao
+import com.vladislaviliev.newair.dao.InMemoryPreferencesDao
 import com.vladislaviliev.newair.dao.InMemoryUserLocationDao
 import com.vladislaviliev.newair.readings.downloader.Downloader
 import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.screens.home.screen.uiComponents.cityNamePlaceholder
 import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.settings.SettingsRepository
+import com.vladislaviliev.newair.user.preferences.PreferencesRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 
@@ -23,7 +23,7 @@ object CommonFunctions {
         InMemoryLiveDao(),
         InMemoryHistoryDao(),
         InMemoryMetadataDao(),
-        InMemorySettingsDao(cityId)
+        InMemoryPreferencesDao(cityId)
     )
 
     fun getRepoCollection(scope: CoroutineScope, cityId: Int = city.id): TestRepoCollection {
@@ -39,7 +39,7 @@ object CommonFunctions {
                 dao.history,
                 dao.metadata
             ),
-            SettingsRepository(scope, dispatcher, dao.settings)
+            PreferencesRepository(scope, dispatcher, dao.preferences)
         )
     }
 }

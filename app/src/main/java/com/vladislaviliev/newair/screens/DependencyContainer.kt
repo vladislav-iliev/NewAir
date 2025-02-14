@@ -11,7 +11,7 @@ import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepositor
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.settings.SettingsRepository
+import com.vladislaviliev.newair.user.preferences.PreferencesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +19,7 @@ import dagger.hilt.android.components.ViewModelComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import com.vladislaviliev.newair.readings.downloader.metadata.PersistentDao as MetadataDao
-import com.vladislaviliev.newair.user.settings.PersistentDao as SettingsDao
+import com.vladislaviliev.newair.user.preferences.PersistentDao as PreferencesDao
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -46,12 +46,7 @@ class DependencyContainer {
         scope: CoroutineScope,
         db: UserDatabase,
         cityId: Int,
-    ) = UserLocationsRepository(
-        scope,
-        Dispatchers.IO,
-        db.userLocationDao(),
-        cityId,
-    )
+    ) = UserLocationsRepository(scope, Dispatchers.IO, db.userLocationDao(), cityId)
 
     @Provides
     fun provideReadingsRepository(
@@ -72,7 +67,7 @@ class DependencyContainer {
         scope: CoroutineScope,
         @PreferencesDependency settingsDataStore: DataStore<Preferences>,
         defaultLocationId: Int,
-    ) = SettingsRepository(
-        scope, Dispatchers.IO, SettingsDao(settingsDataStore, defaultLocationId),
+    ) = PreferencesRepository(
+        scope, Dispatchers.IO, PreferencesDao(settingsDataStore, defaultLocationId),
     )
 }

@@ -7,7 +7,7 @@ import com.vladislaviliev.newair.screens.home.screen.state.Loading
 import com.vladislaviliev.newair.screens.home.screen.state.Transformer
 import com.vladislaviliev.newair.user.location.LocationNotFoundException
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.settings.SettingsRepository
+import com.vladislaviliev.newair.user.preferences.PreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -22,10 +22,10 @@ class ViewModel @Inject constructor(
     private val defaultLocationId: Int,
     private val userLocationsRepository: UserLocationsRepository,
     private val responseRepository: ResponseRepository,
-    private val settingsRepository: SettingsRepository,
+    private val preferencesRepository: PreferencesRepository,
 ) : ViewModel() {
 
-    private val userLocation = settingsRepository.currentLocation
+    private val userLocation = preferencesRepository.currentLocation
         .map(userLocationsRepository::get)
         .retry(predicate = ::whenDatabaseCannotFetchLocation)
 
@@ -39,7 +39,7 @@ class ViewModel @Inject constructor(
 
     private suspend fun whenDatabaseCannotFetchLocation(t: Throwable): Boolean {
         if (t !is LocationNotFoundException) return false
-        settingsRepository.setCurrentLocation(defaultLocationId)
+        preferencesRepository.setCurrentLocation(defaultLocationId)
         return true
     }
 

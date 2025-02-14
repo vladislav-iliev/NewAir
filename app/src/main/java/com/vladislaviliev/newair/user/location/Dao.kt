@@ -30,5 +30,5 @@ interface Dao {
     suspend fun deleteAllExcept(id: Int)
 
     @Query("SELECT * FROM UserLocation WHERE id != :excluding ORDER BY name COLLATE NOCASE ASC")
-    fun newPagingSource(excluding: Int = Int.MAX_VALUE): PagingSource<Int, UserLocation>
+    fun newPagingSource(excluding: Int): PagingSource<Int, UserLocation>
 }

@@ -31,7 +31,5 @@ class UserLocationsRepository(
         dao.deleteAllExcept(protectedId)
     }.await()
 
-    fun newPagingSource() = dao.newPagingSource()
-
-    fun newProtectedPagingSource() = dao.newPagingSource(protectedId)
+    fun newPagingSource(skippedId: Int = Int.MIN_VALUE) = dao.newPagingSource(skippedId)
 }

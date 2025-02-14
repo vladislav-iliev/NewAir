@@ -1,14 +1,14 @@
 package com.vladislaviliev.newair.dao
 
+import com.vladislaviliev.newair.readings.downloader.metadata.Blank
 import com.vladislaviliev.newair.readings.downloader.metadata.Dao
 import com.vladislaviliev.newair.readings.downloader.metadata.Metadata
-import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class InMemoryMetadataDao : Dao {
 
-    private val _data = MutableStateFlow(MetadataNotFound.value)
+    private val _data = MutableStateFlow(Metadata.Blank)
 
     override val data: Flow<Metadata> = _data
 
@@ -17,6 +17,6 @@ class InMemoryMetadataDao : Dao {
     }
 
     override suspend fun clear() {
-        _data.emit(MetadataNotFound.value)
+        _data.emit(Metadata.Blank)
     }
 }

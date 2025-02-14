@@ -2,7 +2,7 @@ package com.vladislaviliev.newair.screens.graph.state
 
 import androidx.annotation.StringRes
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
+import com.vladislaviliev.newair.readings.downloader.metadata.isBlank
 import com.vladislaviliev.newair.readings.downloader.responses.HistoryResponse
 
 class Transformer {
@@ -15,7 +15,7 @@ class Transformer {
 
         val metadata = response.metadata
 
-        if (metadata == MetadataNotFound.value) return messageStateOf(R.string.no_data, "", "")
+        if (metadata.isBlank()) return messageStateOf(R.string.no_data, "", "")
 
         if (metadata.errorMsg.isNotBlank()) return messageStateOf(
             R.string.error, metadata.errorMsg, metadata.timestamp

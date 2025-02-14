@@ -2,7 +2,7 @@ package com.vladislaviliev.newair.screens.map.reading.state
 
 import androidx.annotation.StringRes
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
+import com.vladislaviliev.newair.readings.downloader.metadata.isBlank
 import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
 
 class Transformer {
@@ -15,7 +15,7 @@ class Transformer {
 
         val metadata = response.metadata
 
-        if (metadata == MetadataNotFound.value) return messageStateOf(
+        if (metadata.isBlank()) return messageStateOf(
             R.string.no_data, "", ""
         )
         if (metadata.errorMsg.isNotBlank()) return messageStateOf(
@@ -24,11 +24,6 @@ class Transformer {
         if (response.readings.isEmpty()) return messageStateOf(
             R.string.no_data, "", metadata.timestamp
         )
-        return State(
-            R.string.empty_placeholder,
-            "",
-            metadata.timestamp,
-            response.readings
-        )
+        return State(R.string.empty_placeholder, "", metadata.timestamp, response.readings)
     }
 }

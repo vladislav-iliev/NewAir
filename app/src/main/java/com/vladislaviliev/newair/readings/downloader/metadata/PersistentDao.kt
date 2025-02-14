@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.map
 
-class PersistentDao(private val dataStore: DataStore<Preferences>): Dao {
+class PersistentDao(private val dataStore: DataStore<Preferences>) : Dao {
 
     private val encodeConcat = "~"
     private val prefsKey = stringPreferencesKey("METADATA_KEY")
@@ -28,7 +28,7 @@ class PersistentDao(private val dataStore: DataStore<Preferences>): Dao {
 
     private fun decode(prefs: Preferences): Metadata {
         val str = prefs[prefsKey]
-        if (str == null) return MetadataNotFound.value
+        if (str == null) return Blank
         return decode(str)
     }
 }

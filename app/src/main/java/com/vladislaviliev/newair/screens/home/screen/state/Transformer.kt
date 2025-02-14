@@ -6,7 +6,7 @@ import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.readings.ReadingType
 import com.vladislaviliev.newair.readings.calculations.Health
 import com.vladislaviliev.newair.readings.calculations.Maths.closestReadingTo
-import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
+import com.vladislaviliev.newair.readings.downloader.metadata.isBlank
 import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
 import com.vladislaviliev.newair.user.location.UserLocation
 
@@ -24,7 +24,7 @@ class Transformer {
 
         val metadata = response.metadata
 
-        if (metadata == MetadataNotFound.value) return unknownStateOf(
+        if (metadata.isBlank()) return unknownStateOf(
             locationName, R.string.no_data, "", ""
         )
 

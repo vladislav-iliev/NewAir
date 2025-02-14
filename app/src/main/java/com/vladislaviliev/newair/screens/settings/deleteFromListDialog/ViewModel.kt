@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModel @Inject constructor(
-    private val cityId: Int,
+    private val defaultLocationId: Int,
     private val locationsRepository: UserLocationsRepository,
     private val settingsRepository: SettingsRepository,
     pagingConfig: PagingConfig,
@@ -33,7 +33,7 @@ class ViewModel @Inject constructor(
 
         viewModelScope.launch {
             if (settingsRepository.currentLocation.first() in ids)
-                settingsRepository.setCurrentLocation(cityId)
+                settingsRepository.setCurrentLocation(defaultLocationId)
 
             locationsRepository.delete(ids)
         }.invokeOnCompletion { isDeleting.set(false) }

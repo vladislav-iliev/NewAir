@@ -45,14 +45,13 @@ class DependencyContainer {
     fun provideLocationsRepository(
         scope: CoroutineScope,
         db: UserDatabase,
-        preloadedUserLocation: UserLocation
-    ) =
-        UserLocationsRepository(
-            scope,
-            Dispatchers.IO,
-            db.userLocationDao(),
-            preloadedUserLocation.id,
-        )
+        cityId: Int,
+    ) = UserLocationsRepository(
+        scope,
+        Dispatchers.IO,
+        db.userLocationDao(),
+        cityId,
+    )
 
     @Provides
     fun provideReadingsRepository(
@@ -65,15 +64,15 @@ class DependencyContainer {
         Downloader(),
         db.liveDao(),
         db.historyDao(),
-        MetadataDao(metadataDataStore)
+        MetadataDao(metadataDataStore),
     )
 
     @Provides
     fun providesSettingsRepository(
         scope: CoroutineScope,
         @PreferencesDependency settingsDataStore: DataStore<Preferences>,
-        city: UserLocation,
+        defaultLocationId: Int,
     ) = SettingsRepository(
-        scope, Dispatchers.IO, SettingsDao(settingsDataStore, city.id),
+        scope, Dispatchers.IO, SettingsDao(settingsDataStore, defaultLocationId),
     )
 }

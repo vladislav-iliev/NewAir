@@ -19,7 +19,7 @@ class ViewModel @Inject constructor(
     locationsRepository: UserLocationsRepository,
     pagingConfig: PagingConfig,
     private val settingsRepository: SettingsRepository,
-    val cityId: Int,
+    val preselectId: Int,
 ) : ViewModel() {
 
     private val _hasSelected = MutableStateFlow(false)

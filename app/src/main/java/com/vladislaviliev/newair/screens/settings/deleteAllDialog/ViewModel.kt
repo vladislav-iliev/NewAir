@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModel @Inject constructor(
-    private val cityId: Int,
+    private val defaultLocationId: Int,
     private val userLocationsRepository: UserLocationsRepository,
     private val settingsRepository: SettingsRepository
 ) : ViewModel() {
@@ -21,7 +21,7 @@ class ViewModel @Inject constructor(
 
     fun deleteAll() {
         viewModelScope.launch {
-            settingsRepository.setCurrentLocation(cityId)
+            settingsRepository.setCurrentLocation(defaultLocationId)
             userLocationsRepository.deleteAllExceptCity()
             _message.emit("Done!")
         }

@@ -4,9 +4,9 @@ import com.vladislaviliev.newair.user.settings.Dao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class InMemorySettingsDao(cityId: Int) : Dao {
+class InMemorySettingsDao(defaultLocationId: Int) : Dao {
 
-    private val _currentLocation = MutableStateFlow(cityId)
+    private val _currentLocation = MutableStateFlow(defaultLocationId)
 
     override val currentLocation: Flow<Int> = _currentLocation
 

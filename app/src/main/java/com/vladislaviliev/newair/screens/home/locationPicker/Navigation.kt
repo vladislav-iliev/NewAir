@@ -27,7 +27,10 @@ private fun Content(onDismissRequest: () -> Unit) {
     }
 
     LocationPicker(
-        viewModel.pagingFlow, viewModel.cityId, viewModel::onLocationSelected, onDismissRequest,
+        viewModel.pagingFlow,
+        viewModel.preselectId,
+        viewModel::onLocationSelected,
+        onDismissRequest,
     )
 }
 

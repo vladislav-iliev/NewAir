@@ -32,7 +32,7 @@ internal fun Dialog(
         modifier = modifier.heightIn(max = dimensionResource(R.dimen.picker_dialog_max_height)),
         onDismissRequest = onDismiss,
         title = { Text("Select location") },
-        text = { CheckboxProvider()(items, selectedItems.toSet(), onItemClicked) },
+        text = { CheckboxProvider().Provide(items, selectedItems.toSet(), onItemClicked) },
         confirmButton = { Button(onConfirm) { Text("Confirm") } },
         dismissButton = { Button(onDismiss) { Text("Cancel") } }
     )

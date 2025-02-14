@@ -48,7 +48,7 @@ private fun LocationPicker(
         modifier = modifier.heightIn(max = dimensionResource(R.dimen.picker_dialog_max_height)),
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.select_location)) },
-        text = { RadioButtonProvider()(items, setOf(selectedItem), onItemClicked) },
+        text = { RadioButtonProvider().Provide(items, setOf(selectedItem), onItemClicked) },
         confirmButton = { Button(onConfirm) { Text(stringResource(android.R.string.ok)) } },
         dismissButton = { Button(onDismiss) { Text(stringResource(android.R.string.cancel)) } }
     )

@@ -26,7 +26,7 @@ abstract class ItemProvider {
     abstract fun Modifier.itemModifier(selected: Boolean, onClick: () -> Unit): Modifier
 
     @Composable
-    operator fun invoke(
+    fun Provide(
         items: LazyPagingItems<Model>,
         selectedIds: Collection<Int>,
         onItemClicked: (Int) -> Unit,

@@ -26,6 +26,9 @@ import com.vladislaviliev.newair.user.settings.PersistentDao as SettingsDao
 class DependencyContainer {
 
     @Provides
+    fun provideCityId(city: UserLocation) = city.id
+
+    @Provides
     fun providePagingConfig(): PagingConfig {
         val pageSize = 20
         val prefetchDistance = 10

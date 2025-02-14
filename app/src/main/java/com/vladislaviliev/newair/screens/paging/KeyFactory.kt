@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.user.location.paging
+package com.vladislaviliev.newair.screens.paging
 
 fun keyFactory(item: Model) = when (item) {
     is Model.Location -> item.id

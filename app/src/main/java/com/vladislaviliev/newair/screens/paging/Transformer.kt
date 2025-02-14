@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.user.location.paging
+package com.vladislaviliev.newair.screens.paging
 
 import androidx.paging.PagingData
 import androidx.paging.insertSeparators

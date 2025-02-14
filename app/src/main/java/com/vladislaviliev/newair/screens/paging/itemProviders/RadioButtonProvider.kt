@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.user.location.paging.itemProviders
+package com.vladislaviliev.newair.screens.paging.itemProviders
 
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.RadioButton

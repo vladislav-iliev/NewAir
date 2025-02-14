@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.user.location.paging.itemProviders
+package com.vladislaviliev.newair.screens.paging.itemProviders
 
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.selection.toggleable

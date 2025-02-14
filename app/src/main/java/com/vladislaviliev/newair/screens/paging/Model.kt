@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.user.location.paging
+package com.vladislaviliev.newair.screens.paging
 
 sealed class Model {
     data class Header(val char: Char) : Model()

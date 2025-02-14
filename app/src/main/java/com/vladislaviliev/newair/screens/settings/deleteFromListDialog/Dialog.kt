@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.paging.compose.LazyPagingItems
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.user.location.paging.Model
-import com.vladislaviliev.newair.user.location.paging.itemProviders.CheckboxProvider
+import com.vladislaviliev.newair.screens.paging.Model
+import com.vladislaviliev.newair.screens.paging.itemProviders.CheckboxProvider
 
 @Composable
 internal fun Dialog(

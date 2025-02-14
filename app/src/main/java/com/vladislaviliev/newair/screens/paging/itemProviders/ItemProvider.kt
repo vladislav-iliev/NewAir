@@ -1,4 +1,4 @@
-package com.vladislaviliev.newair.user.location.paging.itemProviders
+package com.vladislaviliev.newair.screens.paging.itemProviders
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.vladislaviliev.newair.user.location.paging.Model
-import com.vladislaviliev.newair.user.location.paging.contentTypeFactory
-import com.vladislaviliev.newair.user.location.paging.keyFactory
+import com.vladislaviliev.newair.screens.paging.Model
+import com.vladislaviliev.newair.screens.paging.contentTypeFactory
+import com.vladislaviliev.newair.screens.paging.keyFactory
 
 abstract class ItemProvider {
 

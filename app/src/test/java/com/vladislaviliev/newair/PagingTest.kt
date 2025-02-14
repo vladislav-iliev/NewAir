@@ -3,9 +3,9 @@ package com.vladislaviliev.newair
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.testing.asSnapshot
+import com.vladislaviliev.newair.screens.paging.Model
 import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.location.paging.Model
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.test.advanceUntilIdle

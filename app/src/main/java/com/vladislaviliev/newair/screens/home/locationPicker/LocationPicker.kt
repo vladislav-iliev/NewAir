@@ -16,8 +16,8 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.user.location.paging.Model
-import com.vladislaviliev.newair.user.location.paging.itemProviders.RadioButtonProvider
+import com.vladislaviliev.newair.screens.paging.Model
+import com.vladislaviliev.newair.screens.paging.itemProviders.RadioButtonProvider
 import kotlinx.coroutines.flow.Flow
 
 @Composable

@@ -19,7 +19,7 @@ import androidx.paging.PagingData
 import com.vladislaviliev.newair.CommonFunctions.getContext
 import com.vladislaviliev.newair.CommonFunctions.getString
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.user.location.paging.Model
+import com.vladislaviliev.newair.screens.paging.Model
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -5,7 +5,7 @@ import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.readings.downloader.metadata.MetadataNotFound
 import com.vladislaviliev.newair.readings.downloader.responses.HistoryResponse
 
-object Transformer {
+class Transformer {
 
     private fun messageStateOf(@StringRes msg: Int, errorMsg: String, timestamp: String) =
         Loading.value.copy(msg, errorMsg, timestamp)

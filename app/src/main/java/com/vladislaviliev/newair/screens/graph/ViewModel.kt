@@ -18,7 +18,7 @@ class ViewModel @Inject constructor(
 ) : ViewModel() {
 
     val state = responseRepository.historyResponses()
-        .map(Transformer::stateOf)
+        .map(Transformer()::stateOf)
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000L), Loading.value)
 
     fun onRefreshClick() {

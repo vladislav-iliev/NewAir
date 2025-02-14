@@ -9,7 +9,7 @@ class UserLocationsRepository(
     private val scope: CoroutineScope,
     private val ioDispatcher: CoroutineDispatcher,
     private val dao: Dao,
-    private val cityId: Int,
+    private val protectedId: Int,
 ) {
     suspend operator fun get(id: Int) = withContext(ioDispatcher) {
         dao.get(id) ?: throw LocationNotFoundException()
@@ -27,11 +27,11 @@ class UserLocationsRepository(
         dao.delete(ids)
     }.await()
 
-    suspend fun deleteAllExceptCity() = scope.async(ioDispatcher) {
-        dao.deleteAllExcept(cityId)
+    suspend fun deleteAllUnprotected() = scope.async(ioDispatcher) {
+        dao.deleteAllExcept(protectedId)
     }.await()
 
-    fun newPagingSourceSelect() = dao.newPagingSource()
+    fun newPagingSource() = dao.newPagingSource()
 
-    fun newPagingSourceDelete() = dao.newPagingSource(cityId)
+    fun newProtectedPagingSource() = dao.newPagingSource(protectedId)
 }

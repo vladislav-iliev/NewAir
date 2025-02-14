@@ -26,7 +26,7 @@ class ViewModel @Inject constructor(
     val hasSelected = _hasSelected.asStateFlow()
 
     val pagingFlow = Pager(
-        pagingConfig, pagingSourceFactory = locationsRepository::newPagingSourceSelect
+        pagingConfig, pagingSourceFactory = locationsRepository::newPagingSource
     ).flow.map(Transformer()::transform)
 
     fun onLocationSelected(id: Int) {

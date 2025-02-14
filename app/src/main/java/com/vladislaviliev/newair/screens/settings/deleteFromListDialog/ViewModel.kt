@@ -25,7 +25,7 @@ class ViewModel @Inject constructor(
     private var isDeleting = AtomicBoolean(false)
 
     val pagingFlow = Pager(
-        pagingConfig, pagingSourceFactory = locationsRepository::newPagingSourceDelete
+        pagingConfig, pagingSourceFactory = locationsRepository::newProtectedPagingSource
     ).flow.map(Transformer()::transform)
 
     fun delete(ids: Collection<Int>) {

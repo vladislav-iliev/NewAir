@@ -22,7 +22,7 @@ class ViewModel @Inject constructor(
     fun deleteAll() {
         viewModelScope.launch {
             preferencesRepository.setCurrentLocation(defaultLocationId)
-            userLocationsRepository.deleteAllExceptCity()
+            userLocationsRepository.deleteAllUnprotected()
             _message.emit("Done!")
         }
     }

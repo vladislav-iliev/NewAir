@@ -42,4 +42,8 @@
 
     <string name="timestamp">Timestamp</string>
     <string name="timestamp_x">Timestamp: %1$s</string>
+
+    <string name="invalid_name_x">Invalid name: %1$s</string>
+    <string name="name_already_exists_x">Name already exists: %1$s</string>
+    <string name="added_x">Added: %1$s</string>
 </resources>

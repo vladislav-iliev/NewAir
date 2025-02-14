@@ -5,7 +5,7 @@ import androidx.paging.insertSeparators
 import androidx.paging.map
 import com.vladislaviliev.newair.user.location.UserLocation
 
-object Transformer {
+class Transformer {
 
     private fun toPagerModel(loc: UserLocation) = Model.Location(loc.id, loc.name)
 

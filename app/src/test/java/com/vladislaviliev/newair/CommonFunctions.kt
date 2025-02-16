@@ -7,7 +7,7 @@ import com.vladislaviliev.newair.dao.InMemoryPreferencesDao
 import com.vladislaviliev.newair.dao.InMemoryUserLocationDao
 import com.vladislaviliev.newair.readings.downloader.Downloader
 import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
-import com.vladislaviliev.newair.screens.home.screen.uiComponents.cityNamePlaceholder
+import com.vladislaviliev.newair.screens.home.CITY_NAME
 import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository
 import com.vladislaviliev.newair.user.preferences.PreferencesRepository
@@ -16,7 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 
 object CommonFunctions {
 
-    val city = UserLocation(1, cityNamePlaceholder, 0.0, 0.0)
+    val city = UserLocation(1, CITY_NAME, 0.0, 0.0)
 
     fun getDaoCollection(cityId: Int) = TestDaoCollection(
         InMemoryUserLocationDao(),

@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
 import com.vladislaviliev.newair.readings.ReadingsDatabase
-import com.vladislaviliev.newair.screens.home.screen.uiComponents.cityNamePlaceholder
+import com.vladislaviliev.newair.screens.home.CITY_NAME
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.PrepopulateDatabase
 import com.vladislaviliev.newair.user.location.UserLocation
@@ -28,7 +28,7 @@ class Container {
     fun provideCoroutineScope() = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
     @Provides
-    fun providesCity() = UserLocation(1, cityNamePlaceholder, 0.0, 0.0)
+    fun providesCity() = UserLocation(1, CITY_NAME, 0.0, 0.0)
 
     @Provides
     @Singleton

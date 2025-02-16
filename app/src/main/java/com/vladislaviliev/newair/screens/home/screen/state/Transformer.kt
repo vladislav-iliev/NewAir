@@ -10,7 +10,7 @@ import com.vladislaviliev.newair.readings.calculations.Maths.closestReadingTo
 import com.vladislaviliev.newair.readings.downloader.metadata.isBlank
 import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
 import com.vladislaviliev.newair.readings.live.LiveReading
-import com.vladislaviliev.newair.screens.home.screen.uiComponents.cityNamePlaceholder
+import com.vladislaviliev.newair.screens.home.CITY_NAME
 import com.vladislaviliev.newair.user.location.UserLocation
 
 class Transformer {
@@ -43,7 +43,7 @@ class Transformer {
         val latitude = userLocation.latitude
         val longitude = userLocation.longitude
 
-        val shouldBeAverage = locationName == cityNamePlaceholder
+        val shouldBeAverage = locationName == CITY_NAME
         fun Collection<LiveReading>.getReading(type: ReadingType) =
             if (shouldBeAverage) average() else closestReadingTo(latitude, longitude, type)
 

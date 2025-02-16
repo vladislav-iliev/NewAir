@@ -18,20 +18,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.vladislaviliev.newair.R
 
-/** Careful when changing, this might already be stored in a database **/
-const val cityNamePlaceholder = "_city_"
-
 @Composable
 fun Location(name: String, onLocationPickerClick: () -> Unit, modifier: Modifier = Modifier) {
 
     val colors = ButtonDefaults.textButtonColors().copy(contentColor = LocalContentColor.current)
-
-    val nameLocalized = if (name == cityNamePlaceholder) stringResource(R.string.city) else name
-    val textDescription = stringResource(R.string.location_x, nameLocalized)
+    val textDescription = stringResource(R.string.location_x, name)
 
     TextButton(onLocationPickerClick, modifier, colors = colors) {
         Text(
-            nameLocalized,
+            name,
             Modifier.semantics { contentDescription = textDescription },
             fontSize = 25.sp,
             textAlign = TextAlign.Center

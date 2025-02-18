@@ -29,8 +29,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vladislaviliev.air.readings.calculations.Health
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.readings.calculations.Health
 
 @Composable
 fun Ui(

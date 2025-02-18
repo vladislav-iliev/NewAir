@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.Circle
-import com.vladislaviliev.newair.readings.calculations.Health
-import com.vladislaviliev.newair.readings.live.LiveReading
+import com.vladislaviliev.air.readings.calculations.Health
+import com.vladislaviliev.air.readings.live.LiveReading
 import com.vladislaviliev.newair.screens.map.NewcastleMap
 import kotlin.collections.forEach
 

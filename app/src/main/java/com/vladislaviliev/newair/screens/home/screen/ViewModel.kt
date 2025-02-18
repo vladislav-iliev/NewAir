@@ -2,7 +2,7 @@ package com.vladislaviliev.newair.screens.home.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
+import com.vladislaviliev.air.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.screens.home.screen.state.Loading
 import com.vladislaviliev.newair.screens.home.screen.state.Transformer
 import com.vladislaviliev.newair.user.location.LocationNotFoundException

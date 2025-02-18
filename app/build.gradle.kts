@@ -67,6 +67,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.air.readings)
+    implementation(libs.air.readings.testing)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

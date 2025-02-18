@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.vladislaviliev.air.readings.live.LiveReading
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.readings.live.LiveReading
 import com.vladislaviliev.newair.screens.map.reading.state.State
 
 @Composable

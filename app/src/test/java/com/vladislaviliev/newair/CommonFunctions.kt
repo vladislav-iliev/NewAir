@@ -1,12 +1,12 @@
 package com.vladislaviliev.newair
 
-import com.vladislaviliev.newair.dao.InMemoryHistoryDao
-import com.vladislaviliev.newair.dao.InMemoryLiveDao
-import com.vladislaviliev.newair.dao.InMemoryMetadataDao
+import com.vladislaviliev.air.readings.downloader.Downloader
+import com.vladislaviliev.air.readings.downloader.responses.ResponseRepository
+import com.vladislaviliev.air.readings.testing.InMemoryHistoryDao
+import com.vladislaviliev.air.readings.testing.InMemoryLiveDao
+import com.vladislaviliev.air.readings.testing.InMemoryMetadataDao
 import com.vladislaviliev.newair.dao.InMemoryPreferencesDao
 import com.vladislaviliev.newair.dao.InMemoryUserLocationDao
-import com.vladislaviliev.newair.readings.downloader.Downloader
-import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.screens.home.CITY_NAME
 import com.vladislaviliev.newair.user.location.UserLocation
 import com.vladislaviliev.newair.user.location.UserLocationsRepository

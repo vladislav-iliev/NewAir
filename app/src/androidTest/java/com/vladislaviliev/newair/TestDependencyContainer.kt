@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
+import com.vladislaviliev.air.readings.ReadingsDatabase
 import com.vladislaviliev.newair.dependencies.Container
 import com.vladislaviliev.newair.dependencies.PreferencesDependency
 import com.vladislaviliev.newair.dependencies.ReadingsDependency
-import com.vladislaviliev.newair.readings.ReadingsDatabase
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.PrepopulateDatabase
 import com.vladislaviliev.newair.user.location.UserLocation

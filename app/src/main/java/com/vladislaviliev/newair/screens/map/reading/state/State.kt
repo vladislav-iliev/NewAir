@@ -1,7 +1,7 @@
 package com.vladislaviliev.newair.screens.map.reading.state
 
 import androidx.annotation.StringRes
-import com.vladislaviliev.newair.readings.live.LiveReading
+import com.vladislaviliev.air.readings.live.LiveReading
 
 data class State(
     @StringRes val message: Int,

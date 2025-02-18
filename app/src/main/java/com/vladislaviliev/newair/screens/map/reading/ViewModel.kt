@@ -2,7 +2,7 @@ package com.vladislaviliev.newair.screens.map.reading
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vladislaviliev.newair.readings.downloader.responses.ResponseRepository
+import com.vladislaviliev.air.readings.downloader.responses.ResponseRepository
 import com.vladislaviliev.newair.screens.map.reading.state.Loading
 import com.vladislaviliev.newair.screens.map.reading.state.Transformer
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -42,6 +42,9 @@ espressoCore = "3.6.1"
 mapsPluginSecrets = "2.0.1"
 
 [libraries]
+air-readings = { module = "com.vladislaviliev.air:readings" }
+air-readings-testing = { module = "com.vladislaviliev.air:readings-testing" }
+
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }

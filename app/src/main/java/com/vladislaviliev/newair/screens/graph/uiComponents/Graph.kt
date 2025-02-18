@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import com.himanshoe.charty.common.toChartDataCollection
 import com.himanshoe.charty.point.PointChart
 import com.himanshoe.charty.point.model.PointData
-import com.vladislaviliev.newair.readings.history.HistoryReading
+import com.vladislaviliev.air.readings.history.HistoryReading
 import java.text.DateFormatSymbols
 import java.util.Calendar
 import java.util.Date

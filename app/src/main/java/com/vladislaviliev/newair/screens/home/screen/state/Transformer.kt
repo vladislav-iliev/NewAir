@@ -2,14 +2,14 @@ package com.vladislaviliev.newair.screens.home.screen.state
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
+import com.vladislaviliev.air.readings.ReadingType
+import com.vladislaviliev.air.readings.calculations.Health
+import com.vladislaviliev.air.readings.calculations.Maths.average
+import com.vladislaviliev.air.readings.calculations.Maths.closestReadingTo
+import com.vladislaviliev.air.readings.downloader.metadata.isBlank
+import com.vladislaviliev.air.readings.downloader.responses.LiveResponse
+import com.vladislaviliev.air.readings.live.LiveReading
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.readings.ReadingType
-import com.vladislaviliev.newair.readings.calculations.Health
-import com.vladislaviliev.newair.readings.calculations.Maths.average
-import com.vladislaviliev.newair.readings.calculations.Maths.closestReadingTo
-import com.vladislaviliev.newair.readings.downloader.metadata.isBlank
-import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
-import com.vladislaviliev.newair.readings.live.LiveReading
 import com.vladislaviliev.newair.screens.home.CITY_NAME
 import com.vladislaviliev.newair.user.location.UserLocation
 

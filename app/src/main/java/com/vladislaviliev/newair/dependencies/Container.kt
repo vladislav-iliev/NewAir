@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.room.Room
-import com.vladislaviliev.newair.readings.ReadingsDatabase
+import com.vladislaviliev.air.readings.ReadingsDatabase
 import com.vladislaviliev.newair.screens.home.CITY_NAME
 import com.vladislaviliev.newair.user.UserDatabase
 import com.vladislaviliev.newair.user.location.PrepopulateDatabase

@@ -1,9 +1,9 @@
 package com.vladislaviliev.newair.screens.map.reading.state
 
 import androidx.annotation.StringRes
+import com.vladislaviliev.air.readings.downloader.metadata.isBlank
+import com.vladislaviliev.air.readings.downloader.responses.LiveResponse
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.readings.downloader.metadata.isBlank
-import com.vladislaviliev.newair.readings.downloader.responses.LiveResponse
 
 class Transformer {
 

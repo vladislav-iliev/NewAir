@@ -7,9 +7,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.vladislaviliev.newair.screens.graph.state.State
+import com.vladislaviliev.air.readings.history.HistoryReading
 import com.vladislaviliev.newair.screens.graph.state.Loading
-import com.vladislaviliev.newair.readings.history.HistoryReading
+import com.vladislaviliev.newair.screens.graph.state.State
 
 @Composable
 internal fun Screen(

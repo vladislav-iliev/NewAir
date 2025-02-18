@@ -3,7 +3,7 @@ package com.vladislaviliev.newair.screens.paging
 import androidx.paging.PagingData
 import androidx.paging.insertSeparators
 import androidx.paging.map
-import com.vladislaviliev.newair.user.location.UserLocation
+import com.vladislaviliev.air.user.location.UserLocation
 
 class Transformer {
 

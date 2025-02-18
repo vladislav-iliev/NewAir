@@ -17,10 +17,10 @@ import androidx.compose.ui.unit.dp
 import com.vladislaviliev.air.readings.calculations.Health
 import com.vladislaviliev.air.readings.downloader.metadata.Metadata
 import com.vladislaviliev.air.readings.downloader.responses.LiveResponse
+import com.vladislaviliev.air.user.location.UserLocation
 import com.vladislaviliev.newair.screens.home.screen.state.State
 import com.vladislaviliev.newair.screens.home.screen.state.Transformer
 import com.vladislaviliev.newair.ui.theme.NewAirTheme
-import com.vladislaviliev.newair.user.location.UserLocation
 
 @Composable
 internal fun Screen(

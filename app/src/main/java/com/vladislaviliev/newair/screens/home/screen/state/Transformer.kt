@@ -9,9 +9,9 @@ import com.vladislaviliev.air.readings.calculations.Maths.closestReadingTo
 import com.vladislaviliev.air.readings.downloader.metadata.isBlank
 import com.vladislaviliev.air.readings.downloader.responses.LiveResponse
 import com.vladislaviliev.air.readings.live.LiveReading
+import com.vladislaviliev.air.user.location.UserLocation
 import com.vladislaviliev.newair.R
 import com.vladislaviliev.newair.screens.home.CITY_NAME
-import com.vladislaviliev.newair.user.location.UserLocation
 
 class Transformer {
 

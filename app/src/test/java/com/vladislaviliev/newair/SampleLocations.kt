@@ -1,6 +1,6 @@
 package com.vladislaviliev.newair
 
-import com.vladislaviliev.newair.user.location.UserLocation
+import com.vladislaviliev.air.user.location.UserLocation
 
 object SampleLocations {
     private fun generateAlphabeticalLocations(): List<UserLocation> {

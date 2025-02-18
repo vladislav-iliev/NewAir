@@ -6,12 +6,12 @@ import androidx.paging.PagingConfig
 import com.vladislaviliev.air.readings.ReadingsDatabase
 import com.vladislaviliev.air.readings.downloader.Downloader
 import com.vladislaviliev.air.readings.downloader.responses.ResponseRepository
+import com.vladislaviliev.air.user.UserDatabase
+import com.vladislaviliev.air.user.location.UserLocation
+import com.vladislaviliev.air.user.location.UserLocationsRepository
+import com.vladislaviliev.air.user.preferences.PreferencesRepository
 import com.vladislaviliev.newair.dependencies.PreferencesDependency
 import com.vladislaviliev.newair.dependencies.ReadingsDependency
-import com.vladislaviliev.newair.user.UserDatabase
-import com.vladislaviliev.newair.user.location.UserLocation
-import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.preferences.PreferencesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +19,7 @@ import dagger.hilt.android.components.ViewModelComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import com.vladislaviliev.air.readings.downloader.metadata.PersistentDao as MetadataDao
-import com.vladislaviliev.newair.user.preferences.PersistentDao as PreferencesDao
+import com.vladislaviliev.air.user.preferences.PersistentDao as PreferencesDao
 
 @Module
 @InstallIn(ViewModelComponent::class)

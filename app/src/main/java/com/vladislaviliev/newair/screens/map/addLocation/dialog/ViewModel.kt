@@ -2,9 +2,9 @@ package com.vladislaviliev.newair.screens.map.addLocation.dialog
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vladislaviliev.air.user.location.UserLocationsRepository
+import com.vladislaviliev.air.user.preferences.PreferencesRepository
 import com.vladislaviliev.newair.R
-import com.vladislaviliev.newair.user.location.UserLocationsRepository
-import com.vladislaviliev.newair.user.preferences.PreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

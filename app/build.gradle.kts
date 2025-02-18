@@ -68,9 +68,9 @@ android {
 
 dependencies {
     implementation(libs.air.readings)
-    implementation(libs.air.readings.testing)
     implementation(libs.air.user)
-    implementation(libs.air.user.testing)
+    testImplementation(libs.air.readings.testing)
+    testImplementation(libs.air.user.testing)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

@@ -186,7 +186,7 @@ class HomeTest {
     @Test
     fun city_name_is_localised() {
         composeTestRule.startHome(Loading.value.copy(location = CITY_NAME))
-        location.assertContentDescriptionContains(getString(R.string.city))
+        location.assertContentDescriptionContains(getString(R.string.city), true)
     }
 
     private fun topAppBarDisplayed() {

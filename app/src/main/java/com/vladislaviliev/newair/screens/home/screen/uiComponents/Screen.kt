@@ -67,7 +67,7 @@ private fun Screen(
     Surface(
         modifier.fillMaxSize(),
         color = backgroundColor.takeOrElse(MaterialTheme.colorScheme::surface),
-        contentColor = contentColor.takeOrElse(MaterialTheme.colorScheme::surface)
+        contentColor = contentColor.takeOrElse(MaterialTheme.colorScheme::onSurface)
     ) {
         BackgroundImages(Modifier.fillMaxSize())
 

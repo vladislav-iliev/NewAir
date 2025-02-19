@@ -16,5 +16,5 @@ class RadioButtonProvider : ItemProvider() {
     override fun Modifier.columnModifier() = this
 
     override fun Modifier.itemModifier(selected: Boolean, onClick: () -> Unit) =
-        this then selectable(selected, role = Role.RadioButton, onClick = onClick)
+        selectable(selected, role = Role.RadioButton, onClick = onClick)
 }

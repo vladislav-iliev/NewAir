@@ -14,8 +14,8 @@ class CheckboxProvider : ItemProvider() {
         Checkbox(isChecked, null, modifier)
     }
 
-    override fun Modifier.columnModifier() = this then selectableGroup()
+    override fun Modifier.columnModifier() = selectableGroup()
 
     override fun Modifier.itemModifier(selected: Boolean, onClick: () -> Unit) =
-        this then toggleable(selected, role = Role.Checkbox) { onClick() }
+        toggleable(selected, role = Role.Checkbox) { onClick() }
 }

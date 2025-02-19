@@ -14,6 +14,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavOptionsBuilder
 import com.vladislaviliev.newair.screens.graph.GraphRoute
@@ -35,7 +36,7 @@ fun NavigationSuiteScope.addButtons(controller: NavController, currentEntry: Nav
 private fun NavigationSuiteScope.addButton(
     controller: NavController, currentDestination: NavDestination?, item: Button<Any>,
 ) {
-    val isSelected = true == currentDestination?.hasRoute<HomeGraphRoute>()
+    val isSelected = true == currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) }
 
     val navOptions =
         { b: NavOptionsBuilder -> b.popUpTo(controller.graph.findStartDestination().id) }

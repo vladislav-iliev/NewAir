@@ -39,10 +39,19 @@ private fun NavigationSuiteScope.addButton(
     val onClick = if (isSelected) {
         {}
     } else {
-        { controller.navigate(item.route) { popUpTo(HomeGraphRoute.startDestination) } }
+        { controller.navigateTo(item.route) }
     }
 
     val icon = @Composable { Icon(item.icon, contentDescription = item.label) }
     val label = @Composable { Text(item.label) }
     item(isSelected, onClick, icon, label = label)
+}
+
+private fun NavController.navigateTo(route: Any) {
+    val popTo = HomeGraphRoute.startDestination
+    if (route == HomeGraphRoute) {
+        popBackStack(popTo, false)
+        return
+    }
+    navigate(route) { popUpTo(popTo) }
 }

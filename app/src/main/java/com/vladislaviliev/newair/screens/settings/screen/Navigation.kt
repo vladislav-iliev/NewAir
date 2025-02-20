@@ -13,9 +13,9 @@ fun NavGraphBuilder.addSettingsScreenDestination(
     onDeleteAllClicked: () -> Unit,
     onAboutClicked: () -> Unit,
 ) {
-    composable<ScreenRoute>(
-        content = { Content(onDeleteLocationsClicked, onDeleteAllClicked, onAboutClicked) }
-    )
+    composable<ScreenRoute> {
+        Content(onDeleteLocationsClicked, onDeleteAllClicked, onAboutClicked)
+    }
 }
 
 @Composable

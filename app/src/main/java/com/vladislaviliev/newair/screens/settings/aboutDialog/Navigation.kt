@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 private object Route
 
 fun NavGraphBuilder.addAboutDialogDestination(onDismissRequest: () -> Unit) {
-    dialog<Route>(content = { Content(onDismissRequest) })
+    dialog<Route> { Content(onDismissRequest) }
 }
 
 @Composable

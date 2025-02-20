@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 object GraphRoute
 
 fun NavGraphBuilder.addGraphDestination() {
-    composable<GraphRoute>(content = { Content() })
+    composable<GraphRoute> { Content() }
 }
 
 @Composable

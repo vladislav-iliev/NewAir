@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 private object AddLocationGraphRoute
 
 fun NavGraphBuilder.addAddLocationGraph(controller: NavController) {
-    navigation<AddLocationGraphRoute>(AddLocationRoute, builder = { addDestinations(controller) })
+    navigation<AddLocationGraphRoute>(AddLocationRoute) { addDestinations(controller) }
 }
 
 private fun NavGraphBuilder.addDestinations(controller: NavController) {

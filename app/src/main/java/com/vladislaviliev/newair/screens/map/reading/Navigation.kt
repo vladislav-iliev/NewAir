@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 object ReadingMapRoute
 
 fun NavGraphBuilder.addReadingMapDestination() {
-    composable<ReadingMapRoute>(content = { Content() })
+    composable<ReadingMapRoute> { Content() }
 }
 
 @Composable

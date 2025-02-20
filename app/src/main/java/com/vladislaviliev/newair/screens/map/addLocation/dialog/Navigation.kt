@@ -15,7 +15,7 @@ import kotlinx.serialization.Serializable
 private data class Route(val latitude: String, val longitude: String)
 
 fun NavGraphBuilder.addDialogDestination(onDismissRequest: () -> Unit) {
-    dialog<Route>(content = { entry -> Content(entry, onDismissRequest) })
+    dialog<Route> { entry -> Content(entry, onDismissRequest) }
 }
 
 @Composable

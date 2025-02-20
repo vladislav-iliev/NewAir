@@ -15,7 +15,7 @@ object ScreenRoute
 fun NavGraphBuilder.addScreenDestination(
     onAddNewLocationClick: () -> Unit, onLocationPickerClick: () -> Unit,
 ) {
-    composable<ScreenRoute>(content = { Content(onAddNewLocationClick, onLocationPickerClick) })
+    composable<ScreenRoute> { Content(onAddNewLocationClick, onLocationPickerClick) }
 }
 
 @Composable

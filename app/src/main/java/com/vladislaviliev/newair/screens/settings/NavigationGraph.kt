@@ -20,7 +20,7 @@ import kotlinx.serialization.Serializable
 object SettingsGraphRoute
 
 fun NavGraphBuilder.addSettingsGraph(controller: NavController) {
-    navigation<SettingsGraphRoute>(ScreenRoute, builder = { addDestinations(controller) })
+    navigation<SettingsGraphRoute>(ScreenRoute) { addDestinations(controller) }
 }
 
 private fun NavGraphBuilder.addDestinations(controller: NavController) {

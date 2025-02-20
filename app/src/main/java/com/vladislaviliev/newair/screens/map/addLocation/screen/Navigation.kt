@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 object AddLocationRoute
 
 fun NavGraphBuilder.addScreenDestination(onAddLocationClick: (Double, Double) -> Unit) {
-    composable<AddLocationRoute>(content = { Content(onAddLocationClick) })
+    composable<AddLocationRoute> { Content(onAddLocationClick) }
 }
 
 @Composable

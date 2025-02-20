@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 object Route
 
 fun NavGraphBuilder.addLocationPickerDestination(onDismissRequest: () -> Unit) {
-    dialog<Route>(content = { Content(onDismissRequest) })
+    dialog<Route> { Content(onDismissRequest) }
 }
 
 @Composable

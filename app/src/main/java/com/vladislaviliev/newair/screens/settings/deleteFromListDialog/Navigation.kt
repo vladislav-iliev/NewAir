@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 private object Route
 
 fun NavGraphBuilder.addDeleteFromListDestination(onDismissRequest: () -> Unit) {
-    dialog<Route>(content = { Content(onDismissRequest) })
+    dialog<Route> { Content(onDismissRequest) }
 }
 
 @Composable

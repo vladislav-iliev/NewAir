@@ -13,10 +13,12 @@ import com.vladislaviliev.newair.screens.map.addLocation.navigateToAddLocationGr
 import kotlinx.serialization.Serializable
 
 @Serializable
-object HomeGraphRoute
+object HomeGraphRoute {
+    val startDestination = ScreenRoute
+}
 
 fun NavGraphBuilder.addHomeGraph(controller: NavController) {
-    navigation<HomeGraphRoute>(ScreenRoute, builder = { addDestinations(controller) })
+    navigation<HomeGraphRoute>(HomeGraphRoute.startDestination) { addDestinations(controller) }
 }
 
 private fun NavGraphBuilder.addDestinations(controller: NavController) {

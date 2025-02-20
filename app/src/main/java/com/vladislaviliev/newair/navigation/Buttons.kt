@@ -15,8 +15,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavOptionsBuilder
 import com.vladislaviliev.newair.screens.graph.GraphRoute
 import com.vladislaviliev.newair.screens.home.HomeGraphRoute
 import com.vladislaviliev.newair.screens.map.reading.ReadingMapRoute
@@ -38,13 +36,10 @@ private fun NavigationSuiteScope.addButton(
 ) {
     val isSelected = true == currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) }
 
-    val navOptions =
-        { b: NavOptionsBuilder -> b.popUpTo(controller.graph.findStartDestination().id) }
-
     val onClick = if (isSelected) {
         {}
     } else {
-        { controller.navigate(item.route, builder = navOptions) }
+        { controller.navigate(item.route) { popUpTo(HomeGraphRoute.startDestination) } }
     }
 
     val icon = @Composable { Icon(item.icon, contentDescription = item.label) }

@@ -1,4 +1,7 @@
 # NewAir
+
+This repo is for the app itself only. For component implementations below ViewModel level, see repo [air](https://github.com/vladislav-iliev/air)
+
 ## Goal
 NewAir is an Android app that displays air data from Newcastle upon
 Tyne, England. Using real-time sensors from Newcastle University's

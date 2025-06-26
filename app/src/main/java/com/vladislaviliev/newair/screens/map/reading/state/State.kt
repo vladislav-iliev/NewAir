@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import com.vladislaviliev.air.readings.live.LiveReading
 
 data class State(
-    @StringRes val message: Int,
+    @get:StringRes val message: Int,
     val errorMessage: String,
     val timestamp: String,
     val readings: Iterable<LiveReading>

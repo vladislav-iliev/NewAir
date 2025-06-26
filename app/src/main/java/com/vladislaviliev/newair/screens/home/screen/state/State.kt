@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 
 data class State(
     val location: String,
-    @StringRes val message: Int,
+    @get:StringRes val message: Int,
     val errorMessage: String,
     val timestamp: String,
     val pollution: String,

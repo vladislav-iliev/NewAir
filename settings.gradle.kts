@@ -22,11 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "NewAir"
 include(":app")
-includeBuild(file("../air/", PathValidation.DIRECTORY)) {
-    dependencySubstitution {
-        substitute(module("com.vladislaviliev.air:readings")).using(project(":readings"))
-        substitute(module("com.vladislaviliev.air:readings-testing")).using(project(":readings-testing"))
-        substitute(module("com.vladislaviliev.air:user")).using(project(":user"))
-        substitute(module("com.vladislaviliev.air:user-testing")).using(project(":user-testing"))
-    }
-}
+includeBuild(file("../air/", PathValidation.DIRECTORY))
